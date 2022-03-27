@@ -1,7 +1,7 @@
 import Web3 from 'web3';
 import { Contract } from 'web3-eth-contract';
 import { AbiItem } from 'web3-utils';
-import { addressMap, stableCoins } from '../config';
+// import { addressMap, stableCoins } from '../config';
 import ERC20JSON from '../contracts/IERC20.json';
 import FUSD from '../contracts/FUSD.json';
 

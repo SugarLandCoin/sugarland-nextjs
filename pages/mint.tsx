@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import type { NextPage } from 'next';
 import { styled } from '@mui/material/styles';
 import { Container, Grid, Stack, Typography, Button, Box, Paper, Table, TableBody, TableContainer, TableHead, TableRow } from '@mui/material';
@@ -40,7 +40,8 @@ const StyledTableRow = styled(TableRow)(() => ({
 }));
 
 const Mint: NextPage = () => {
-  const { sugarPrice } = useContext(GlobalContext);
+  const globalContext = useContext(GlobalContext);
+  const sugarPrice = globalContext.sugarPrice == null ? 0 : globalContext.sugarPrice;
 
   const createData = (
     tier: string,
@@ -63,10 +64,6 @@ const Mint: NextPage = () => {
     createData('TIER 5', 'PINK DIAMOND', '500,000', '100', '1', '180', '5,400', '$' + (sugarPrice * 5400).toFixed(2)),
     createData('TIER 6', 'GREY DIAMOND', '300,000', '110', '0.5', '100', '3,000', '$' + (sugarPrice * 3000).toFixed(2)),
   ];
-
-  useEffect(() => {
-	}, []);
-
 
   const _renderTable = (_rows: any) => {
     return (

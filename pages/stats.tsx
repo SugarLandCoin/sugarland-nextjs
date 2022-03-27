@@ -68,7 +68,6 @@ const Mint: NextPage = () => {
   useEffect(() => {
     async function getCoinData() {
       const sugarland = await fetchCoinData('sugarland-token');
-      console.log(sugarland);
       setSugarPrice(sugarland.current_price.usd.toFixed(10));
       return sugarland;
     }
