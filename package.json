@@ -1,0 +1,61 @@
+{
+  "name": "sugarland-nextjs",
+  "version": "5.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "eslint": "eslint \"**/*.{js,jsx,ts,tsx}\"",
+    "eslint-and-fix": "eslint \"**/*.{js,jsx,ts,tsx}\" --fix",
+    "format:check": "prettier --config .prettierrc '**/*.{js,jsx,ts,tsx}' --check",
+    "format:write": "prettier --config .prettierrc '**/*.{js,jsx,ts,tsx}' --write",
+    "post-update": "echo \"codesandbox preview only, need an update\" && yarn upgrade --latest"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn format:check",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "dependencies": {
+    "@emotion/cache": "latest",
+    "@emotion/react": "latest",
+    "@emotion/server": "latest",
+    "@emotion/styled": "latest",
+    "@mui/icons-material": "latest",
+    "@mui/material": "latest",
+    "@mui/styles": "^5.4.4",
+    "@typescript-eslint/eslint-plugin": "^5.16.0",
+    "@typescript-eslint/parser": "^5.16.0",
+    "@walletconnect/web3-provider": "^1.7.5",
+    "axios": "^0.26.1",
+    "bignumber.js": "^9.0.2",
+    "chalk": "^5.0.1",
+    "coinmarketcap-api": "^3.1.1",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "ethers": "^5.5.4",
+    "material-ui-image": "^3.3.2",
+    "next": "latest",
+    "notistack": "^2.0.3",
+    "prettier": "^2.6.0",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-icons": "^4.3.1",
+    "web3": "^1.7.0",
+    "web3-utils": "^1.7.1",
+    "web3modal": "^1.9.5"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^16.2.3",
+    "@commitlint/config-conventional": "^16.2.1",
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "eslint": "latest",
+    "eslint-config-next": "latest",
+    "husky": "^7.0.4",
+    "typescript": "latest"
+  }
+}
