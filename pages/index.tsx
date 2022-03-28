@@ -137,7 +137,7 @@ const Home: NextPage = () => {
         <Grid item md={3}>
           <Box sx={{backgroundColor: 'rgba(47, 19, 74, 0.25)', p: 5, borderRadius: 3}}>
             <Typography textAlign={'center'}>Marketcap</Typography>
-            <Typography textAlign={'center'} variant='subtitle2'>{numberWithCommas(marketCap.toFixed(0))}</Typography>
+            <Typography textAlign={'center'} variant='subtitle2'>{numberWithCommas(marketCap)}</Typography>
           </Box>
         </Grid>
       </Grid>
