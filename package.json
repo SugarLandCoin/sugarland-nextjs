@@ -57,6 +57,7 @@
   "devDependencies": {
     "@commitlint/cli": "^16.2.3",
     "@commitlint/config-conventional": "^16.2.1",
+    "@types/chart.js": "^2.9.35",
     "@types/node": "latest",
     "@types/react": "latest",
     "eslint": "latest",

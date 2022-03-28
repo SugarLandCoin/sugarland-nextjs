@@ -12,12 +12,18 @@ import {
   Title,
   Tooltip,
   Legend,
-  Filler
+  Filler,
+  registerables as registerablesJS
 } from 'chart.js';
 import { Chart } from 'react-chartjs-2';
+
 import { GlobalContext } from '../contexts';
 import { stringHelper } from '../helpers';
 import { useCoingecko } from '../hooks';
+const _registerables = registerablesJS;
+_registerables?.map((value) => {
+  ChartJS.register(value);
+})
 
 ChartJS.register(
   CategoryScale,
@@ -75,8 +81,6 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     const chart = chartRef.current;
-    
-    console.log(chart);
     if (!chart) {
       return;
     }
