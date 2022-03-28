@@ -2,7 +2,6 @@ import axios from "axios";
 
 const useCoingecko = () => {
   const fetchCoinData = async (id: string) => {
-    console.log(id);
     try {
       const coin = await axios.get(
         `https://api.coingecko.com/api/v3/coins/${id}?localization=false&community_data=false&developer_data=false&sparkline=false`

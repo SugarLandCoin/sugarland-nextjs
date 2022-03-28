@@ -331,6 +331,16 @@ theme = createTheme({
         }
       }
     },
+    MuiListItem: {
+      styleOverrides: {
+        root: {
+          '&.Mui-selected': {
+            backgroundColor : '#A656C1',
+            borderRadius: '10px',
+          }
+        }
+      }
+    },
     MuiListItemButton: {
       styleOverrides: {
         root: {
