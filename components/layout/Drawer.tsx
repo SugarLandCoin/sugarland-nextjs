@@ -55,12 +55,14 @@ export default function PermanentDrawerLeft() {
                   <ListItemText primary="Stats" />
                 </ListItem>
               </Link>
-              <ListItem button key="swap" selected={router.asPath == '/swap'}>
-                <ListItemIcon>
-                  <IoIosSwap color='white'/>
-                </ListItemIcon>
-                <ListItemText primary="Swap" />
-              </ListItem>
+              <Link href='/swap' passHref>
+                <ListItem button key="swap" selected={router.asPath == '/swap'}>
+                  <ListItemIcon>
+                    <IoIosSwap color='white'/>
+                  </ListItemIcon>
+                  <ListItemText primary="Swap" />
+                </ListItem>
+              </Link>
               <ListItem button key="reflections" selected={router.asPath == '/reflections'}>
                 <ListItemIcon>
                   <ImCoinDollar color='white' />

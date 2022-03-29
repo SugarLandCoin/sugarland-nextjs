@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { NextPage } from 'next';
+import { useRouter } from 'next/router';
 import { AppBar, Toolbar, Button, Stack } from '@mui/material';
 import { drawerWidth } from '../../config';
 import { Web3ModalContext } from '../../contexts';
@@ -17,6 +18,7 @@ const StyledToolbar = styled(Toolbar)(( ) => ({
 }));
 
 const NavBar: NextPage = () => {
+  const router = useRouter();
   const [addr, setAddr] = React.useState<string>("");
   const { connect, disconnect, account } = useContext(Web3ModalContext);
 
@@ -61,7 +63,7 @@ const NavBar: NextPage = () => {
   return (
     <AppBar position="fixed" color="transparent" elevation={0} sx={{alignItems: 'flex-end', width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}>
       <StyledToolbar >
-        { _renderConnectWalletButton() }
+        { router.asPath != '/swap' && _renderConnectWalletButton() }
       </StyledToolbar>
     </AppBar>
   );
