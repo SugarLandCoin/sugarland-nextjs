@@ -68,7 +68,7 @@ const Mint: NextPage = () => {
   const _renderTable = (_rows: any) => {
     return (
       <TableContainer component={Paper} sx={{backgroundColor: 'transparent', color: 'white'}} elevation={0}>
-        <Table sx={{ minWidth: 200 }} aria-label="simple table">
+        <Table sx={{ minWidth: 100 }} aria-label="simple table">
           <TableHead>
             <TableRow sx={{borderRadius: 30}}>
               <StyledTableCell>TIERS</StyledTableCell>
@@ -106,14 +106,14 @@ const Mint: NextPage = () => {
   }
 
   return (
-    <Container maxWidth='lg' sx={{pt: 10}}>
+    <Container maxWidth="xl" sx={{mt: 3, p: 10}}>
       {/* This is Minting Page for NFT */}
       <Grid container>
-        <Grid item sm={12} md={12} p={2} mb={3}>
+        <Grid item xs={12} sm={12} md={12} p={2} mb={3}>
           <Typography variant='h4'>COLLECT DIAMOND NFTS & BOOST YOUR $SUGAR REWARDS</Typography>
           <Typography variant='h6'>Monthly Rewards Pool = 5,280,000 SUGAR [Worth ${(sugarPrice * 5280000).toFixed(2)}*]</Typography>
         </Grid>
-        <Grid item sm={4} md={2}>
+        <Grid item xs={6} sm={4} md={4} lg={2}>
           <Stack direction="column" justifyContent='center' alignItems='center'>
             <Box component="img"
               src="/nft/tier (1).png"
@@ -126,7 +126,7 @@ const Mint: NextPage = () => {
             <Button sx={{width: 150}}>MINT NOW</Button>
           </Stack>
         </Grid>
-        <Grid item sm={4} md={2}>
+        <Grid item xs={6} sm={4} md={4} lg={2}>
           <Stack direction="column" justifyContent='center' alignItems='center'>
             <Box component="img"
               src="/nft/tier (2).png"
@@ -139,7 +139,7 @@ const Mint: NextPage = () => {
             <Button sx={{width: 150}}>MINT NOW</Button>
           </Stack>
         </Grid>
-        <Grid item sm={4} md={2}>
+        <Grid item xs={6} sm={4} md={4} lg={2}>
           <Stack direction="column" justifyContent='center' alignItems='center'>
             <Box component="img"
               src="/nft/tier (3).png"
@@ -152,7 +152,7 @@ const Mint: NextPage = () => {
             <Button sx={{width: 150}}>MINT NOW</Button>
           </Stack>
         </Grid>
-        <Grid item sm={4} md={2}>
+        <Grid item xs={6} sm={4} md={4} lg={2}>
           <Stack direction="column" justifyContent='center' alignItems='center'>
             <Box component="img"
               src="/nft/tier (4).png"
@@ -165,7 +165,7 @@ const Mint: NextPage = () => {
             <Button sx={{width: 150}}>MINT NOW</Button>
           </Stack>
         </Grid>
-        <Grid item sm={4} md={2}>
+        <Grid item xs={6} sm={4} md={4} lg={2}>
           <Stack direction="column" justifyContent='center' alignItems='center'>
             <Box component="img"
               src="/nft/tier (5).png"
@@ -178,7 +178,7 @@ const Mint: NextPage = () => {
             <Button sx={{width: 150}}>MINT NOW</Button>
           </Stack>
         </Grid>
-        <Grid item sm={4} md={2}>
+        <Grid item xs={6} sm={4} md={4} lg={2}>
           <Stack direction="column" justifyContent='center' alignItems='center'>
             <Box component="img"
               src="/nft/tier (6).png"
@@ -191,15 +191,15 @@ const Mint: NextPage = () => {
             <Button sx={{width: 150}}>MINT NOW</Button>
           </Stack>
         </Grid>
-        <Grid item md={12} mt={5}>
+        <Grid item xs={12} md={12} mt={5}>
           <Box >
             <Grid container spacing={2}>
-              <Grid item sm={12} md={9}>
+              <Grid item xs={12} sm={12} md={9}>
                 <Box>
                   { _renderTable(rows) }
                 </Box>
               </Grid>
-              <Grid item sm={12} md={3}>
+              <Grid item xs={12} sm={12} md={3}>
                 <Stack direction="column">
                   <Typography variant="subtitle1">MINT CONDITION</Typography>
                   <Typography variant="label1">Whitelisted Winners can mint for free but should have minimum SUGAR BALANCE for their Tier.</Typography>
@@ -214,7 +214,6 @@ const Mint: NextPage = () => {
           </Box>
         </Grid>
       </Grid>
-      {/* <FUSDContainer /> */}
     </Container>
   );
 };

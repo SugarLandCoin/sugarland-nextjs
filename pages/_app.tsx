@@ -2,16 +2,18 @@ import * as React from 'react';
 import Head from 'next/head';
 import { AppProps } from 'next/app';
 import { ThemeProvider } from '@mui/material/styles';
-import { CssBaseline, Box } from '@mui/material';
+import { CssBaseline, Box, Container } from '@mui/material';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import { CacheProvider, EmotionCache } from '@emotion/react';
 import { SnackbarProvider } from 'notistack';
 import { MoralisProvider } from "react-moralis";
 import theme from '../src/theme';
 import createEmotionCache from '../src/createEmotionCache';
 import { ProviderProps } from '../types';
-import { YamProvider, Web3Provider, Web3ModalProvider, GlobalContextProvider } from '../contexts';
+import { YamProvider, Web3Provider, Web3ModalProvider, GlobalContextProvider, NavigationContextProvider } from '../contexts';
 import NavBar from '../components/layout/NavBar';
 import Drawer from '../components/layout/Drawer';
+import { drawerWidth, drawerWidthCollapsed } from '../config';
 
 import { MORALIS_SERVER_URL, MORALIS_APP_ID } from '../config';
 
@@ -30,9 +32,11 @@ const Providers = (props: ProviderProps) => {
           <YamProvider>
             <Web3Provider>
               <GlobalContextProvider>
-                <SnackbarProvider maxSnack={3} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
-                  {props.children}
-                </SnackbarProvider>
+                <NavigationContextProvider>
+                  <SnackbarProvider maxSnack={3} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
+                    {props.children}
+                  </SnackbarProvider>
+                </NavigationContextProvider>
               </GlobalContextProvider>
             </Web3Provider>
           </YamProvider>
@@ -43,8 +47,10 @@ const Providers = (props: ProviderProps) => {
 }
 
 export default function MyApp(props: MyAppProps) {
+  const isDesktop = useMediaQuery('(min-width:600px)');
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
-
+  const drawerW = !isDesktop ? drawerWidthCollapsed : drawerWidth;
+  console.log(drawerW);
   return (
     <CacheProvider value={emotionCache}>
       <Head>

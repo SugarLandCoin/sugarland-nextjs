@@ -44,4 +44,4 @@ interface TokenMapOptions {
 }
 
 export const drawerWidth = 360;
-export const drawerWidthCollapsed = 69;
+export const drawerWidthCollapsed = 60;

@@ -320,7 +320,6 @@ theme = createTheme({
     MuiDrawer: {
       styleOverrides: {
         root: {
-          background: 'red',
           width: '240px',
           whiteSpace: 'nowrap',
           flexShrink: 0,

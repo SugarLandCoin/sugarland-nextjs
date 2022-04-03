@@ -5,6 +5,6 @@ export { default as Web3ModalContext } from './Web3Modal/Web3ModalContext';
 export { default as Web3ModalProvider } from './Web3Modal/Web3ModalProvider';
 export { default as GlobalContext } from './Global/GlobalContext';
 export { default as GlobalContextProvider } from './Global/GlobalContextProvider';
-// export { default as WalletContext } from './Wallet/WalletContext';
-// export { default as WalletProvider } from './Wallet/WalletProvider';
+export { default as NavigationContext } from './Navigation/NavigationContext';
+export { default as NavigationContextProvider } from './Navigation/NavigationContextProvider';
 export { default as YamProvider } from './Yam/YamProvider';

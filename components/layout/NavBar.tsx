@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { AppBar, Toolbar, Button, Stack } from '@mui/material';
+import { AppBar, Toolbar, Button, Stack, IconButton } from '@mui/material';
 import { drawerWidth } from '../../config';
-import { Web3ModalContext } from '../../contexts';
+import { Web3ModalContext, NavigationContext } from '../../contexts';
+import MenuIcon from '@mui/icons-material/Menu';
 
 import { styled } from '@mui/material/styles';
 import { useCallback, useContext } from 'react';
@@ -11,16 +12,15 @@ import { useCallback, useContext } from 'react';
 // const StyledToolbar = styled(Toolbar)(({ theme }) => ({
 const StyledToolbar = styled(Toolbar)(( ) => ({
   alignItems: 'flex-center',
-  // paddingTop: theme.spacing(1),
-  // paddingBottom: theme.spacing(2),
-  '@media all': {
-  },
+  justifyContent: 'space-between',
+  width: '100%',
 }));
 
 const NavBar: NextPage = () => {
   const router = useRouter();
   const [addr, setAddr] = React.useState<string>("");
   const { connect, disconnect, account } = useContext(Web3ModalContext);
+  const { toggleDrawerOpen } = useContext(NavigationContext);
 
   React.useEffect(() => {
     if (account) {
@@ -61,8 +61,30 @@ const NavBar: NextPage = () => {
   };
 
   return (
-    <AppBar position="fixed" color="transparent" elevation={0} sx={{alignItems: 'flex-end', width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}>
+    <AppBar position="fixed" color="transparent" elevation={0} 
+      sx={{
+        alignItems: 'flex-end', 
+        justifyContent: 'space-between',
+        sm: {
+          width: '100%',
+          pl: 3,
+        },
+        md: {
+          width: `calc(100% - ${drawerWidth}px)`, 
+          ml: `${drawerWidth}px` 
+        },
+      }}>
       <StyledToolbar >
+        <IconButton
+          color="inherit"
+          aria-label="open drawer"
+          edge="start"
+          onClick={toggleDrawerOpen}
+          sx={{ mr: 2, visibility: { md: 'hidden' } }}
+        >
+          <MenuIcon />
+        </IconButton>
+        
         { router.asPath != '/swap' && _renderConnectWalletButton() }
       </StyledToolbar>
     </AppBar>
