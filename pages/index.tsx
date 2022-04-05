@@ -1,6 +1,9 @@
 import * as React from 'react';
 import { useContext, useEffect, useState, useRef } from 'react';
+import Radium, { StyleRoot } from 'radium';
 import type { NextPage } from 'next';
+import Link from 'next/link';
+import Image from 'next/image';
 import { Container, Grid, Box, Typography } from '@mui/material';
 import type { ChartArea, ChartData } from 'chart.js';
 import {
@@ -20,6 +23,13 @@ import { Chart } from 'react-chartjs-2';
 import { GlobalContext } from '../contexts';
 import { stringHelper } from '../helpers';
 import { useCoingecko } from '../hooks';
+
+const COINGECKO = "/images/icons/Coingecko-icon.png";
+const BCSSCAN = "/images/icons/BSCScan-icon.png";
+const COINMARKETCAP = "/images/icons/Coinmarketcap-icon.png";
+const POOCOIN = "/images/icons/Poocoin-icon.png";
+const DEXTOOLS = "/images/icons/Dextools-icon.png";
+
 const _registerables = registerablesJS;
 _registerables?.map((value) => {
   ChartJS.register(value);
@@ -113,44 +123,147 @@ const Home: NextPage = () => {
     };
     getChartData();
   }, [])
+
+  const calcCurrentContainerStyle = {
+    mt: 10,
+    marginLeft:'2rem',
+    marginRight:'2rem',
+    p: 5,
+  };
+  const typoStyle = {
+    fontSize: '20px',
+    lineHeight: '30px',
+  };
+  const calcBoxStyle = {
+    p:5,
+    borderRadius: 3,
+    height:'100%',
+    backgroundColor: 'rgba(47, 19, 74, 0.25)',
+    overflow:'auto',
+    overflowY:'hidden',
+  };
+  const networkIconStyle = {
+    display:'flex',
+    alignItems:'center',
+    marginBottom:'1%',
+    marginTop:'1%',
+  }; 
+  const imgStyle = {
+    width:'40px',
+    height:'40px',
+    paddingRight:'10px',
+  };
+  const customLinkStyle = {
+    color:'white',
+    textDecoration:'none',
+    textAlign: 'center',
+    cursor: 'pointer',
+    marginLeft: '2%',
+  };
   return (
-    <Container maxWidth="xl" sx={{mt: 20, p: 5}}>
-      <Grid container spacing={3}>
-        <Grid item md={3}>
-          <Box sx={{backgroundColor: 'rgba(47, 19, 74, 0.25)', p: 5, borderRadius: 3}}>
-            <Typography textAlign={'center'}>Current Price</Typography>
-            <Typography textAlign={'center'} variant='subtitle2'>$ {Number(sugarPrice).toFixed(6)}</Typography>
+    <Container maxWidth="xl" sx={calcCurrentContainerStyle}>
+      <Grid container spacing={4}>
+        <Grid item xs={12}>
+          <Typography textAlign={'center'}>SUGARLAND DASHBOARD</Typography>
+        </Grid>
+        <Grid md={6} xs={12} item>
+          <Box sx={calcBoxStyle}>
+            <Grid item container>
+              <Typography sx={typoStyle} variant='subtitle2'>Current Price - </Typography>
+              <Typography sx={typoStyle} variant='subtitle2'> $ {Number(sugarPrice).toFixed(6)}</Typography>
+            </Grid>
+            <Grid item container>
+              <Typography sx={typoStyle} variant='subtitle2'>Marketcap </Typography>
+              <Typography sx={typoStyle} variant='subtitle2'> $ {numberWithCommas(marketCap)}</Typography>
+            </Grid>
+            <Grid item container>
+              <Typography sx={typoStyle} variant='subtitle2'>Circulating Supply - </Typography>
+              <Typography sx={typoStyle} variant='subtitle2'> $ {numberWithCommas(totalSupply)}</Typography>
+            </Grid>
+            <Grid container>
+              <Typography sx={typoStyle} variant='subtitle2'>Burned Supply - </Typography>
+              <Typography sx={typoStyle} variant='subtitle2'> {Number(sugarPrice).toFixed(6)}</Typography>
+            </Grid>
+            <Grid container>
+              <Typography sx={typoStyle} variant='subtitle2'>Burned Value - </Typography>
+              <Typography sx={typoStyle} variant='subtitle2'> {Number(sugarPrice).toFixed(6)}</Typography>
+            </Grid>
+
           </Box>
         </Grid>
-        <Grid item md={3}>
-          <Box sx={{backgroundColor: 'rgba(47, 19, 74, 0.25)', p: 5, borderRadius: 3}}>
-            <Typography textAlign={'center'}>Holders</Typography>
-            <Typography textAlign={'center'} variant='subtitle2'>{numberWithCommas(tokenHolders)}</Typography>
+
+        <Grid md={6} xs={12} item>  
+          <Box sx={calcBoxStyle}>
+            <Grid item container>
+              <Typography sx={typoStyle} variant='subtitle2'>Holders</Typography>
+              <Typography sx={typoStyle} variant='subtitle2'>{numberWithCommas(tokenHolders)}</Typography>
+            </Grid>
+
           </Box>
         </Grid>
-        <Grid item md={3}>
-          <Box sx={{backgroundColor: 'rgba(47, 19, 74, 0.25)', p: 5, borderRadius: 3}}>
-            <Typography textAlign={'center'}>Circulating Supply</Typography>
-            <Typography textAlign={'center'} variant='subtitle2'>{numberWithCommas(totalSupply)}</Typography>
+        <Grid item md={3} xs={12}>
+          <Box sx={{backgroundColor: 'rgba(47, 19, 74, 0.25)', p: 5, borderRadius: 3,}}>
+            <Typography >Growth Wallet Balance</Typography>
+            <Typography variant='subtitle2'>${numberWithCommas(totalSupply)}</Typography>
           </Box>
         </Grid>
-        <Grid item md={3}>
-          <Box sx={{backgroundColor: 'rgba(47, 19, 74, 0.25)', p: 5, borderRadius: 3}}>
-            <Typography textAlign={'center'}>Marketcap</Typography>
-            <Typography textAlign={'center'} variant='subtitle2'>{numberWithCommas(marketCap)}</Typography>
+        <Grid item md={3} xs={12}>
+          <Box sx={{backgroundColor: 'rgba(47, 19, 74, 0.25)', p: 5, borderRadius: 3, }}>
+            <Typography >Royalty Wallet Balance</Typography>
+            <Typography variant='subtitle2'>${numberWithCommas(marketCap)}</Typography>
           </Box>
         </Grid>
-      </Grid>
-      <Grid container sx={{mt:10}} spacing={3}>
-        <Grid item md={8}>
-          <Box sx={{backgroundColor: 'rgba(47, 19, 74, 0.25)', p: 5, borderRadius: 3}}>
-            <Chart type="line" ref={chartRef} options={chartOptions} data={priceData} />
+        <Grid item md={3} xs={12}>
+          <Box sx={{backgroundColor: 'rgba(47, 19, 74, 0.25)', p: 5, borderRadius: 3, }}>
+            <Typography >Moonshot Wallet Balance</Typography>
+            <Typography variant='subtitle2'>${numberWithCommas(marketCap)}</Typography>
           </Box>
         </Grid>
-        <Grid item md={4}>
-          <Box sx={{backgroundColor: 'rgba(47, 19, 74, 0.25)', p: 5, borderRadius: 3}}>
-            <Typography textAlign={'center'} variant='subtitle2'>Sugarland News</Typography>
-            <Typography textAlign={'center'}>Here you can find latest sugarland activities. Stay tuned to discover all the updateds related to the Sugarland curated metaverse.</Typography>
+
+        <Grid item xs={12} >
+          <Box sx={{backgroundColor: 'rgba(47, 19, 74, 0.25)', p: 5, borderRadius: 3, pl: 10,}}>
+            <Grid xs={12} container>
+              <Grid xs={12} md={4} style={networkIconStyle}>
+                <Image alt="coingecko" src={COINGECKO} width={'40px'} height={'40px'} />
+                <Link href='https://www.coingecko.com/'>
+                  <a target="_blank" style={customLinkStyle}>
+                    <Typography variant='subtitle2'>CoinGecko</Typography>
+                  </a>
+                </Link>
+              </Grid>
+              <Grid xs={12} md={4} style={networkIconStyle}>
+                <Image alt="bsc" src={BCSSCAN} width={'40px'} height={'40px'} />
+                <Link href='https://bscscan.com/'>
+                  <a target="_blank" style={customLinkStyle}>
+                    <Typography variant='subtitle2'>BSCScan</Typography>
+                  </a>
+                </Link>
+              </Grid>
+              <Grid xs={12} md={4} style={networkIconStyle}>
+                <Image alt="cmc" src={COINMARKETCAP} width={'40px'} height={'40px'} /> 
+                <Link href='https://coinmarketcap.com/'>
+                  <a target="_blank" style={customLinkStyle}>
+                    <Typography variant='subtitle2'>CoinMarketCap</Typography>
+                  </a>
+                </Link>
+              </Grid>
+              <Grid xs={12} md={4} style={networkIconStyle}>
+                <Image alt="cmc" src={POOCOIN} width={'40px'} height={'40px'} />   
+                <Link href='https://coinmarketcap.com/'>
+                  <a target="_blank" style={customLinkStyle}>
+                    <Typography variant='subtitle2'>Poocoin</Typography>
+                  </a>
+                </Link>
+              </Grid>
+              <Grid xs={12} md={4} style={networkIconStyle}>
+                <Image alt="cmc" src={DEXTOOLS} width={'40px'} height={'40px'} /> 
+                <Link href='https://www.dextools.io/'>
+                  <a target="_blank" style={customLinkStyle}>
+                    <Typography variant='subtitle2'>Dextools</Typography>
+                  </a>
+                </Link>
+              </Grid>
+            </Grid>
           </Box>
         </Grid>
       </Grid>
@@ -159,3 +272,4 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+

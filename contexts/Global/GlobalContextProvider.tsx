@@ -12,6 +12,7 @@ const GlobalContextProvider = ( props: ProviderProps) => {
   const [tokenHolders, setTokenHolders] = useState<number>(0);
   const [marketCap, setMarketCap] = useState<number>(0);
   const [totalSupply, setTotalSupply] = useState<number>(0);
+  const [burndSupply, setBurndSupply] = useState<number>(0);
 
   useEffect(() => {
     
@@ -21,6 +22,7 @@ const GlobalContextProvider = ( props: ProviderProps) => {
       setSugarPrice(sugarland.current_price.usd.toFixed(10));
       setTotalSupply(sugarland.total_supply);
       setMarketCap(Number((sugarland.current_price.usd * sugarland.total_supply).toFixed()));
+      // setBurndSupply(sugarland.)
       return sugarland;
     }
     getCoinData();
