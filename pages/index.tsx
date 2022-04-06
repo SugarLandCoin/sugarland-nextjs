@@ -93,11 +93,11 @@ const Home: NextPage = () => {
             </Grid>
             <Grid container>
               <Typography sx={typoStyle} variant='subtitle2'>Burned Supply - </Typography>
-              <Typography sx={typoStyle} variant='subtitle2'> {Number(sugarPrice).toFixed(6)}</Typography>
+              <Typography sx={typoStyle} variant='subtitle2'> {Number(burntAmount).toFixed(6)}</Typography>
             </Grid>
             <Grid container>
               <Typography sx={typoStyle} variant='subtitle2'>Burned Value - </Typography>
-              <Typography sx={typoStyle} variant='subtitle2'> {Number(sugarPrice).toFixed(6)}</Typography>
+              <Typography sx={typoStyle} variant='subtitle2'> {Number(burntAmount).toFixed(6)}</Typography>
             </Grid>
 
           </Box>
@@ -142,7 +142,7 @@ const Home: NextPage = () => {
               </Grid>
               <Grid xs={12} md={4} style={networkIconStyle}>
                 <Image alt="bsc" src={BCSSCAN} width={'40px'} height={'40px'}/>
-                <Link href='https://bscscan.com/'>
+                <Link href='https://bscscan.com/' sx={{m:2,}}>
                   <Typography variant='subtitle2'>BSCScan</Typography>
                 </Link>
               </Grid>
