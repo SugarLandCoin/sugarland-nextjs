@@ -12,6 +12,7 @@ const Web3Provider = ( props: ProviderProps) => {
 
   useEffect(() => {
     let _chainId = ( chainId == null? defaultChainId : chainId );
+    console.log(_chainId);
 
     const newWeb3: Web3Client = new Web3Client(rpcUrls[_chainId], {});
     setWeb3(newWeb3);

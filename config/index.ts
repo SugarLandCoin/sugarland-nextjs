@@ -6,9 +6,10 @@ export const CMC_KEY = "980181ba-4dbd-4f5d-8136-512067bdba93";
 
 export const DATA_UNAVAILABLE = '--';
 
-export const defaultChainId = 56;
+export const defaultChainId = 97;
 
-export const SUGAR_V2_ADDRESS = "0xcB2aDBCa6f15E9B3F1D98FcE57aC48a093F34fA9";
+// export const SUGAR_V2_ADDRESS = "0xcB2aDBCa6f15E9B3F1D98FcE57aC48a093F34fA9";
+export const SUGAR_V2_ADDRESS = "0x55C750D1dCa531F9a4fD429925BA12C44C34C529";
 export const SUGAR_V2_GENESIS_BLOCK = 14254159;
 
 export const SUGAR_ADDRESS = SUGAR_V2_ADDRESS;
@@ -35,6 +36,11 @@ export const networkNames: INetworkNames = {
 type AddressMapOptions = {
   [key: string]: string
 }
+
+export const addressMap: AddressMapOptions = {
+  'SUGAR': '0xcB2aDBCa6f15E9B3F1D98FcE57aC48a093F34fA9',
+};
+
 interface TokenInfo {
   name: string;
   decimal: number;

@@ -57,7 +57,7 @@ export default function PermanentDrawerLeft(props: Props) {
   const listItemStyle = {
     paddingLeft: 3,
     justifyContent:'space-between',
-
+    display:'flex',
   }
   const iconContainerStyle = {
     background: 'linear-gradient(to bottom, rgba(78, 94, 238, 0.25), rgba(228,122, 231, 0.25))',
@@ -183,32 +183,32 @@ export default function PermanentDrawerLeft(props: Props) {
             <ListItem>
               <ListItemText sx={listItemStyle} primary="Socials" />
             </ListItem>
-            <ListItem  sx={listItemStyle} direction="raw">
-                <Link href='https://twitter.com/'>
-                  <a target="_blank" style={socialLinkStyle}>
-                    <Image alt="twitter" src={TWITTER} width={'30px'} height={'30px'}/>
-                  </a>
-                </Link>
-                <Link href='https://telegram.com/'>
-                  <a target="_blank" style={socialLinkStyle}>
-                    <Image alt="telegram" src={TELEGRAM} width={'30px'} height={'30px'}/>
-                  </a>
-                </Link>
-                <Link href='https://discord.com/'>
-                  <a target="_blank" style={socialLinkStyle}>
-                    <Image alt="discord" src={DISCORD} width={'30px'} height={'30px'}/>
-                  </a>
-                </Link>
-                <Link href='https://instagram.com/'>
-                  <a target="_blank" style={socialLinkStyle}>
-                    <Image alt="instagram" src={INSTAGRAM} width={'30px'} height={'30px'}/>
-                  </a>
-                </Link>
-                <Link href='https://www.facebook.com/'>
-                  <a target="_blank" style={socialLinkStyle}>
-                    <Image alt="facebook" src={FACEBOOK} width={'30px'} height={'30px'}/>
-                  </a>
-                </Link>
+            <ListItem sx={listItemStyle}>
+              <Link href='https://twitter.com/'>
+                <a target="_blank" style={socialLinkStyle}>
+                  <Image alt="twitter" src={TWITTER} width={'30px'} height={'30px'}/>
+                </a>
+              </Link>
+              <Link href='https://telegram.com/'>
+                <a target="_blank" style={socialLinkStyle}>
+                  <Image alt="telegram" src={TELEGRAM} width={'30px'} height={'30px'}/>
+                </a>
+              </Link>
+              <Link href='https://discord.com/'>
+                <a target="_blank" style={socialLinkStyle}>
+                  <Image alt="discord" src={DISCORD} width={'30px'} height={'30px'}/>
+                </a>
+              </Link>
+              <Link href='https://instagram.com/'>
+                <a target="_blank" style={socialLinkStyle}>
+                  <Image alt="instagram" src={INSTAGRAM} width={'30px'} height={'30px'}/>
+                </a>
+              </Link>
+              <Link href='https://www.facebook.com/'>
+                <a target="_blank" style={socialLinkStyle}>
+                  <Image alt="facebook" src={FACEBOOK} width={'30px'} height={'30px'}/>
+                </a>
+              </Link>
             </ListItem>
           </List>
       </Box>

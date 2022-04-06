@@ -4,6 +4,7 @@ import { styled } from '@mui/material/styles';
 import { Container, Grid, Stack, Typography, Button, Box, Paper, Table, TableBody, TableContainer, TableHead, TableRow } from '@mui/material';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import { GlobalContext } from '../contexts';
+import { useYam } from '../hooks';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -40,6 +41,7 @@ const StyledTableRow = styled(TableRow)(() => ({
 }));
 
 const Mint: NextPage = () => {
+  const yam = useYam();
   const globalContext = useContext(GlobalContext);
   const sugarPrice = globalContext.sugarPrice == null ? 0 : globalContext.sugarPrice;
 
@@ -64,6 +66,11 @@ const Mint: NextPage = () => {
     createData('TIER 5', 'PINK DIAMOND', '500,000', '100', '1', '180', '5,400', '$' + (sugarPrice * 5400).toFixed(2)),
     createData('TIER 6', 'GREY DIAMOND', '300,000', '110', '0.5', '100', '3,000', '$' + (sugarPrice * 3000).toFixed(2)),
   ];
+
+  const handleMint = (_id: number) => {
+    console.log(_id);
+    // yam.contracts.contractsMap['SUGAR'].
+  }
 
   const _renderTable = (_rows: any) => {
     return (
