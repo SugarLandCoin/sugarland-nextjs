@@ -5,16 +5,8 @@ import { useContext, useState } from 'react';
 import Box from '@mui/material/Box';
 import Drawer  from '@mui/material/Drawer';
 import Typography from '@mui/material/Typography';
-import TelegramIcon from '@mui/icons-material/Telegram';
-import TwitterIcon from '@mui/icons-material/Twitter';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import FacebookRoundedIcon from '@mui/icons-material/FacebookRounded';
 
-
-import { Divider, List, ListItem, ListItemIcon, ListItemText, Stack } from '@mui/material';
-import { IoIosStats, IoIosSwap, IoIosAnalytics } from 'react-icons/io';
-import { IoStorefront, IoTicket } from 'react-icons/io5';
-import { ImCoinDollar, ImHammer } from 'react-icons/im';
+import { Divider, List, ListItem, ListItemText, Stack } from '@mui/material';
 
 import Image from 'next/image';
 import Logo from '../../public/ExWhite.svg';
@@ -184,27 +176,27 @@ export default function PermanentDrawerLeft(props: Props) {
               <ListItemText sx={listItemStyle} primary="Socials" />
             </ListItem>
             <ListItem sx={listItemStyle}>
-              <Link href='https://twitter.com/'>
+              <Link href='https://twitter.com/' passHref>
                 <a target="_blank" style={socialLinkStyle}>
                   <Image alt="twitter" src={TWITTER} width={'30px'} height={'30px'}/>
                 </a>
               </Link>
-              <Link href='https://telegram.com/'>
+              <Link href='https://telegram.com/' passHref>
                 <a target="_blank" style={socialLinkStyle}>
                   <Image alt="telegram" src={TELEGRAM} width={'30px'} height={'30px'}/>
                 </a>
               </Link>
-              <Link href='https://discord.com/'>
+              <Link href='https://discord.com/' passHref>
                 <a target="_blank" style={socialLinkStyle}>
                   <Image alt="discord" src={DISCORD} width={'30px'} height={'30px'}/>
                 </a>
               </Link>
-              <Link href='https://instagram.com/'>
+              <Link href='https://instagram.com/' passHref>
                 <a target="_blank" style={socialLinkStyle}>
                   <Image alt="instagram" src={INSTAGRAM} width={'30px'} height={'30px'}/>
                 </a>
               </Link>
-              <Link href='https://www.facebook.com/'>
+              <Link href='https://www.facebook.com/' passHref>
                 <a target="_blank" style={socialLinkStyle}>
                   <Image alt="facebook" src={FACEBOOK} width={'30px'} height={'30px'}/>
                 </a>

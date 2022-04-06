@@ -24,11 +24,9 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     const getBurntAmount = async () => {
-      console.log('get burnt amount');
-      console.log(web3Client);
       if(web3Client != undefined) {
         const res = await web3Client.contracts.contractsMap['SUGAR'].methods.balanceOf('0x000000000000000000000000000000000000dead').call();
-        console.log(res);
+        setBurntAmount(res);
       }
     };
     getBurntAmount();
@@ -59,18 +57,7 @@ const Home: NextPage = () => {
     marginBottom:'1%',
     marginTop:'1%',
   }; 
-  const imgStyle = {
-    width:'40px',
-    height:'40px',
-    paddingRight:'10px',
-  };
-  const customLinkStyle = {
-    color:'white',
-    textDecoration:'none',
-    textAlign: 'center',
-    cursor: 'pointer',
-    marginLeft: '2%',
-  };
+
   return (
     <Container maxWidth="xl" sx={calcCurrentContainerStyle}>
       <Grid container spacing={4}>
@@ -136,31 +123,31 @@ const Home: NextPage = () => {
             <Grid xs={12} container>
               <Grid xs={12} md={4} style={networkIconStyle}>
                 <Image alt="coingecko" src={COINGECKO} width={'40px'} height={'40px'}/>
-                <Link href='https://www.coingecko.com/'>
+                <Link href='https://www.coingecko.com/' passHref>
                   <Typography variant='subtitle2'>CoinGecko</Typography>
                 </Link>
               </Grid>
               <Grid xs={12} md={4} style={networkIconStyle}>
                 <Image alt="bsc" src={BCSSCAN} width={'40px'} height={'40px'}/>
-                <Link href='https://bscscan.com/' sx={{m:2,}}>
+                <Link href='https://bscscan.com/' passHref>
                   <Typography variant='subtitle2'>BSCScan</Typography>
                 </Link>
               </Grid>
               <Grid xs={12} md={4} style={networkIconStyle}>
                 <Image alt="cmc" src={COINMARKETCAP} width={'40px'} height={'40px'} /> 
-                <Link href='https://coinmarketcap.com/'>
+                <Link href='https://coinmarketcap.com/' passHref>
                   <Typography variant='subtitle2'>CoinMarketCap</Typography>
                 </Link>
               </Grid>
               <Grid xs={12} md={4} style={networkIconStyle}>
                 <Image alt="cmc" src={POOCOIN} width={'40px'} height={'40px'} />   
-                <Link href='https://coinmarketcap.com/'>
+                <Link href='https://coinmarketcap.com/' passHref>
                   <Typography variant='subtitle2'>Poocoin</Typography>
                 </Link>
               </Grid>
               <Grid xs={12} md={4} style={networkIconStyle}>
                 <Image alt="cmc" src={DEXTOOLS} width={'40px'} height={'40px'} /> 
-                <Link href='https://www.dextools.io/'>
+                <Link href='https://www.dextools.io/' passHref>
                   <Typography variant='subtitle2'>Dextools</Typography>
                 </Link>
               </Grid>
