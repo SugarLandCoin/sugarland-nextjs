@@ -26,7 +26,6 @@ const Home: NextPage = () => {
       if(yamClient != undefined) {
         const res = await yamClient.contracts.contractsMap['SUGAR'].methods.balanceOf('0x000000000000000000000000000000000000dead').call();
         setBurntAmount(res);
-        console.log("BBB"+res);
       }
     };
     getBurntAmount();

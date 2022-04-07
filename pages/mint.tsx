@@ -85,14 +85,10 @@ const Mint: NextPage = () => {
         if(yamClient != undefined) {
           const sellingStatusRes = await yamClient.contracts.contractsMap['SugarNFT'].methods.getSellingStatus().call(); //Selling
           const winnerInfoRes = await yamClient.contracts.contractsMap['SugarNFT'].methods.getWinnerInfo(account).call(); 
-          console.log("Address:--------", account) ;
           setSellingStatus(sellingStatusRes);
-          console.log("SELLING_STATUS:",sellingStatus);
           setWinnerInfo(winnerInfoRes);
-          console.log("WINNER INFO",winnerInfo);
         }
       } catch (error) {
-        console.log(error);
       }
     };
     getSellingStatus();
@@ -100,13 +96,12 @@ const Mint: NextPage = () => {
 
   const handleMint = async (id: number) => {
     if(yamClient != undefined) {
-      
       const res = await yamClient.contracts.contractsMap['SugarNFT'].methods.getPricePerNFT(id).call();
       setNftPrice(res);
-      console.log("nftPrice-----------",nftPrice);
       await yamClient.contracts.contractsMap['SugarNFT'].methods.mint(id).send({from:account, value:nftPrice});
     }
   };
+
   
   const handleClaim = async (id: number) => {
     if(yamClient != undefined) {
@@ -121,12 +116,9 @@ const Mint: NextPage = () => {
     }
     // Airdrop phase
     if (winnerInfo[1]) {
-      console.log("winnerInfo 1----------", winnerInfo[1]);
       return false;
     }
-    console.log("winnerInfo 0----------", winnerInfo[0]);
     return (id == winnerInfo[0]);
-
   }, [sellingStatus, winnerInfo]);
   
   const _renderTable = (_rows: any) => {
