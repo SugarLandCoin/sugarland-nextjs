@@ -93,7 +93,7 @@ export default function PermanentDrawerLeft(props: Props) {
               </ListItem>
             </Link>
             <Link href='/Reward' passHref>
-              <ListItem button key="Reward" selected={router.asPath == '/swap'}>
+              <ListItem button key="Reward">
                 <ListItemText sx={listItemStyle} primary="Rewards" />
               </ListItem>
             </Link>
