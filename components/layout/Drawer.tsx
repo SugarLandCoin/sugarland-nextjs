@@ -11,7 +11,7 @@ import { Divider, List, ListItem, ListItemText, Stack } from '@mui/material';
 import Image from 'next/image';
 import Logo from '../../public/ExWhite.svg';
 import { drawerWidth } from '../../config';
-import { GlobalContext, NavigationContext, Web3ModalContext } from '../../contexts';
+import { GlobalContext, NavigationContext} from '../../contexts';
 
 const TWITTER = "/images/icons/Twitter.png";
 const TELEGRAM = "/images/icons/Telegram.png";
@@ -30,11 +30,11 @@ interface Props {
 export default function PermanentDrawerLeft(props: Props) {
   const { window } = props;
   const router = useRouter();
-  const [addr, setAddr] = React.useState<string>("");
+  // const [addr, setAddr] = React.useState<string>("");
   const [mobileOpen, setMobileOpen] = useState(true);
   const { sugarPrice } = useContext(GlobalContext);
   const { drawerOpen, toggleDrawerOpen } = useContext(NavigationContext);
-  const { connect, disconnect, account } = useContext(Web3ModalContext);
+  // const { connect, disconnect, account } = useContext(Web3ModalContext);
   const container = window !== undefined ? () => window().document.body : undefined;
 
   const boxTypoStyle = {
@@ -92,9 +92,9 @@ export default function PermanentDrawerLeft(props: Props) {
                 <ListItemText sx={listItemStyle} primary="Swap" />
               </ListItem>
             </Link>
-            <Link href='/soon' passHref>
-              <ListItem button key="reflections">
-                <ListItemText sx={listItemStyle} primary="Reflections" />
+            <Link href='/Reward' passHref>
+              <ListItem button key="Reward" selected={router.asPath == '/swap'}>
+                <ListItemText sx={listItemStyle} primary="Rewards" />
               </ListItem>
             </Link>
           </List>

@@ -2,7 +2,6 @@ import React, { useCallback } from "react";
 import { useContext, useEffect, useState } from 'react';
 import type { NextPage } from 'next';
 import { styled } from '@mui/material/styles';
-import { useWeb3 } from '../hooks';
 import { useYam } from '../hooks';
 import { Container, Grid, Stack, Typography, Button, Box, Paper, Table, TableBody, TableContainer, TableHead, TableRow } from '@mui/material';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
@@ -44,17 +43,12 @@ const StyledTableRow = styled(TableRow)(() => ({
 
 const Mint: NextPage = () => {
   const globalContext = useContext(GlobalContext);
-  const [addr, setAddr] = React.useState<string>("");
   const { account } = useContext(Web3ModalContext);
   const sugarPrice = globalContext.sugarPrice == null ? 0 : globalContext.sugarPrice;
-  const [burntAmount, setBurntAmount] = useState<number>(1);
   const [sellingStatus, setSellingStatus] = useState(true); 
-  const [winnerInfo, setWinnerInfo] = useState<object>();
+  const [winnerInfo, setWinnerInfo] = useState<any>();
   const [nftPrice, setNftPrice] = useState<number>();
-
-
   const yamClient = useYam();
-  const web3Client = useWeb3();
 
   const createData = (
     tier: string,
@@ -89,6 +83,7 @@ const Mint: NextPage = () => {
           setWinnerInfo(winnerInfoRes);
         }
       } catch (error) {
+        console.log(error);
       }
     };
     getSellingStatus();
@@ -102,8 +97,7 @@ const Mint: NextPage = () => {
     }
   };
 
-  
-  const handleClaim = async (id: number) => {
+  const handleClaim = async () => {
     if(yamClient != undefined) {
       await yamClient.contracts.contractsMap['SugarNFT'].methods.airdrop().send({from: account});
     }
@@ -189,7 +183,7 @@ const Mint: NextPage = () => {
                     </Button>
                   ) : (
                     <Button sx={{width: 150}}
-                      onClick = {() => handleClaim(index + 1)}
+                      onClick = {() => handleClaim()}
                       disabled = {!getEnableStatus(index + 1)}
                     >Claim NFT
                     </Button>
