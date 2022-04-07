@@ -19,7 +19,6 @@ const Web3ModalProvider = ( props: ProviderProps ) => {
 
   useEffect(() => {
     const providerOptions = {
-
       walletconnect: {
         package: WalletConnectProvider,
         options: {
@@ -41,7 +40,7 @@ const Web3ModalProvider = ( props: ProviderProps ) => {
     setWeb3Modal(_web3Modal);
   }, []);
 
-  const resetWeb3 = useCallback(() => {
+  const resetWeb3 = useCallback(() => { 
     setWeb3(null);
     setAccount(null);
     setChainId(null);

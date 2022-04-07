@@ -14,7 +14,7 @@ const YamProvider = (props: ProviderProps) => {
   const [yam, setYam] = useState<Yam>();
 
   useEffect(() => {
-    
+    console.log(web3, chainId, account);
     if (web3 && chainId && account) {
       try {
         const _yam = new Yam(web3, {});
