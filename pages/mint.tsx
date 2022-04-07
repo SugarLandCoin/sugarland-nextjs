@@ -1,10 +1,12 @@
-import React, { useContext } from "react";
+import React, { useCallback } from "react";
+import { useContext, useEffect, useState } from 'react';
 import type { NextPage } from 'next';
 import { styled } from '@mui/material/styles';
+import { useWeb3 } from '../hooks';
+import { useYam } from '../hooks';
 import { Container, Grid, Stack, Typography, Button, Box, Paper, Table, TableBody, TableContainer, TableHead, TableRow } from '@mui/material';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import { GlobalContext } from '../contexts';
-// import { useYam } from '../hooks';
+import { GlobalContext, Web3ModalContext } from '../contexts';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -41,9 +43,18 @@ const StyledTableRow = styled(TableRow)(() => ({
 }));
 
 const Mint: NextPage = () => {
-  // const yam = useYam();
   const globalContext = useContext(GlobalContext);
+  const [addr, setAddr] = React.useState<string>("");
+  const { account } = useContext(Web3ModalContext);
   const sugarPrice = globalContext.sugarPrice == null ? 0 : globalContext.sugarPrice;
+  const [burntAmount, setBurntAmount] = useState<number>(1);
+  const [sellingStatus, setSellingStatus] = useState(true); 
+  const [winnerInfo, setWinnerInfo] = useState<object>();
+  const [nftPrice, setNftPrice] = useState<number>();
+
+
+  const yamClient = useYam();
+  const web3Client = useWeb3();
 
   const createData = (
     tier: string,
@@ -67,11 +78,57 @@ const Mint: NextPage = () => {
     createData('TIER 6', 'GREY DIAMOND', '300,000', '110', '0.5', '100', '3,000', '$' + (sugarPrice * 3000).toFixed(2)),
   ];
 
-  // const handleMint = (_id: number) => {
-  //   console.log(_id);
-  //   // yam.contracts.contractsMap['SUGAR'].
-  // }
+  
+  useEffect(() => {
+    const getSellingStatus = async () => {
+      try {
+        if(yamClient != undefined) {
+          const sellingStatusRes = await yamClient.contracts.contractsMap['SugarNFT'].methods.getSellingStatus().call(); //Selling
+          const winnerInfoRes = await yamClient.contracts.contractsMap['SugarNFT'].methods.getWinnerInfo(account).call(); 
+          console.log("Address:--------", account) ;
+          setSellingStatus(sellingStatusRes);
+          console.log("SELLING_STATUS:",sellingStatus);
+          setWinnerInfo(winnerInfoRes);
+          console.log("WINNER INFO",winnerInfo);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getSellingStatus();
+  }, [yamClient]);
 
+  const handleMint = async (id: number) => {
+    if(yamClient != undefined) {
+      
+      const res = await yamClient.contracts.contractsMap['SugarNFT'].methods.getPricePerNFT(id).call();
+      setNftPrice(res);
+      console.log("nftPrice-----------",nftPrice);
+      await yamClient.contracts.contractsMap['SugarNFT'].methods.mint(id).send({from:account, value:nftPrice});
+    }
+  };
+  
+  const handleClaim = async (id: number) => {
+    if(yamClient != undefined) {
+      await yamClient.contracts.contractsMap['SugarNFT'].methods.airdrop().send({from: account});
+    }
+  };
+
+  const getEnableStatus = useCallback((id: number): boolean => {
+    // Mint phase
+    if (sellingStatus) {
+      return true;
+    }
+    // Airdrop phase
+    if (winnerInfo[1]) {
+      console.log("winnerInfo 1----------", winnerInfo[1]);
+      return false;
+    }
+    console.log("winnerInfo 0----------", winnerInfo[0]);
+    return (id == winnerInfo[0]);
+
+  }, [sellingStatus, winnerInfo]);
+  
   const _renderTable = (_rows: any) => {
     return (
       <TableContainer component={Paper} sx={{backgroundColor: 'transparent', color: 'white'}} elevation={0}>
@@ -120,84 +177,36 @@ const Mint: NextPage = () => {
           <Typography variant='h4'>COLLECT DIAMOND NFTS & BOOST YOUR $SUGAR REWARDS</Typography>
           <Typography variant='h6'>Monthly Rewards Pool = 5,280,000 SUGAR [Worth ${(sugarPrice * 5280000).toFixed(2)}*]</Typography>
         </Grid>
-        <Grid item xs={6} sm={4} md={4} lg={2}>
-          <Stack direction="column" justifyContent='center' alignItems='center'>
-            <Box component="img"
-              src="/nft/tier (1).png"
-              sx={{
-                height: 240,
-                width: 150,
-                borderRadius: 3,
-              }} 
-            />
-            <Button sx={{width: 150}}>MINT NOW</Button>
-          </Stack>
-        </Grid>
-        <Grid item xs={6} sm={4} md={4} lg={2}>
-          <Stack direction="column" justifyContent='center' alignItems='center'>
-            <Box component="img"
-              src="/nft/tier (2).png"
-              sx={{
-                height: 240,
-                width: 150,
-                borderRadius: 3,
-              }} 
-            />
-            <Button sx={{width: 150}}>MINT NOW</Button>
-          </Stack>
-        </Grid>
-        <Grid item xs={6} sm={4} md={4} lg={2}>
-          <Stack direction="column" justifyContent='center' alignItems='center'>
-            <Box component="img"
-              src="/nft/tier (3).png"
-              sx={{
-                height: 240,
-                width: 150,
-                borderRadius: 3,
-              }} 
-            />
-            <Button sx={{width: 150}}>MINT NOW</Button>
-          </Stack>
-        </Grid>
-        <Grid item xs={6} sm={4} md={4} lg={2}>
-          <Stack direction="column" justifyContent='center' alignItems='center'>
-            <Box component="img"
-              src="/nft/tier (4).png"
-              sx={{
-                height: 240,
-                width: 150,
-                borderRadius: 3,
-              }} 
-            />
-            <Button sx={{width: 150}}>MINT NOW</Button>
-          </Stack>
-        </Grid>
-        <Grid item xs={6} sm={4} md={4} lg={2}>
-          <Stack direction="column" justifyContent='center' alignItems='center'>
-            <Box component="img"
-              src="/nft/tier (5).png"
-              sx={{
-                height: 240,
-                width: 150,
-                borderRadius: 3,
-              }} 
-            />
-            <Button sx={{width: 150}}>MINT NOW</Button>
-          </Stack>
-        </Grid>
-        <Grid item xs={6} sm={4} md={4} lg={2}>
-          <Stack direction="column" justifyContent='center' alignItems='center'>
-            <Box component="img"
-              src="/nft/tier (6).png"
-              sx={{
-                height: 240,
-                width: 150,
-                borderRadius: 3,
-              }} 
-            />
-            <Button sx={{width: 150}}>MINT NOW</Button>
-          </Stack>
-        </Grid>
+        {
+          (new Array(6).fill(0)).map((_, index) => {
+            return (
+              <Grid key={index} item xs={6} sm={4} md={4} lg={2}>
+                <Stack direction="column" justifyContent='center' alignItems='center'>
+                  <Box component="img"
+                    src={`/nft/tier (${index + 1}).png`}
+                    sx={{
+                      height: 240,
+                      width: 150,
+                      borderRadius: 3,
+                    }} 
+                  />
+                  {sellingStatus ? (
+                    <Button sx={{width: 150}}
+                    onClick = {() => handleMint(index + 1)}
+                    >Mint Now
+                    </Button>
+                  ) : (
+                    <Button sx={{width: 150}}
+                      onClick = {() => handleClaim(index + 1)}
+                      disabled = {!getEnableStatus(index + 1)}
+                    >Claim NFT
+                    </Button>
+                  )}
+                </Stack>
+              </Grid>
+            )
+          })
+        }
         <Grid item xs={12} md={12} mt={5}>
           <Box >
             <Grid container spacing={2}>

@@ -4,8 +4,7 @@ import type { NextPage } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Container, Grid, Box, Typography } from '@mui/material';
-
-import { useWeb3 } from '../hooks';
+import { useYam } from '../hooks';
 import { GlobalContext } from '../contexts';
 import { stringHelper } from '../helpers';
 
@@ -20,13 +19,14 @@ const Home: NextPage = () => {
   const { numberWithCommas } = stringHelper;
   const { sugarPrice, tokenHolders, totalSupply, marketCap } = useContext(GlobalContext);
   const [burntAmount, setBurntAmount] = useState<number>(0);
-  const web3Client = useWeb3();
+  const yamClient = useYam();
 
   useEffect(() => {
     const getBurntAmount = async () => {
-      if(web3Client != undefined) {
-        const res = await web3Client.contracts.contractsMap['SUGAR'].methods.balanceOf('0x000000000000000000000000000000000000dead').call();
+      if(yamClient != undefined) {
+        const res = await yamClient.contracts.contractsMap['SUGAR'].methods.balanceOf('0x000000000000000000000000000000000000dead').call();
         setBurntAmount(res);
+        console.log("BBB"+res);
       }
     };
     getBurntAmount();

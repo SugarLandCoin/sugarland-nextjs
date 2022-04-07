@@ -11,7 +11,7 @@ import { Divider, List, ListItem, ListItemText, Stack } from '@mui/material';
 import Image from 'next/image';
 import Logo from '../../public/ExWhite.svg';
 import { drawerWidth } from '../../config';
-import { GlobalContext, NavigationContext } from '../../contexts';
+import { GlobalContext, NavigationContext, Web3ModalContext } from '../../contexts';
 
 const TWITTER = "/images/icons/Twitter.png";
 const TELEGRAM = "/images/icons/Telegram.png";
@@ -30,9 +30,11 @@ interface Props {
 export default function PermanentDrawerLeft(props: Props) {
   const { window } = props;
   const router = useRouter();
+  const [addr, setAddr] = React.useState<string>("");
   const [mobileOpen, setMobileOpen] = useState(true);
   const { sugarPrice } = useContext(GlobalContext);
   const { drawerOpen, toggleDrawerOpen } = useContext(NavigationContext);
+  const { connect, disconnect, account } = useContext(Web3ModalContext);
   const container = window !== undefined ? () => window().document.body : undefined;
 
   const boxTypoStyle = {
@@ -90,15 +92,17 @@ export default function PermanentDrawerLeft(props: Props) {
                 <ListItemText sx={listItemStyle} primary="Swap" />
               </ListItem>
             </Link>
-            <ListItem button key="reflections" selected={router.asPath == '/reflections'}>
-              <ListItemText sx={listItemStyle} primary="Reflections" />
-            </ListItem>
+            <Link href='/soon' passHref>
+              <ListItem button key="reflections">
+                <ListItemText sx={listItemStyle} primary="Reflections" />
+              </ListItem>
+            </Link>
           </List>
       </Box>
       <Box sx={boxItemStyle}>
           <List>
-            <Link href="/" passHref>
-                <ListItem button key="staking" selected={router.asPath == '/staking'}>
+            <Link href="/soon" passHref>
+                <ListItem button key="staking">
                   <ListItemText sx={listItemStyle} primary="Staking"/>
                 </ListItem>
             </Link>
@@ -111,25 +115,27 @@ export default function PermanentDrawerLeft(props: Props) {
                 <ListItemText sx={listItemStyle} primary="Mint" />
               </ListItem>
             </Link>
-            <Link href='/' passHref>
-              <ListItem button key="whitelistpass" selected={router.asPath == '/whitelistpass'}>
+            <Link href='/soon' passHref>
+              <ListItem button key="whitelistpass" >
                 <ListItemText sx={listItemStyle} primary="Whitelist Pass" />
               </ListItem>
             </Link>
-            <ListItem button key="citizen" selected={router.asPath == '/citizen'}>
-              <ListItemText sx={listItemStyle} primary="Citizen NFTs" />
-            </ListItem>
+            <Link href='/soon' passHref>
+              <ListItem button key="citizen" >
+                <ListItemText sx={listItemStyle} primary="Citizen NFTs" />
+              </ListItem>
+            </Link>
           </List>
       </Box>
       <Box sx={boxItemStyle}>
           <List>
-            <Link href='/' passHref>
-              <ListItem button key="governance" selected={router.asPath == '/governance'}>
-                <ListItemText sx={listItemStyle} primary="Governance ( Soon )" />
+            <Link href='/soon' passHref>
+              <ListItem button key="governance">
+                <ListItemText sx={listItemStyle} primary="Governance" />
               </ListItem>
             </Link>
-            <Link href='/' passHref>
-              <ListItem button key="listings" selected={router.asPath == '/listing'}>
+            <Link href='/soon' passHref>
+              <ListItem button key="listings">
                 <ListItemText  sx={listItemStyle} primary="Listing" />
               </ListItem>
             </Link>
@@ -137,8 +143,8 @@ export default function PermanentDrawerLeft(props: Props) {
       </Box>
       <Box sx={boxItemStyle}>
           <List>
-            <Link href="/" passHref>
-                <ListItem button key="merch" selected={router.asPath == '/merch'}>
+            <Link href="/soon" passHref>
+                <ListItem button key="merch" >
                   <ListItemText sx={listItemStyle} primary="Merch"/>
                 </ListItem>
             </Link>

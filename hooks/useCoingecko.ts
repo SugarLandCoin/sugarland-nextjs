@@ -3,11 +3,13 @@ import axios from "axios";
 const useCoingecko = () => {
   const fetchCoinData = async (id: string) => {
     try {
-      const coin = await axios.get(
-        `https://api.coingecko.com/api/v3/coins/${id}?localization=false&community_data=false&developer_data=false&sparkline=false`
-        // 'https://api.coingecko.com/api/v3/coins/binance-smart-chain/contract/0xcB2aDBCa6f15E9B3F1D98FcE57aC48a093F34fA9'
+      const coin = await axios.get('https://deep-index.moralis.io/api/v2/erc20/0xcB2aDBCa6f15E9B3F1D98FcE57aC48a093F34fA9/price?chain=bsc&exchange=Pancakeswap', {
+        headers: {
+          'X-API-Key': '30Gj6TFjr7ZG7F4KyEP19HNuSuc5f2UC3VYpcPqww3IJlpIkOImimChpNNzgm5Cv'
+        }
+      }
       );
-      return coin.data.market_data;
+      return coin.data;
     } catch (error) {
       console.error(error);
     }

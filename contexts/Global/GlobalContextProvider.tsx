@@ -17,9 +17,9 @@ const GlobalContextProvider = ( props: ProviderProps) => {
     async function getCoinData() {
       const sugarland = await fetchCoinData('sugarland-token');
       console.log(sugarland);
-      setSugarPrice(sugarland.current_price.usd.toFixed(10));
-      setTotalSupply(sugarland.total_supply);
-      setMarketCap(Number((sugarland.current_price.usd * sugarland.total_supply).toFixed()));
+      setSugarPrice(sugarland.usdPrice.toFixed(10));
+      setTotalSupply(1000000000000000000);
+      setMarketCap(Number((sugarland.usdPrice * totalSupply).toFixed()));
       return sugarland;
     }
     getCoinData();
