@@ -5,7 +5,6 @@ import { useContext, useState } from 'react';
 import Box from '@mui/material/Box';
 import Drawer  from '@mui/material/Drawer';
 import Typography from '@mui/material/Typography';
-import { makeStyles } from "@mui/styles";
 import { Divider, List, ListItem, ListItemText, Stack } from '@mui/material';
 
 import Image from 'next/image';
@@ -216,7 +215,7 @@ export default function PermanentDrawerLeft(props: Props) {
 
   );
 
-  const classes = makeStyles();
+  // const classes = makeStyles();
   return (
     <>
       <Drawer
