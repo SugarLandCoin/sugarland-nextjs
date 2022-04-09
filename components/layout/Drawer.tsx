@@ -5,11 +5,11 @@ import { useContext, useState } from 'react';
 import Box from '@mui/material/Box';
 import Drawer  from '@mui/material/Drawer';
 import Typography from '@mui/material/Typography';
-
 import { Divider, List, ListItem, ListItemText, Stack } from '@mui/material';
 
 import Image from 'next/image';
 import Logo from '../../public/ExWhite.svg';
+import Logo1 from '../../public/sugarlogo.png';
 import { drawerWidth } from '../../config';
 import { GlobalContext, NavigationContext} from '../../contexts';
 
@@ -18,6 +18,18 @@ const TELEGRAM = "/images/icons/Telegram.png";
 const INSTAGRAM = "/images/icons/Instagram.png";
 const DISCORD = "/images/icons/Discord.png";
 const FACEBOOK = "/images/icons/Facebook.png";
+import {CgLaptop} from 'react-icons/cg';
+import {BiPulse} from 'react-icons/bi';
+import {IoIosSwitch} from 'react-icons/io';
+import {BsFillCheckCircleFill} from 'react-icons/bs';
+import {IoMdLock} from 'react-icons/io';
+import {RiImageFill} from 'react-icons/ri';
+import {RiBookmarkFill} from 'react-icons/ri';
+import {AiOutlineUser} from 'react-icons/ai';
+import {BsFillBookmarkPlusFill} from 'react-icons/bs';
+import {BsList} from 'react-icons/bs';
+import {AiOutlineHeart} from 'react-icons/ai';
+import {FiShare} from 'react-icons/fi'
 
 interface Props {
   /**
@@ -49,7 +61,7 @@ export default function PermanentDrawerLeft(props: Props) {
     pr:1,
   }
   const listItemStyle = {
-    paddingLeft: 3,
+    paddingLeft: 2,
     justifyContent:'space-between',
     display:'flex',
   }
@@ -67,7 +79,8 @@ export default function PermanentDrawerLeft(props: Props) {
 
   const drawerContent = (
     <Stack direction="column" spacing={1} sx={{mt:4,}}>
-      <Image alt="logo" src={Logo} width={'100px'} height={'30px'}/>
+      {/* <Image alt="logo" src={Logo} width={'100px'} height={'30px'}/> */}
+      {/* <Image alt="logo" src={Logo1} width={'100px'} height={'30px'}/> */}
       <Box sx={boxTypoStyle}>
         <Typography variant="body1" align="center" p={2}>$SUGAR: $ {Number(sugarPrice).toFixed(6)}</Typography>
       </Box>
@@ -75,6 +88,7 @@ export default function PermanentDrawerLeft(props: Props) {
         <List >
             <Link href='/' passHref>
               <ListItem button key="officialwebsite" selected={router.asPath == '/officialwebsite'}>
+                <CgLaptop/>
                 <ListItemText sx={listItemStyle} primary="Official Website" />
               </ListItem>
             </Link>
@@ -84,16 +98,19 @@ export default function PermanentDrawerLeft(props: Props) {
           <List>
             <Link href='/' passHref>
               <ListItem button key="stats" selected={router.asPath == '/'}>
+                <BiPulse/>
                 <ListItemText sx={listItemStyle} primary="Stats" />
               </ListItem>
             </Link>
             <Link href='/swap' passHref>
               <ListItem button key="swap" selected={router.asPath == '/swap'}>
+                <IoIosSwitch/>
                 <ListItemText sx={listItemStyle} primary="Swap" />
               </ListItem>
             </Link>
             <Link href='/Reward' passHref>
-              <ListItem button key="Reward">
+              <ListItem button key="Reward" selected={router.asPath == '/Reward'}>
+                <BsFillCheckCircleFill/>
                 <ListItemText sx={listItemStyle} primary="Rewards" />
               </ListItem>
             </Link>
@@ -103,6 +120,7 @@ export default function PermanentDrawerLeft(props: Props) {
           <List>
             <Link href="/soon" passHref>
                 <ListItem button key="staking">
+                  <IoMdLock/>
                   <ListItemText sx={listItemStyle} primary="Staking"/>
                 </ListItem>
             </Link>
@@ -112,16 +130,19 @@ export default function PermanentDrawerLeft(props: Props) {
           <List>
             <Link href='/mint' passHref>
               <ListItem button key="mint" selected={router.asPath == '/mint'}>
+                <RiImageFill/>
                 <ListItemText sx={listItemStyle} primary="Mint" />
               </ListItem>
             </Link>
             <Link href='/soon' passHref>
               <ListItem button key="whitelistpass" >
+                <RiBookmarkFill/>
                 <ListItemText sx={listItemStyle} primary="Whitelist Pass" />
               </ListItem>
             </Link>
             <Link href='/soon' passHref>
               <ListItem button key="citizen" >
+                <AiOutlineUser/>
                 <ListItemText sx={listItemStyle} primary="Citizen NFTs" />
               </ListItem>
             </Link>
@@ -131,11 +152,13 @@ export default function PermanentDrawerLeft(props: Props) {
           <List>
             <Link href='/soon' passHref>
               <ListItem button key="governance">
+                <BsFillBookmarkPlusFill/> 
                 <ListItemText sx={listItemStyle} primary="Governance" />
               </ListItem>
             </Link>
             <Link href='/soon' passHref>
               <ListItem button key="listings">
+                <BsList/>
                 <ListItemText  sx={listItemStyle} primary="Listing" />
               </ListItem>
             </Link>
@@ -145,40 +168,17 @@ export default function PermanentDrawerLeft(props: Props) {
           <List>
             <Link href="/soon" passHref>
                 <ListItem button key="merch" >
+                  <AiOutlineHeart/>
                   <ListItemText sx={listItemStyle} primary="Merch"/>
                 </ListItem>
             </Link>
           </List>
       </Box>
-      
- 
-      {/* <Box sx={{
-          background: 'linear-gradient(to bottom, rgba(78, 94, 238, 0.25), rgba(228,122, 231, 0.25))',
-          borderRadius: 3, 
-          padding:2
-        }}>
-          <List>
-            <Link href='/mint' passHref>
-              <ListItem button key="mintnft" selected={router.asPath == '/mint'}>
-                  <ListItemIcon>
-                    <ImHammer color='white'/>
-                  </ListItemIcon>
-                  <ListItemText primary="Mint NFT" />
-              </ListItem>
-            </Link>
-            <ListItem button key="stakenft" selected={router.asPath == '/stake'}>
-              <ListItemIcon>
-                <IoIosAnalytics color='white'/>
-              </ListItemIcon>
-              <ListItemText primary="Stake NFT" />
-            </ListItem>
-          </List>
-      </Box> */}
-
 
       <Box sx={iconContainerStyle} >
           <List>
             <ListItem>
+              <FiShare/>
               <ListItemText sx={listItemStyle} primary="Socials" />
             </ListItem>
             <ListItem sx={listItemStyle}>
@@ -215,6 +215,7 @@ export default function PermanentDrawerLeft(props: Props) {
 
   );
 
+  // const classes = makeStyles();
   return (
     <>
       <Drawer
