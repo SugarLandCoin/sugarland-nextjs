@@ -5,11 +5,12 @@ import { useContext, useState } from 'react';
 import Box from '@mui/material/Box';
 import Drawer  from '@mui/material/Drawer';
 import Typography from '@mui/material/Typography';
-
+import { makeStyles } from "@mui/styles";
 import { Divider, List, ListItem, ListItemText, Stack } from '@mui/material';
 
 import Image from 'next/image';
 import Logo from '../../public/ExWhite.svg';
+import Logo1 from '../../public/sugarlogo.png';
 import { drawerWidth } from '../../config';
 import { GlobalContext, NavigationContext} from '../../contexts';
 
@@ -79,7 +80,8 @@ export default function PermanentDrawerLeft(props: Props) {
 
   const drawerContent = (
     <Stack direction="column" spacing={1} sx={{mt:4,}}>
-      <Image alt="logo" src={Logo} width={'100px'} height={'30px'}/>
+      {/* <Image alt="logo" src={Logo} width={'100px'} height={'30px'}/> */}
+      {/* <Image alt="logo" src={Logo1} width={'100px'} height={'30px'}/> */}
       <Box sx={boxTypoStyle}>
         <Typography variant="body1" align="center" p={2}>$SUGAR: $ {Number(sugarPrice).toFixed(6)}</Typography>
       </Box>
@@ -214,6 +216,7 @@ export default function PermanentDrawerLeft(props: Props) {
 
   );
 
+  const classes = makeStyles();
   return (
     <>
       <Drawer
