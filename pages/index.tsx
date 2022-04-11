@@ -39,7 +39,7 @@ const useStyles = makeStyles(() => ({
     fontSize:'18px',
     fontWeight:'bold',
     lineHeight:'35px',
-    
+    marginRight:'10px',
   },
   subContentStyle: {
     fontFamily:'Montserrat',
@@ -49,7 +49,7 @@ const useStyles = makeStyles(() => ({
   },
   balanceTitleStyle: {
     fontFamily:'Montserrat',
-    fontSize:'14px',
+    fontSize:'12px',
     fontWeight:'bold',
     lineHeight:'35px',
   },
@@ -67,6 +67,7 @@ const Home: NextPage = () => {
   const { numberWithCommas } = stringHelper;
   const { sugarPrice, tokenHolders, totalSupply, marketCap } = useContext(GlobalContext);
   const [burntAmount, setBurntAmount] = useState<number>(0);
+  const [repeater,setRepeater]=useState<number>(0);
   const yamClient = useYam();
 
   useEffect(() => {
@@ -76,8 +77,10 @@ const Home: NextPage = () => {
         setBurntAmount(res);
       }
     };
+    // const { sugarPrice, tokenHolders, totalSupply, marketCap } = useContext(GlobalContext);
     getBurntAmount();
-  }, []);
+    setTimeout(() => setRepeater(prevState=>prevState+1), 10000);
+  }, [repeater]);
 
   const calcCurrentContainerStyle = {
     mt: 10,
@@ -102,23 +105,23 @@ const Home: NextPage = () => {
         <Grid md={6} xs={12} item>
           <Box sx={calcBoxStyle}>
             <Grid item className={classes.inRowStyle}>
-              <Typography className={classes.subTitleStyle}>Current Price:</Typography>
+              <Typography className={classes.subTitleStyle}>Current Price </Typography>
               <Typography className={classes.subContentStyle}> ${Number(sugarPrice).toFixed(6)}</Typography>
             </Grid>
             <Grid item className={classes.inRowStyle}>
-              <Typography className={classes.subTitleStyle}>Marketcap:</Typography>
+              <Typography className={classes.subTitleStyle}>Marketcap </Typography>
               <Typography className={classes.subContentStyle}> ${Number(marketCap)}</Typography>
             </Grid>
             <Grid item className={classes.inRowStyle}>
-              <Typography className={classes.subTitleStyle}>CirculatingSupply:</Typography>
+              <Typography className={classes.subTitleStyle}>CirculatingSupply </Typography>
               <Typography className={classes.subContentStyle}> ${numberWithCommas(totalSupply)}</Typography>
             </Grid>
             <Grid item className={classes.inRowStyle}>
-              <Typography className={classes.subTitleStyle}>Burned Supply:</Typography>
+              <Typography className={classes.subTitleStyle}>Burned Supply </Typography>
               <Typography className={classes.subContentStyle}> ${numberWithCommas(burntAmount)}</Typography>
             </Grid>
             <Grid item className={classes.inRowStyle}>
-              <Typography  className={classes.subTitleStyle}>Burned Value:</Typography>
+              <Typography  className={classes.subTitleStyle}>Burned Value </Typography>
               <Typography  className={classes.subContentStyle}> ${numberWithCommas (Number(burntAmount) * Number(sugarPrice))}</Typography>
             </Grid>
             

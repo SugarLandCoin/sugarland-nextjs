@@ -12,6 +12,7 @@ const GlobalContextProvider = ( props: ProviderProps) => {
   const [tokenHolders, setTokenHolders] = useState<number>(0);
   const [marketCap, setMarketCap] = useState<number>(0);
   const [totalSupply, setTotalSupply] = useState<number>(0);
+  const [repeater,setRepeater]=useState<number>(0);
 
   useEffect(() => {
     async function getCoinData() {
@@ -45,7 +46,6 @@ const GlobalContextProvider = ( props: ProviderProps) => {
       Moralis.initPlugins();
       getHolders();
     });
-
   }, []);
 
   return <GlobalContext.Provider value={{ sugarPrice, tokenHolders, totalSupply, marketCap }}>{ props.children }</GlobalContext.Provider>;
