@@ -64,6 +64,11 @@ export default function PermanentDrawerLeft(props: Props) {
     justifyContent:'space-between',
     display:'flex',
   }
+  const listIconStyle = {
+    paddingLeft: 6,
+    justifyContent:'space-between',
+    display:'flex',
+  }
   const iconContainerStyle = {
     background: 'linear-gradient(to bottom, rgba(78, 94, 238, 0.25), rgba(228,122, 231, 0.25))',
     borderRadius: 3,
@@ -179,7 +184,7 @@ export default function PermanentDrawerLeft(props: Props) {
               <FiShare/>
               <ListItemText sx={listItemStyle} primary="Socials" />
             </ListItem>
-            <ListItem sx={listItemStyle}>
+            <ListItem sx={listIconStyle}>
               <Link href='https://twitter.com/' passHref>
                 <a target="_blank" style={socialLinkStyle}>
                   <Image alt="twitter" src={TWITTER} width={'30px'} height={'30px'}/>
