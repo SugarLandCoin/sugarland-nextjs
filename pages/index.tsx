@@ -20,7 +20,7 @@ const useStyles = makeStyles(() => ({
     color: 'white',
     display:'flex',
     alignItems:'center',
-    
+    marginRight: '3%',
     marginBottom:'2%',
   },
  
@@ -69,7 +69,7 @@ const useStyles = makeStyles(() => ({
   },
   boxlinkStyle: {
     marginTop:'5%',
-    marginLeft: '1%',
+    marginLeft: '2%',
     padding: '1%',
     borderRadius: '10px',
     background: 'linear-gradient(to bottom, rgba(78, 14, 238, 0.25), rgba(50,122, 231, 0.25))',
@@ -186,39 +186,40 @@ const Home: NextPage = () => {
 
       
       <Grid container lg={12} spacing={6} className={classes.boxlinkStyle}>
-        <Grid lg={2} xs={12} className={classes.networkIconStyle}>
+        <Grid lg={2} md={6} xs={12} className={classes.networkIconStyle}>
           <Image alt="coingecko" src={COINGECKO} width={'40px'} height={'40px'}/>
           <Link href='https://www.coingecko.com/' passHref>
             <Typography className={classes.subTitleStyle} sx={{ml:2,}}>CoinGecko</Typography>
           </Link>
         </Grid>
-        <Grid lg={2} xs={12} className={classes.networkIconStyle}>
+        <Grid lg={2} md={6} xs={12} className={classes.networkIconStyle}>
           <Image alt="bsc" src={BCSSCAN} width={'40px'} height={'40px'}/>
           <Link href='https://bscscan.com/' passHref>
             <Typography className={classes.subTitleStyle} sx={{ml:2,}}>BSCScan</Typography>
           </Link>
         </Grid>
 
-        <Grid lg={2} xs={12} className={classes.networkIconStyle}>
-          <Image alt="cmc" src={COINMARKETCAP} width={'40px'} height={'40px'}/> 
-          <Link href='https://coinmarketcap.com/' passHref>
-            <Typography className={classes.subTitleStyle} sx={{ml:2,}}>CoinMarketCap</Typography>
-          </Link>
-        </Grid>
-
-        <Grid lg={2} xs={12} className={classes.networkIconStyle}>
-          <Image alt="cmc" src={POOCOIN} width={'40px'} height={'40px'}/>   
-          <Link href='https://coinmarketcap.com/' passHref>
-            <Typography className={classes.subTitleStyle} sx={{ml:2,}}>Poocosasdin</Typography>
-          </Link>
-        </Grid>
-
-        <Grid lg={2} xs={12} className={classes.networkIconStyle}>
+        <Grid lg={2} md={6} xs={12} className={classes.networkIconStyle}>
           <Image alt="cmc" src={DEXTOOLS} width={'40px'} height={'40px'} /> 
           <Link href='https://www.dextools.io/' passHref>
             <Typography className={classes.subTitleStyle} sx={{ml:2,}}>Dextools</Typography>
           </Link>
         </Grid>
+
+        <Grid lg={2} md={6} xs={12} className={classes.networkIconStyle}>
+          <Image alt="cmc" src={POOCOIN} width={'40px'} height={'40px'}/>   
+          <Link href='https://poocoin.app/' passHref>
+            <Typography className={classes.subTitleStyle} sx={{ml:2,}}>Poocosasdin</Typography>
+          </Link>
+        </Grid>
+
+        <Grid lg={2} md={6} xs={12} className={classes.networkIconStyle}>
+          <Image alt="cmc" src={COINMARKETCAP} height={'40px'}  width={'40px'} layout={'fixed'}/> 
+          <Link href='https://coinmarketcap.com/' passHref>
+            <Typography className={classes.subTitleStyle} sx={{ml:2,}}>CoinMarketCap</Typography>
+          </Link>
+        </Grid>
+
       </Grid>
     </Grid>
     </Container>
