@@ -20,8 +20,8 @@ const useStyles = makeStyles(() => ({
     borderWidth:'1px',
     borderStyle:'solid',
     width:'50%',
-    height:'auto%',
     fontSize:'12px',
+    height:'auto',
   },
   titleStyle: {
     fontSize:'30px',
