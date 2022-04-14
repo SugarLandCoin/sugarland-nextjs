@@ -55,7 +55,7 @@ const Soon: NextPage = () => {
               <Typography className={classes.subContentStyle}>Snag a Sugarland WhiteList Pass NFT and be first in line for any partnership-generated ‘Right to Mint’ opportunities!</Typography>
             </Grid>
             <Grid item>
-              <Typography className={classes.subtitleStyle} variant="subtitle2" >Minting ComingSoonasadfsfd</Typography>
+              <Typography className={classes.subtitleStyle} variant="subtitle2" >Minting ComingSoon.</Typography>
             </Grid>
           </Box>
         </Grid>
