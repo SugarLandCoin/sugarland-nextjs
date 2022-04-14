@@ -166,7 +166,7 @@ const Mint: NextPage = () => {
         {
           (new Array(6).fill(0)).map((_, index) => {
             return (
-              <Grid key={index} item xs={6} sm={4} md={4} lg={2}>
+              <Grid key={index} item xs={12} sm={6} md={4} lg={2}>
                 <Stack direction="column" justifyContent='center' alignItems='center'>
                   <Box component="img"
                     src={`/nft/tier (${index + 1}).png`}

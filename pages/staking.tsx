@@ -20,24 +20,30 @@ const useStyles = makeStyles(() => ({
     borderWidth:'1px',
     borderStyle:'solid',
     width:'50%',
+    height:'auto%',
     fontSize:'12px',
   },
   titleStyle: {
     fontSize:'30px',
-    lineHeight:'40px',    
+    lineHeight:'40px',
+    wordWrap:'break-word',
   },
   subtitleStyle: {
-    fontSize:'15px',
+    fontSize:'17px',
+    wordWrap:'break-word',
   },
   subContentStyle: {
     fontSize:'20px',
+    wordWrap:'break-word',
   },
   subDescriptionStyle: {
     fontSize:'12px',
+    wordWrap:'break-word',
   },
   rewardContainerStyle: {
     marginTop:'100px',
     marginLeft:'5%',
+    wordWrap:'break-word',
   },
 }));
 
