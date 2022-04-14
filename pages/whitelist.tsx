@@ -24,20 +24,25 @@ const useStyles = makeStyles(() => ({
   },
   titleStyle: {
     fontSize:'30px',
-    lineHeight:'40px',    
+    lineHeight:'40px',
+    wordWrap:'break-word',
   },
   subtitleStyle: {
     fontSize:'20px',
+    wordWrap:'break-word',
   },
   subContentStyle: {
     fontSize:'20px',
+    wordWrap:'break-word',
   },
   subDescriptionStyle: {
     fontSize:'12px',
+    wordWrap:'break-word',
   },
   rewardContainerStyle: {
     marginTop:'100px',
     marginLeft:'5%',
+    wordWrap:'break-word',
   },
 }));
 
@@ -55,7 +60,7 @@ const Soon: NextPage = () => {
               <Typography className={classes.subContentStyle}>Snag a Sugarland WhiteList Pass NFT and be first in line for any partnership-generated ‘Right to Mint’ opportunities!</Typography>
             </Grid>
             <Grid item>
-              <Typography className={classes.subtitleStyle} variant="subtitle2" >Minting ComingSoon.</Typography>
+              <Typography className={classes.subtitleStyle} variant="subtitle2" >Minting Coming Soon.</Typography>
             </Grid>
           </Box>
         </Grid>

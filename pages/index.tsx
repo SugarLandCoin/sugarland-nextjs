@@ -40,11 +40,13 @@ const useStyles = makeStyles(() => ({
     fontWeight:'bold',
     lineHeight:'35px',
     marginRight:'10px',
+    wordWrap:'break-word',
   },
   subContentStyle: {
     fontFamily:'Montserrat',
     fontSize:'20px',
     lineHeight:'35px',
+    wordWrap:'break-word',
   },
   balanceTitleStyle: {
     fontFamily:'Montserrat',

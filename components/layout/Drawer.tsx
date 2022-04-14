@@ -190,7 +190,7 @@ export default function PermanentDrawerLeft(props: Props) {
                   <Image alt="twitter" src={TWITTER} width={'30px'} height={'30px'}/>
                 </a>
               </Link>
-              <Link href='https://telegram.com/' passHref>
+              <Link href='https://t.me/SugarLandNews/' passHref>
                 <a target="_blank" style={socialLinkStyle}>
                   <Image alt="telegram" src={TELEGRAM} width={'30px'} height={'30px'}/>
                 </a>

@@ -62,7 +62,7 @@ export default function MyApp(props: MyAppProps) {
       <Head>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
 
-        <link rel="icon" href="/Favicon.PNG"/>
+        <link rel="icon" href="/favicon3.PNG"/>
         {/* <Link rel="icon" href="/LOGOHD.PNG"/> */}
       </Head>
       <Providers {...pageProps}>

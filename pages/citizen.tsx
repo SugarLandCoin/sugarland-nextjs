@@ -60,7 +60,7 @@ const Soon: NextPage = () => {
                 </Box>
             </Grid>
 
-            <Grid item xs={12} sx={{ml:5, mt:6}}>
+            <Grid item xs={12} sx={{ml:3, mt:6}}>
                 <Grid>
                 <Typography className={classes.titleStyle} variant="subtitle2" >Each CITIZENS NFT equals one VOTE</Typography>
                 </Grid>
