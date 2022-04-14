@@ -9,6 +9,7 @@ import { Divider, List, ListItem, ListItemText, Stack } from '@mui/material';
 
 import Image from 'next/image';
 import Logo from '../../public/ExWhite.svg';
+import Logo2 from '../../public/neonlogo.png';
 import { drawerWidth } from '../../config';
 import { GlobalContext, NavigationContext} from '../../contexts';
 
@@ -89,7 +90,7 @@ export default function PermanentDrawerLeft(props: Props) {
       </Box>
       <Box sx={boxItemStyle}>
         <List >
-            <Link href='/' passHref>
+            <Link href='https://sugarlandcoin.com/' passHref>
               <ListItem button key="officialwebsite" selected={router.asPath == '/officialwebsite'}>
                 <CgLaptop/>
                 <ListItemText sx={listItemStyle} primary="Official Website" />
@@ -121,8 +122,8 @@ export default function PermanentDrawerLeft(props: Props) {
       </Box>
       <Box sx={boxItemStyle}>
           <List>
-            <Link href="/soon" passHref>
-                <ListItem button key="staking">
+            <Link href="/staking" passHref>
+                <ListItem button key="staking" selected={router.asPath == '/staking'}>
                   <IoMdLock/>
                   <ListItemText sx={listItemStyle} primary="Staking"/>
                 </ListItem>
@@ -134,17 +135,17 @@ export default function PermanentDrawerLeft(props: Props) {
             <Link href='/mint' passHref>
               <ListItem button key="mint" selected={router.asPath == '/mint'}>
                 <RiImageFill/>
-                <ListItemText sx={listItemStyle} primary="Mint" />
+                <ListItemText sx={listItemStyle} primary="Diamond NFTs" />
               </ListItem>
             </Link>
-            <Link href='/soon' passHref>
-              <ListItem button key="whitelistpass" >
+            <Link href='/whitelist' passHref>
+              <ListItem button key="whitelist" selected={router.asPath == '/whitelist'}>
                 <RiBookmarkFill/>
                 <ListItemText sx={listItemStyle} primary="Whitelist Pass" />
               </ListItem>
             </Link>
-            <Link href='/soon' passHref>
-              <ListItem button key="citizen" >
+            <Link href='/citizen' passHref>
+              <ListItem button key="citizen" selected={router.asPath == '/citizen'}>
                 <AiOutlineUser/>
                 <ListItemText sx={listItemStyle} primary="Citizen NFTs" />
               </ListItem>
@@ -185,7 +186,7 @@ export default function PermanentDrawerLeft(props: Props) {
               <ListItemText sx={listItemStyle} primary="Socials" />
             </ListItem>
             <ListItem sx={listIconStyle}>
-              <Link href='https://twitter.com/' passHref>
+              <Link href='https://twitter.com/sugarlandcoin/' passHref>
                 <a target="_blank" style={socialLinkStyle}>
                   <Image alt="twitter" src={TWITTER} width={'30px'} height={'30px'}/>
                 </a>
@@ -195,17 +196,17 @@ export default function PermanentDrawerLeft(props: Props) {
                   <Image alt="telegram" src={TELEGRAM} width={'30px'} height={'30px'}/>
                 </a>
               </Link>
-              <Link href='https://discord.com/' passHref>
+              <Link href='https://discord.gg/28KZRJzxbA/' passHref>
                 <a target="_blank" style={socialLinkStyle}>
                   <Image alt="discord" src={DISCORD} width={'30px'} height={'30px'}/>
                 </a>
               </Link>
-              <Link href='https://instagram.com/' passHref>
+              <Link href='https://www.instagram.com/sugarland_IG/' passHref>
                 <a target="_blank" style={socialLinkStyle}>
                   <Image alt="instagram" src={INSTAGRAM} width={'30px'} height={'30px'}/>
                 </a>
               </Link>
-              <Link href='https://www.facebook.com/' passHref>
+              <Link href='https://www.facebook.com/SugarlandCoinFB/' passHref>
                 <a target="_blank" style={socialLinkStyle}>
                   <Image alt="facebook" src={FACEBOOK} width={'30px'} height={'30px'}/>
                 </a>
