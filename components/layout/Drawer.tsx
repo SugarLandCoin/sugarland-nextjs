@@ -9,7 +9,6 @@ import { Divider, List, ListItem, ListItemText, Stack } from '@mui/material';
 
 import Image from 'next/image';
 import Logo from '../../public/ExWhite.svg';
-import Logo2 from '../../public/neonlogo.png';
 import { drawerWidth } from '../../config';
 import { GlobalContext, NavigationContext} from '../../contexts';
 
@@ -154,14 +153,14 @@ export default function PermanentDrawerLeft(props: Props) {
       </Box>
       <Box sx={boxItemStyle}>
           <List>
-            <Link href='/soon' passHref>
-              <ListItem button key="governance">
+            <Link href='/governance' passHref>
+              <ListItem button key="governance" selected={router.asPath == '/governance'}>
                 <BsFillBookmarkPlusFill/> 
                 <ListItemText sx={listItemStyle} primary="Governance" />
               </ListItem>
             </Link>
-            <Link href='/soon' passHref>
-              <ListItem button key="listings">
+            <Link href='/listing' passHref>
+              <ListItem button key="listings" selected={router.asPath == '/listing'}>
                 <BsList/>
                 <ListItemText  sx={listItemStyle} primary="Listing" />
               </ListItem>

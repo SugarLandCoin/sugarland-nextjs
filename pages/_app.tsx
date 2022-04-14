@@ -1,7 +1,6 @@
 import * as React from 'react';
 import Head from 'next/head';
 import { AppProps } from 'next/app';
-import Link from 'next/link';
 import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline, Box } from '@mui/material';
 import { CacheProvider, EmotionCache } from '@emotion/react';

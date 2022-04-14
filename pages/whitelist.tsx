@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Image from 'next/image';
 import type { NextPage } from 'next';
-import { Container, Grid, Typography, Button, Box, TextField } from '@mui/material';
+import { Container, Grid, Typography, Box} from '@mui/material';
 import { makeStyles } from "@mui/styles";
 
 import unlockNFT from '../public/images/unlockNFT1.png';
@@ -10,7 +10,7 @@ const useStyles = makeStyles(() => ({
     backgroundColor: 'rgba(47, 19, 74, 0.25)',
     padding: '7%',
     borderRadius: '10px',
-    height:'100%',
+    height: '100%',
   },
   customButtonStyle: {
     color:'white',
@@ -41,9 +41,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const whitelist: NextPage = (props) => {
-
-  const title = props;
+const Soon: NextPage = () => {
   const classes = useStyles();
   return (
     <Container className={classes.rewardContainerStyle}>
@@ -57,17 +55,17 @@ const whitelist: NextPage = (props) => {
               <Typography className={classes.subContentStyle}>Snag a Sugarland WhiteList Pass NFT and be first in line for any partnership-generated ‘Right to Mint’ opportunities!</Typography>
             </Grid>
             <Grid item>
-              <Typography className={classes.subtitleStyle} variant="subtitle2" >Minting ComingSoon</Typography>
+              <Typography className={classes.subtitleStyle} variant="subtitle2" >Minting ComingSoonasadfsfd</Typography>
             </Grid>
           </Box>
         </Grid>
 
         <Grid item xs={12} md={6}>
-          <Image src={unlockNFT}/>
+          <Image alt="whitelist" src={unlockNFT}/>
         </Grid>        
       </Grid>
     </Container>
   );
 };
 
-export default whitelist;
+export default Soon;

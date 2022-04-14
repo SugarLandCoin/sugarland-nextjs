@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Image from 'next/image';
 import type { NextPage } from 'next';
-import { Container, Grid, Typography, Button, Box, TextField } from '@mui/material';
+import { Container, Grid, Typography, Button, Box} from '@mui/material';
 import { makeStyles } from "@mui/styles";
 
 import imageDoken from '../public/images/doken.png';
@@ -53,7 +53,7 @@ const Staking: NextPage = () => {
               <Typography className={classes.titleStyle} variant="subtitle2" >STACKING PARTNERS</Typography>
             </Grid>
             <Grid item sx={{mb:3}}>
-              <Image src={imageDoken} width={'200px'} height={'40px'}/>
+              <Image alt="doken" src={imageDoken} width={'200px'} height={'40px'}/>
             </Grid>
             <Grid item sx={{mb:4}}>
               <Button className={classes.customButtonStyle}>Open DokenDojo</Button>

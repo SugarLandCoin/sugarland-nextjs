@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Image from 'next/image';
 import type { NextPage } from 'next';
-import { Container, Grid, Typography, Button, Box, TextField } from '@mui/material';
+import { Container, Grid, Typography, Box} from '@mui/material';
 import { makeStyles } from "@mui/styles";
 
 import imageCitizen from '../public/images/citizen.png';
@@ -40,9 +40,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Soon: NextPage = (props) => {
-
-  const title = props;
+const Soon: NextPage = () => {
   const classes = useStyles();
   return (
     <Container className={classes.rewardContainerStyle}>
@@ -74,7 +72,7 @@ const Soon: NextPage = (props) => {
         </Grid>
 
         <Grid item xs={12} md={6}>
-          <Image src={imageCitizen}/>
+          <Image alt="citizen" src={imageCitizen}/>
         </Grid>        
       </Grid>
     </Container>
