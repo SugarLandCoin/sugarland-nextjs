@@ -23,6 +23,14 @@ interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
 }
 
+// React.useEffect(() => {
+//   // Remove the server-side injected CSS.
+//   const jssStyles = document.querySelector('#jss-server-side');
+//   if (jssStyles) {
+//     jssStyles.parentElement.removeChild(jssStyles);
+//   }
+// }, []);
+
 const Providers = (props: ProviderProps) => {
   return (
     <MoralisProvider serverUrl={MORALIS_SERVER_URL} appId={MORALIS_APP_ID}>
@@ -53,6 +61,9 @@ export default function MyApp(props: MyAppProps) {
     <CacheProvider value={emotionCache}>
       <Head>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+        <link rel="icon" href="/Favicon.PNG"/>
+        {/* <Link rel="icon" href="/LOGOHD.PNG"/> */}
       </Head>
       <Providers {...pageProps}>
         <Box sx={{display: 'flex'}}>

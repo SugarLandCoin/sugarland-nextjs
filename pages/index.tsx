@@ -20,14 +20,14 @@ const useStyles = makeStyles(() => ({
     color: 'white',
     display:'flex',
     alignItems:'center',
-    marginBottom:'1%',
-    marginTop:'1%',
+    marginRight: '3%',
+    marginBottom:'2%',
   },
+ 
   inRowStyle: {
     display:'flex',
   },
   iconStyle: {
-
     justifyContent:'center',
   },
   dashContainerStyle: {
@@ -36,20 +36,19 @@ const useStyles = makeStyles(() => ({
   },
   subTitleStyle: {
     fontFamily:'Montserrat',
-    fontSize:'18px',
+    fontSize:'16px',
     fontWeight:'bold',
     lineHeight:'35px',
-    
+    marginRight:'10px',
   },
   subContentStyle: {
     fontFamily:'Montserrat',
-    fontSize:'18px',
-    fontWeight:'bold',
+    fontSize:'20px',
     lineHeight:'35px',
   },
   balanceTitleStyle: {
     fontFamily:'Montserrat',
-    fontSize:'14px',
+    fontSize:'12px',
     fontWeight:'bold',
     lineHeight:'35px',
   },
@@ -59,14 +58,39 @@ const useStyles = makeStyles(() => ({
     fontWeight:'bold',
     lineHeight:'35px',
   },
+  boxBlurStyle: {
+    marginLeft:'5%',
+    padding: '5%',
+    backgroundColor: 'rgba(78, 14, 238, 0.25)',
+    borderRadius: '10px',
+    borderWidth: '1px',
+    borderColor: '#AB6FE9',
+    boxShadow: '0px 0px 2px 2px #AB6FE9',
+  },
+  boxlinkStyle: {
+    marginTop:'5%',
+    marginLeft: '2%',
+    padding: '1%',
+    borderRadius: '10px',
+    background: 'linear-gradient(to bottom, rgba(78, 14, 238, 0.25), rgba(50,122, 231, 0.25))',
+  },
+  calcBoxStyle: {
+    padding:'5%',
+    height:'100%',
+    borderRadius: '10px',
+    background: 'linear-gradient(to bottom, rgba(78, 14, 238, 0.25), rgba(123,122, 231, 0.25))',
+    marginBottom: '10%',
+    marginLeft:'5%',
+  },
+
 }));
 
 const Home: NextPage = () => {
-  const classes = useStyles();
-
+  const classes = useStyles(); 
   const { numberWithCommas } = stringHelper;
   const { sugarPrice, tokenHolders, totalSupply, marketCap } = useContext(GlobalContext);
   const [burntAmount, setBurntAmount] = useState<number>(0);
+  const [repeater,setRepeater]=useState<number>(0);
   const yamClient = useYam();
 
   useEffect(() => {
@@ -76,123 +100,130 @@ const Home: NextPage = () => {
         setBurntAmount(res);
       }
     };
+    // const { sugarPrice, tokenHolders, totalSupply, marketCap } = useContext(GlobalContext);
     getBurntAmount();
-  }, []);
-
-  const calcCurrentContainerStyle = {
-    mt: 10,
-    marginLeft:'2rem',
-    marginRight:'2rem',
-    p: 5,
-  };
-  const calcBoxStyle = {
-    p:5,
-    borderRadius: 3,
-    height:'100%',
-    backgroundColor: 'rgba(47, 19, 74, 0.25)',
-    
-  };
+    setTimeout(() => setRepeater(prevState=>prevState+1), 10000);
+  }, [repeater]);
 
   return (
     <Container className={classes.dashContainerStyle}>
       <Grid container spacing={6}>
-        <Grid item xs={12} >
+
+      <Grid item xs={12} sx={{mb:5,}}>
           <Typography textAlign={'center'} variant='subtitle2'>SUGARLAND DASHBOARD</Typography>
         </Grid>
-        <Grid md={6} xs={12} item>
-          <Box sx={calcBoxStyle}>
-            <Grid item className={classes.inRowStyle}>
-              <Typography className={classes.subTitleStyle}>Current Price:</Typography>
-              <Typography className={classes.subContentStyle}> ${Number(sugarPrice).toFixed(6)}</Typography>
+
+      <Grid container spacing={6}>
+        <Grid lg={4} md={6} xs={12} item>
+          <Box className={classes.calcBoxStyle}>
+            <Grid item sx={{mb:3,}}>
+              <Typography className={classes.subTitleStyle}>Current Price </Typography>
+              <Typography className={classes.subContentStyle}> $ {Number(sugarPrice).toFixed(6)}</Typography>
             </Grid>
-            <Grid item className={classes.inRowStyle}>
-              <Typography className={classes.subTitleStyle}>Marketcap:</Typography>
-              <Typography className={classes.subContentStyle}> ${Number(marketCap)}</Typography>
+            <Grid item sx={{mb:3,}}>
+              <Typography className={classes.subTitleStyle}>Marketcap </Typography>
+              <Typography className={classes.subContentStyle}> $ {Number(marketCap)}</Typography>
             </Grid>
-            <Grid item className={classes.inRowStyle}>
-              <Typography className={classes.subTitleStyle}>CirculatingSupply:</Typography>
-              <Typography className={classes.subContentStyle}> ${numberWithCommas(totalSupply)}</Typography>
+            <Grid item sx={{mb:3,}}>
+              <Typography className={classes.subTitleStyle}>CirculatingSupply </Typography>
+              <Typography className={classes.subContentStyle}> $ {numberWithCommas(totalSupply)}</Typography>
             </Grid>
-            <Grid item className={classes.inRowStyle}>
-              <Typography className={classes.subTitleStyle}>Burned Supply:</Typography>
-              <Typography className={classes.subContentStyle}> ${numberWithCommas(burntAmount)}</Typography>
-            </Grid>
-            <Grid item className={classes.inRowStyle}>
-              <Typography  className={classes.subTitleStyle}>Burned Value:</Typography>
-              <Typography  className={classes.subContentStyle}> ${numberWithCommas (Number(burntAmount) * Number(sugarPrice))}</Typography>
-            </Grid>
-            
           </Box>
         </Grid>
 
-        <Grid md={6} xs={12} item>  
-          <Box sx={calcBoxStyle}>
-            <Grid item className={classes.inRowStyle}>
+        <Grid lg={4} md={6} xs={12} item>  
+          <Box className={classes.calcBoxStyle}>
+            <Grid item sx={{mb:3,}}>
+              <Typography className={classes.subTitleStyle}>Burned Supply </Typography>
+              <Typography className={classes.subContentStyle}> $ {numberWithCommas(burntAmount)}</Typography>
+            </Grid>
+
+            <Grid item sx={{mb:3,}}>
+              <Typography  className={classes.subTitleStyle}>Burned Value </Typography>
+              <Typography  className={classes.subContentStyle}> $ {numberWithCommas (Number(burntAmount) * Number(sugarPrice))}</Typography>
+            </Grid>
+          </Box>
+          
+        </Grid>
+
+        <Grid lg={4} md={6} xs={12} item>  
+          <Box className={classes.calcBoxStyle}>
+            <Grid item sx={{mb:3,}}>
               <Typography className={classes.subTitleStyle}>Holders </Typography>
               <Typography  className={classes.subContentStyle}> {numberWithCommas(tokenHolders)}</Typography>
             </Grid>
 
+            <Grid item>
+              <Typography className={classes.subTitleStyle}>Diamod Hands who never sold </Typography>
+              <Typography  className={classes.subContentStyle}> {numberWithCommas(648320)}</Typography>
+            </Grid>
           </Box>
         </Grid>
-        <Grid item md={3} xs={12}>
-          <Box sx={{backgroundColor: 'rgba(47, 19, 74, 0.25)', p: 2, borderRadius: 3,}}>
+
+      </Grid>
+
+      <Grid container spacing={6} sx={{mt:1,}}>
+        <Grid item lg={4} md={6} xs={12}>
+          <Box className={classes.boxBlurStyle}>
             <Typography className={classes.balanceTitleStyle}>Growth Wallet Balance</Typography>
             <Typography className={classes.balanceContentStyle}>$110</Typography>
           </Box>
         </Grid>
-        <Grid item md={3} xs={12}>
-          <Box sx={{backgroundColor: 'rgba(47, 19, 74, 0.25)', p: 2, borderRadius: 3, }}>
+        <Grid item lg={4} md={6} xs={12}>
+          <Box className={classes.boxBlurStyle}>
             <Typography className={classes.balanceTitleStyle}>Royalty Wallet Balance</Typography>
             <Typography className={classes.balanceContentStyle}>$110</Typography>
           </Box>
         </Grid>
-        <Grid item md={3} xs={12}>
-          <Box sx={{backgroundColor: 'rgba(47, 19, 74, 0.25)', p: 2, borderRadius: 3, }}>
+        <Grid item lg={4} md={6} xs={12}>
+          <Box className={classes.boxBlurStyle}>
             <Typography className={classes.balanceTitleStyle}>Moonshot Wallet Balance</Typography>
             <Typography className={classes.balanceContentStyle}>$110</Typography>
           </Box>
         </Grid>
-
-        <Grid item xs={12} >
-          <Box sx={{backgroundColor: 'rgba(47, 19, 74, 0.25)', p: 2, borderRadius: 3, pl: 10,}}>
-            <Grid xs={12} container>
-              <Grid item xs={12} md={4} className={classes.networkIconStyle}>
-                <Image alt="coingecko" src={COINGECKO} width={'40px'} height={'40px'}/>
-                <Link href='https://www.coingecko.com/' passHref>
-                  <Typography className={classes.subTitleStyle} sx={{ml:2,}}>CoinGecko</Typography>
-                </Link>
-              </Grid>
-              <Grid item xs={12} md={4} className={classes.networkIconStyle}>
-                <Image alt="bsc" src={BCSSCAN} width={'40px'} height={'40px'}/>
-                <Link href='https://bscscan.com/' passHref>
-                  <Typography className={classes.subTitleStyle} sx={{ml:2,}}>BSCScan</Typography>
-                </Link>
-              </Grid>
-              <Grid item xs={12} md={4} className={classes.networkIconStyle}>
-                <Image alt="cmc" src={COINMARKETCAP} width={'40px'} height={'40px'} /> 
-                <Link href='https://coinmarketcap.com/' passHref>
-                  <Typography className={classes.subTitleStyle} sx={{ml:2,}}>CoinMarketCap</Typography>
-                </Link>
-              </Grid>
-              <Grid item xs={12} md={4} className={classes.networkIconStyle}>
-                <Image alt="cmc" src={POOCOIN} width={'30px'} height={'40px'}/>   
-                <Link href='https://coinmarketcap.com/' passHref>
-                  <Typography className={classes.subTitleStyle} sx={{ml:2,}}>Poocosasdin</Typography>
-                </Link>
-              </Grid>
-              <Grid  item xs={12} md={4} className={classes.networkIconStyle}>
-                <Image alt="cmc" src={DEXTOOLS} width={'40px'} height={'40px'} /> 
-                <Link href='https://www.dextools.io/' passHref>
-                  <Typography className={classes.subTitleStyle} sx={{ml:2,}}>Dextools</Typography>
-                </Link>
-              </Grid>
-            </Grid>
-          </Box>
-        </Grid>
       </Grid>
+
+
+      
+      <Grid container lg={12} spacing={6} className={classes.boxlinkStyle}>
+        <Grid lg={2} md={6} xs={12} className={classes.networkIconStyle}>
+          <Image alt="coingecko" src={COINGECKO} width={'40px'} height={'40px'}/>
+          <Link href='https://www.coingecko.com/' passHref>
+            <Typography className={classes.subTitleStyle} sx={{ml:2,}}>CoinGecko</Typography>
+          </Link>
+        </Grid>
+        <Grid lg={2} md={6} xs={12} className={classes.networkIconStyle}>
+          <Image alt="bsc" src={BCSSCAN} width={'40px'} height={'40px'}/>
+          <Link href='https://bscscan.com/' passHref>
+            <Typography className={classes.subTitleStyle} sx={{ml:2,}}>BSCScan</Typography>
+          </Link>
+        </Grid>
+
+        <Grid lg={2} md={6} xs={12} className={classes.networkIconStyle}>
+          <Image alt="cmc" src={DEXTOOLS} width={'40px'} height={'40px'} /> 
+          <Link href='https://www.dextools.io/' passHref>
+            <Typography className={classes.subTitleStyle} sx={{ml:2,}}>Dextools</Typography>
+          </Link>
+        </Grid>
+
+        <Grid lg={2} md={6} xs={12} className={classes.networkIconStyle}>
+          <Image alt="cmc" src={POOCOIN} width={'40px'} height={'40px'}/>   
+          <Link href='https://poocoin.app/' passHref>
+            <Typography className={classes.subTitleStyle} sx={{ml:2,}}>Poocosasdin</Typography>
+          </Link>
+        </Grid>
+
+        <Grid lg={2} md={6} xs={12} className={classes.networkIconStyle}>
+          <Image alt="cmc" src={COINMARKETCAP} height={'40px'}  width={'40px'} layout={'fixed'}/> 
+          <Link href='https://coinmarketcap.com/' passHref>
+            <Typography className={classes.subTitleStyle} sx={{ml:2,}}>CoinMarketCap</Typography>
+          </Link>
+        </Grid>
+
+      </Grid>
+    </Grid>
     </Container>
   );
 };
 
 export default Home;
-

@@ -9,7 +9,6 @@ import { Divider, List, ListItem, ListItemText, Stack } from '@mui/material';
 
 import Image from 'next/image';
 import Logo from '../../public/ExWhite.svg';
-import Logo1 from '../../public/sugarlogo.png';
 import { drawerWidth } from '../../config';
 import { GlobalContext, NavigationContext} from '../../contexts';
 
@@ -65,6 +64,11 @@ export default function PermanentDrawerLeft(props: Props) {
     justifyContent:'space-between',
     display:'flex',
   }
+  const listIconStyle = {
+    paddingLeft: 6,
+    justifyContent:'space-between',
+    display:'flex',
+  }
   const iconContainerStyle = {
     background: 'linear-gradient(to bottom, rgba(78, 94, 238, 0.25), rgba(228,122, 231, 0.25))',
     borderRadius: 3,
@@ -79,14 +83,13 @@ export default function PermanentDrawerLeft(props: Props) {
 
   const drawerContent = (
     <Stack direction="column" spacing={1} sx={{mt:4,}}>
-      {/* <Image alt="logo" src={Logo} width={'100px'} height={'30px'}/> */}
-      {/* <Image alt="logo" src={Logo1} width={'100px'} height={'30px'}/> */}
+      <Image alt="logo" src={Logo} width={'100px'} height={'30px'}/>
       <Box sx={boxTypoStyle}>
         <Typography variant="body1" align="center" p={2}>$SUGAR: $ {Number(sugarPrice).toFixed(6)}</Typography>
       </Box>
       <Box sx={boxItemStyle}>
         <List >
-            <Link href='/' passHref>
+            <Link href='https://sugarlandcoin.com/' passHref>
               <ListItem button key="officialwebsite" selected={router.asPath == '/officialwebsite'}>
                 <CgLaptop/>
                 <ListItemText sx={listItemStyle} primary="Official Website" />
@@ -118,8 +121,8 @@ export default function PermanentDrawerLeft(props: Props) {
       </Box>
       <Box sx={boxItemStyle}>
           <List>
-            <Link href="/soon" passHref>
-                <ListItem button key="staking">
+            <Link href="/staking" passHref>
+                <ListItem button key="staking" selected={router.asPath == '/staking'}>
                   <IoMdLock/>
                   <ListItemText sx={listItemStyle} primary="Staking"/>
                 </ListItem>
@@ -131,17 +134,17 @@ export default function PermanentDrawerLeft(props: Props) {
             <Link href='/mint' passHref>
               <ListItem button key="mint" selected={router.asPath == '/mint'}>
                 <RiImageFill/>
-                <ListItemText sx={listItemStyle} primary="Mint" />
+                <ListItemText sx={listItemStyle} primary="Diamond NFTs" />
               </ListItem>
             </Link>
-            <Link href='/soon' passHref>
-              <ListItem button key="whitelistpass" >
+            <Link href='/whitelist' passHref>
+              <ListItem button key="whitelist" selected={router.asPath == '/whitelist'}>
                 <RiBookmarkFill/>
                 <ListItemText sx={listItemStyle} primary="Whitelist Pass" />
               </ListItem>
             </Link>
-            <Link href='/soon' passHref>
-              <ListItem button key="citizen" >
+            <Link href='/citizen' passHref>
+              <ListItem button key="citizen" selected={router.asPath == '/citizen'}>
                 <AiOutlineUser/>
                 <ListItemText sx={listItemStyle} primary="Citizen NFTs" />
               </ListItem>
@@ -150,14 +153,14 @@ export default function PermanentDrawerLeft(props: Props) {
       </Box>
       <Box sx={boxItemStyle}>
           <List>
-            <Link href='/soon' passHref>
-              <ListItem button key="governance">
+            <Link href='/governance' passHref>
+              <ListItem button key="governance" selected={router.asPath == '/governance'}>
                 <BsFillBookmarkPlusFill/> 
                 <ListItemText sx={listItemStyle} primary="Governance" />
               </ListItem>
             </Link>
-            <Link href='/soon' passHref>
-              <ListItem button key="listings">
+            <Link href='/listing' passHref>
+              <ListItem button key="listings" selected={router.asPath == '/listing'}>
                 <BsList/>
                 <ListItemText  sx={listItemStyle} primary="Listing" />
               </ListItem>
@@ -181,8 +184,8 @@ export default function PermanentDrawerLeft(props: Props) {
               <FiShare/>
               <ListItemText sx={listItemStyle} primary="Socials" />
             </ListItem>
-            <ListItem sx={listItemStyle}>
-              <Link href='https://twitter.com/' passHref>
+            <ListItem sx={listIconStyle}>
+              <Link href='https://twitter.com/sugarlandcoin/' passHref>
                 <a target="_blank" style={socialLinkStyle}>
                   <Image alt="twitter" src={TWITTER} width={'30px'} height={'30px'}/>
                 </a>
@@ -192,17 +195,17 @@ export default function PermanentDrawerLeft(props: Props) {
                   <Image alt="telegram" src={TELEGRAM} width={'30px'} height={'30px'}/>
                 </a>
               </Link>
-              <Link href='https://discord.com/' passHref>
+              <Link href='https://discord.gg/28KZRJzxbA/' passHref>
                 <a target="_blank" style={socialLinkStyle}>
                   <Image alt="discord" src={DISCORD} width={'30px'} height={'30px'}/>
                 </a>
               </Link>
-              <Link href='https://instagram.com/' passHref>
+              <Link href='https://www.instagram.com/sugarland_IG/' passHref>
                 <a target="_blank" style={socialLinkStyle}>
                   <Image alt="instagram" src={INSTAGRAM} width={'30px'} height={'30px'}/>
                 </a>
               </Link>
-              <Link href='https://www.facebook.com/' passHref>
+              <Link href='https://www.facebook.com/SugarlandCoinFB/' passHref>
                 <a target="_blank" style={socialLinkStyle}>
                   <Image alt="facebook" src={FACEBOOK} width={'30px'} height={'30px'}/>
                 </a>
