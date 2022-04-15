@@ -6,15 +6,16 @@ export const CMC_KEY = "980181ba-4dbd-4f5d-8136-512067bdba93";
 
 export const DATA_UNAVAILABLE = '--';
 
-export const defaultChainId = 97;
+export const defaultChainId = 56;
 
 export const SUGAR_V2_ADDRESS = "0xcB2aDBCa6f15E9B3F1D98FcE57aC48a093F34fA9";
+                                 
 export const SUGAR_V2_GENESIS_BLOCK = 14254159;
 
 export const SUGAR_ADDRESS = SUGAR_V2_ADDRESS;
 export const SUGAR_GENESIS_BLOCK = SUGAR_V2_GENESIS_BLOCK;
 
-export const SUGAR_NFT_ADDRESS = "0x55C750D1dCa531F9a4fD429925BA12C44C34C529";
+export const SUGAR_NFT_ADDRESS = "0xB822271328e4D1236e209fC5C6Fe4E282313f9F6";
 
 interface IRpcUrls {
   [key: number]: string

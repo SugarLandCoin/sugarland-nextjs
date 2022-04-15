@@ -128,7 +128,7 @@ const Home: NextPage = () => {
             </Grid>
             <Grid item sx={{mb:3,}}>
               <Typography className={classes.subTitleStyle}>CirculatingSupply </Typography>
-              <Typography className={classes.subContentStyle}> $ {numberWithCommas(totalSupply)}</Typography>
+              <Typography className={classes.subContentStyle}>  {numberWithCommas(totalSupply)}</Typography>
             </Grid>
           </Box>
         </Grid>
@@ -156,7 +156,7 @@ const Home: NextPage = () => {
             </Grid>
 
             <Grid item>
-              <Typography className={classes.subTitleStyle}>Diamod Hands who never sold </Typography>
+              <Typography className={classes.subTitleStyle}>Diamond Hands who never sold </Typography>
               <Typography  className={classes.subContentStyle}> {numberWithCommas(648320)}</Typography>
             </Grid>
           </Box>
@@ -211,7 +211,7 @@ const Home: NextPage = () => {
         <Grid lg={2} md={6} xs={12} className={classes.networkIconStyle}>
           <Image alt="cmc" src={POOCOIN} width={'40px'} height={'40px'}/>   
           <Link href='https://poocoin.app/' passHref>
-            <Typography className={classes.subTitleStyle} sx={{ml:2,}}>Poocosasdin</Typography>
+            <Typography className={classes.subTitleStyle} sx={{ml:2,}}>Poocoin</Typography>
           </Link>
         </Grid>
 
