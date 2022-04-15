@@ -41,7 +41,7 @@ type AddressMapOptions = {
 
 export const addressMap: AddressMapOptions = {
   'SUGAR': '0xcB2aDBCa6f15E9B3F1D98FcE57aC48a093F34fA9',
-  'SugarNFT' : '0x55C750D1dCa531F9a4fD429925BA12C44C34C529',
+  'SugarNFT' : '0xB822271328e4D1236e209fC5C6Fe4E282313f9F6',
   
 };
 
