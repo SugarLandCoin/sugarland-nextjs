@@ -29,6 +29,7 @@ import {BsFillBookmarkPlusFill} from 'react-icons/bs';
 import {BsList} from 'react-icons/bs';
 import {AiOutlineHeart} from 'react-icons/ai';
 import {FiShare} from 'react-icons/fi'
+import {MdCollectionsBookmark} from 'react-icons/md'
 
 interface Props {
   /**
@@ -149,6 +150,12 @@ export default function PermanentDrawerLeft(props: Props) {
                 <ListItemText sx={listItemStyle} primary="Citizen NFTs" />
               </ListItem>
             </Link>
+            <Link href='/mynfts' passHref>
+              <ListItem button key="MyNFTs" selected={router.asPath == '/mynfts'}>
+                <MdCollectionsBookmark/>
+                <ListItemText sx={listItemStyle} primary="My NFTs" />
+              </ListItem>
+            </Link>
           </List>
       </Box>
       <Box sx={boxItemStyle}>
@@ -210,6 +217,7 @@ export default function PermanentDrawerLeft(props: Props) {
                   <Image alt="facebook" src={FACEBOOK} width={'30px'} height={'30px'}/>
                 </a>
               </Link>
+
             </ListItem>
           </List>
       </Box>
