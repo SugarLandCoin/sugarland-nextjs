@@ -40,7 +40,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Citizen: NextPage = () => {
+const Soon: NextPage = () => {
   const classes = useStyles();
   return (
     <Container className={classes.rewardContainerStyle}>
@@ -66,7 +66,7 @@ const Citizen: NextPage = () => {
                 </Grid>
                 <Grid item sx={{mb:3}}>
                 <Typography className={classes.subContentStyle}>Holding a Sugarland Citizen NFT unlocks the power to suggest projects from across the cryptoverse that, once approved, can be rated by the rest of the community!
-                In addition, Citizen NFT holders will earn rewards for contributing and will receive airdrops, and more from partner projects.</Typography>
+                In addition, Citizen NFT holders will earn rewards for contributing and will receive airdrops, whitelist spots, and more from partner projects.</Typography>
                 </Grid>
             </Grid>
         </Grid>
@@ -79,4 +79,4 @@ const Citizen: NextPage = () => {
   );
 };
 
-export default Citizen;
+export default Soon;
