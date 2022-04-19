@@ -68,11 +68,11 @@ const Reward: NextPage = () => {
             </Grid>
             <Grid item sx={{mb:3}}>
               <Typography className={classes.subtitleStyle} variant="subtitle2" >Reflections Amount</Typography>
-              <Typography className={classes.subContentStyle}>0</Typography>
+              <Typography className={classes.subContentStyle}>648320</Typography>
             </Grid>
             <Grid item>
-              <Typography className={classes.subtitleStyle} variant="subtitle2" >Reflections value </Typography>
-              <Typography className={classes.subContentStyle}>$ 0</Typography>
+              <Typography className={classes.subtitleStyle} variant="subtitle2" >Reflections value</Typography>
+              <Typography className={classes.subContentStyle}>648320</Typography>
             </Grid>
           </Box>
         </Grid>
@@ -83,12 +83,12 @@ const Reward: NextPage = () => {
               <Typography className={classes.titleStyle} variant="subtitle2" >CHECK YOUR DIAMOND NFT REWARDS</Typography>
             </Grid>
             <Grid item sx={{mb:3,}}>
-              <Typography className={classes.subtitleStyle} variant="subtitle2" >Rewards Collected </Typography>
-              <Typography className={classes.subContentStyle}>0</Typography>
+              <Typography className={classes.subtitleStyle} variant="subtitle2" >Rewards Collected</Typography>
+              <Typography className={classes.subContentStyle}>648320</Typography>
             </Grid>
             <Grid item sx={{mb:3,}}>
               <Typography className={classes.subtitleStyle} variant="subtitle2" >Rewards Value</Typography>
-              <Typography className={classes.subContentStyle}>$ 0</Typography>
+              <Typography className={classes.subContentStyle}>648320</Typography>
             </Grid>
             <Grid item sx={{mb:3,}}>
               <Button className={classes.customButtonStyle}>Claim Rewards</Button>

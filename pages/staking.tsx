@@ -56,7 +56,7 @@ const Staking: NextPage = () => {
         <Grid item xs={12} md={6}>
           <Box className={classes.customBoxStyle}>
             <Grid item sx={{mb:6}}>
-              <Typography className={classes.titleStyle} variant="subtitle2" >STAKING PARTNERS</Typography>
+              <Typography className={classes.titleStyle} variant="subtitle2" >STACKING PARTNERS</Typography>
             </Grid>
             <Grid item sx={{mb:3}}>
               <Image alt="doken" src={imageDoken} width={'200px'} height={'40px'}/>
@@ -80,7 +80,7 @@ const Staking: NextPage = () => {
               <Typography className={classes.titleStyle} variant="subtitle2" >SUGAR STAKING POOLS ARE UNDER CONSTRUCTION</Typography> 
             </Grid>
             <Grid item sx={{mb:3,}}>
-              <Typography className={classes.subtitleStyle} >Stay tuned!</Typography>
+              <Typography className={classes.subtitleStyle} >Stay turned!</Typography>
             </Grid>
           </Box>
         </Grid>        
