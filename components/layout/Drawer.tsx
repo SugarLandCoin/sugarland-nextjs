@@ -149,6 +149,12 @@ export default function PermanentDrawerLeft(props: Props) {
                 <ListItemText sx={listItemStyle} primary="Citizen NFTs" />
               </ListItem>
             </Link>
+            <Link href='/soon' passHref>
+              <ListItem button key="MyNFTs" selected={router.asPath == '/soon'}>
+                <MdCollectionsBookmark/>
+                <ListItemText sx={listItemStyle} primary="My NFTs" />
+              </ListItem>
+            </Link>
           </List>
       </Box>
       <Box sx={boxItemStyle}>
