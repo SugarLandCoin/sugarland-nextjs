@@ -127,7 +127,7 @@ const Home: NextPage = () => {
               <Typography className={classes.subContentStyle}> $ {Number(marketCap)}</Typography>
             </Grid>
             <Grid item sx={{mb:3,}}>
-              <Typography className={classes.subTitleStyle}>CirculatingSupply </Typography>
+              <Typography className={classes.subTitleStyle}>Circulating Supply </Typography>
               <Typography className={classes.subContentStyle}>  {numberWithCommas(totalSupply)}</Typography>
             </Grid>
           </Box>
@@ -156,7 +156,7 @@ const Home: NextPage = () => {
             </Grid>
 
             <Grid item>
-              <Typography className={classes.subTitleStyle}>Diamond Hands who never sold </Typography>
+              <Typography className={classes.subTitleStyle}>Diamond Hands Who Never Sold </Typography>
               <Typography  className={classes.subContentStyle}> {numberWithCommas(648320)}</Typography>
             </Grid>
           </Box>
@@ -194,10 +194,18 @@ const Home: NextPage = () => {
             <Typography className={classes.subTitleStyle} sx={{ml:2,}}>CoinGecko</Typography>
           </Link>
         </Grid>
+
         <Grid lg={2} md={6} xs={12} className={classes.networkIconStyle}>
           <Image alt="bsc" src={BCSSCAN} width={'40px'} height={'40px'}/>
           <Link href='https://bscscan.com/' passHref>
             <Typography className={classes.subTitleStyle} sx={{ml:2,}}>BSCScan</Typography>
+          </Link>
+        </Grid>
+
+        <Grid lg={2} md={6} xs={12} className={classes.networkIconStyle}>
+          <Image alt="cmc" src={COINMARKETCAP} height={'40px'}  width={'40px'} layout={'fixed'}/> 
+          <Link href='https://coinmarketcap.com/' passHref>
+            <Typography className={classes.subTitleStyle} sx={{ml:2,}}>CoinMarketCap</Typography>
           </Link>
         </Grid>
 
@@ -212,13 +220,6 @@ const Home: NextPage = () => {
           <Image alt="cmc" src={POOCOIN} width={'40px'} height={'40px'}/>   
           <Link href='https://poocoin.app/' passHref>
             <Typography className={classes.subTitleStyle} sx={{ml:2,}}>Poocoin</Typography>
-          </Link>
-        </Grid>
-
-        <Grid lg={2} md={6} xs={12} className={classes.networkIconStyle}>
-          <Image alt="cmc" src={COINMARKETCAP} height={'40px'}  width={'40px'} layout={'fixed'}/> 
-          <Link href='https://coinmarketcap.com/' passHref>
-            <Typography className={classes.subTitleStyle} sx={{ml:2,}}>CoinMarketCap</Typography>
           </Link>
         </Grid>
 
