@@ -1,71 +1,11 @@
 import React, { useCallback } from "react";
 import { useContext, useEffect, useState } from 'react';
 import type { NextPage } from 'next';
-import Image from 'next/image';
-import Badge from '@mui/material/Badge';
-import { makeStyles } from "@mui/styles";
 import { styled } from '@mui/material/styles';
 import { useYam } from '../hooks';
 import { Container, Grid, Stack, Typography, Button, Box, Paper, Table, TableBody, TableContainer, TableHead, TableRow } from '@mui/material';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import { GlobalContext, Web3ModalContext } from '../contexts';
-
-const useStyles = makeStyles(() => ({
-  diamondBox: {
-    margin:'5%',
-    paddingBottom:'5%',
-    // backgroundImage:'url(/nft/tier1.png)',
-    // backgroundImage: `url(${'/nft/tier' + 1 + '.png'})`,
-    backgroundSize:"contain",
-    backgroundRepeat:'no-repeat',
-    backgroundPositionX:'center',
-    backgroundPositionY:'-10px',
-    borderRadius:'10px',
-    // borderStyle:'2px solid white',
-    // boxShadow: '0px 0px 2px 2px #AB6FE9',
-    color:'White',
-
-    
-  },
-  customBadge: {
-    display:'flex',
-    flexDirection:'column',
-    width:'40px',
-    height:'40px',
-    borderRadius:'20px',
-    color: 'gray',
-    backgroundImage:'url(/images/back/7.jpg)',
-    backgroundSize:'100px 100px',
-    backgroundPosition:'center',
-    // boxShadow: '0px 0px 2px 2px #AB6FE9',
-    boxShadow: '0px 0px 6px 6px lightgray',
-    // borderStyle:'2px solid white',
-    fontSize:'15px',
-    alignItems:'center',
-    paddingTop:"8px",
-    // textAlign:'center',
-  },
-
-  customBadge2: {
-    marginBottom:'250px',
-    marginRight:'120px',
-    position:'absolute',
-    display:'flex',
-    flexDirection:'column',
-    width:'25px',
-    height:'25px',
-    borderRadius:'20px',
-    color: 'white',
-    backgroundImage:'url(/images/back/2.jpg)',
-    backgroundSize:'100px 100px',
-    backgroundPosition:'center',
-    boxShadow: '0px 0px 3px 3px lightgray',
-    fontSize:'10px',
-    alignItems:'center',
-    paddingTop:"1px",
-  },
-  
-}));
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -226,14 +166,6 @@ const Mint: NextPage = () => {
         {
           (new Array(6).fill(0)).map((_, index) => {
             return (
-           <Grid key={index} item xs={12} sm={6} md={4} lg={2} >
-                <Stack direction="column" justifyContent='center' alignItems='center'
-                // style={{backgroundImage:`url(${'/nft/tier'+(index+1)+'.png'})`}}
-                >
-                <Typography variant="subtitle1" className={classes.customBadge2}>{remainingAmount[index+1]}</Typography>
-                  <Box 
-                    component="img"
-                    src={`/nft/tier${index + 1}.png`}
               <Grid key={index} item xs={12} sm={6} md={4} lg={2}>
                 <Stack direction="column" justifyContent='center' alignItems='center'>
                   <Box component="img"
@@ -243,7 +175,6 @@ const Mint: NextPage = () => {
                       width: 150,
                       borderRadius: 3,
                     }} 
-                  ></Box>
                   />
                   {sellingStatus ? (
                     <Button sx={{width: 150}}
