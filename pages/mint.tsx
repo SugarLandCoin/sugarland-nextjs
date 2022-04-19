@@ -77,7 +77,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     paddingBottom: '6px',
   },
   [`&.${tableCellClasses.body}`]: {
-    fontSize: 10,
+    fontSize: 12,
     fontWeight: 800,
     color: theme.palette.common.white,
     paddingTop: '6px',
@@ -102,12 +102,14 @@ const StyledTableRow = styled(TableRow)(() => ({
 }));
 
 const Mint: NextPage = () => {
+  const classes = useStyles(); 
   const globalContext = useContext(GlobalContext);
   const { account } = useContext(Web3ModalContext);
   const sugarPrice = globalContext.sugarPrice == null ? 0 : globalContext.sugarPrice;
   const [sellingStatus, setSellingStatus] = useState(true); 
   const [winnerInfo, setWinnerInfo] = useState<any>();
   const [nftPrice, setNftPrice] = useState<number>();
+  const [remainingAmount, setRemainingAmount] = useState<number[]>([]);
   const yamClient = useYam();
 
   const createData = (
@@ -124,12 +126,12 @@ const Mint: NextPage = () => {
   };
 
   const rows = [
-    createData('TIER 1', 'WHITE DIAMOND', '5,000,000', '30', '5', '1,800', '54,000', '$' + (sugarPrice * 54000).toFixed(2)),
-    createData('TIER 2', 'BLACK DIAMOND', '3,000,000', '30', '4', '1,000', '30,000', '$' + (sugarPrice * 30000).toFixed(2)),
-    createData('TIER 3', 'PURPLE DIAMOND', '2,000,000', '50', '3', '700', '21,000', '$' + (sugarPrice * 21000).toFixed(2)),
-    createData('TIER 4', 'ROSE GOLD DIAMOND', '1,000,000', '80', '2', '350', '10,500', '$' + (sugarPrice * 10500).toFixed(2)),
-    createData('TIER 5', 'PINK DIAMOND', '500,000', '100', '1', '180', '5,400', '$' + (sugarPrice * 5400).toFixed(2)),
-    createData('TIER 6', 'GREY DIAMOND', '300,000', '110', '0.5', '100', '3,000', '$' + (sugarPrice * 3000).toFixed(2)),
+    createData('Tier 1', 'White Diamond', '5,000,000', '30', '5', '1,800', '54,000', '$' + 113),
+    createData('Tier 2', 'Black Diamond', '3,000,000', '30', '4', '1,060', '31,800', '$' + 67),
+    createData('Tier 3', 'Purple Diamond', '2,000,000', '50', '3', '695', '20,850', '$' + 44),
+    createData('Tier 4', 'Rose GOLD Diamond', '1,000,000', '80', '2', '345', '10,350', '$' + 22),
+    createData('Tier 5', 'Pink Diamond', '500,000', '100', '1', '170', '5,100', '$' + 11),
+    createData('Tier 6', 'Gray Diamond', '300,000', '110', '0.5', '100', '3,000', '$' + 6),
   ];
 
   
@@ -139,6 +141,14 @@ const Mint: NextPage = () => {
         if(yamClient != undefined) {
           const sellingStatusRes = await yamClient.contracts.contractsMap['SugarNFT'].methods.getSellingStatus().call(); //Selling
           const winnerInfoRes = await yamClient.contracts.contractsMap['SugarNFT'].methods.getWinnerInfo(account).call(); 
+          const remains: number[] = new Array(6);
+          for(let i=1; i<=6; i++){
+            const temp = await yamClient.contracts.contractsMap['SugarNFT'].methods.getRemainingAmount(i).call();
+            remains[i] = temp;
+          }
+          // console.log("------------------------" + remains);
+          setRemainingAmount(remains);
+          console.log(remainingAmount);
           setSellingStatus(sellingStatusRes);
           setWinnerInfo(winnerInfoRes);
         }
@@ -226,25 +236,25 @@ const Mint: NextPage = () => {
         {
           (new Array(6).fill(0)).map((_, index) => {
             return (
-           <Grid key={index} item xs={12} sm={6} md={4} lg={2} >
+
+              <Grid key={index} item xs={12} sm={6} md={4} lg={2} >
                 <Stack direction="column" justifyContent='center' alignItems='center'
                 // style={{backgroundImage:`url(${'/nft/tier'+(index+1)+'.png'})`}}
                 >
                 <Typography variant="subtitle1" className={classes.customBadge2}>{remainingAmount[index+1]}</Typography>
+
+
                   <Box 
                     component="img"
                     src={`/nft/tier${index + 1}.png`}
-              <Grid key={index} item xs={12} sm={6} md={4} lg={2}>
-                <Stack direction="column" justifyContent='center' alignItems='center'>
-                  <Box component="img"
-                    src={`/nft/tier (${index + 1}).png`}
                     sx={{
-                      height: 240,
-                      width: 150,
+                      height: 300,
+                      width: 180,
                       borderRadius: 3,
                     }} 
                   ></Box>
-                  />
+
+                     
                   {sellingStatus ? (
                     <Button sx={{width: 150}}
                     onClick = {() => handleMint(index + 1)}
@@ -262,7 +272,7 @@ const Mint: NextPage = () => {
             )
           })
         }
-        <Grid item xs={12} md={12} mt={5}>
+        <Grid item xs={12} md={12} mt={5} >
           <Box >
             <Grid container spacing={2}>
               <Grid item xs={12} sm={12} md={9}>
