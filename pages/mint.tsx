@@ -75,7 +75,7 @@ const Mint: NextPage = () => {
   const sugarPrice = globalContext.sugarPrice == null ? 0 : globalContext.sugarPrice;
   const [sellingStatus, setSellingStatus] = useState(true); 
   const [winnerInfo, setWinnerInfo] = useState<any>();
-  const [nftPrice, setNftPrice] = useState<number>();
+  const [nftPrice, setNftPrice] = useState<number[]>([]);
   const [remainingAmount, setRemainingAmount] = useState<number[]>([]);
   const yamClient = useYam();
 
@@ -109,13 +109,17 @@ const Mint: NextPage = () => {
           const sellingStatusRes = await yamClient.contracts.contractsMap['SugarNFT'].methods.getSellingStatus().call(); //Selling
           const winnerInfoRes = await yamClient.contracts.contractsMap['SugarNFT'].methods.getWinnerInfo(account).call(); 
           const remains: number[] = new Array(6);
+          const prices: number[] = new Array(6);
           for(let i=1; i<=6; i++){
             const temp = await yamClient.contracts.contractsMap['SugarNFT'].methods.getRemainingAmount(i).call();
+            const price = await yamClient.contracts.contractsMap['SugarNFT'].methods.getPricePerNFT(i).call();
             remains[i] = temp;
+            prices[i] = price;
           }
-          // console.log("------------------------" + remains);
           setRemainingAmount(remains);
-          console.log(remainingAmount);
+          setNftPrice(prices);
+          // console.log(remainingAmount);
+          console.log(nftPrice);
           setSellingStatus(sellingStatusRes);
           setWinnerInfo(winnerInfoRes);
         }
@@ -128,15 +132,17 @@ const Mint: NextPage = () => {
 
   const handleMint = async (id: number) => {
     if(yamClient != undefined) {
-      const res = await yamClient.contracts.contractsMap['SugarNFT'].methods.getPricePerNFT(id).call();
-      setNftPrice(res);
-      await yamClient.contracts.contractsMap['SugarNFT'].methods.mint(id).send({from:account, value:nftPrice ,gasLimit:21000});
+      // const res = await yamClient.contracts.contractsMap['SugarNFT'].methods.getPricePerNFT(id).call();
+      // setNftPrice(res);
+      // alert(nftPrice[id]);
+      await yamClient.contracts.contractsMap['SugarNFT'].methods.mint(id).send({from:account, value:nftPrice[id] , gasLimit:21000});
     }
   };
 
   const handleClaim = async () => {
     if(yamClient != undefined) {
       await yamClient.contracts.contractsMap['SugarNFT'].methods.airdrop().send({from: account});
+
     }
   };
 
