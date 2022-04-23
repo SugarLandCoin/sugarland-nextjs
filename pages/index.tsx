@@ -3,9 +3,11 @@ import { useContext, useEffect, useState } from 'react';
 import type { NextPage } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
+import Web3 from 'web3';
 import { Container, Grid, Box, Typography } from '@mui/material';
 import { makeStyles } from "@mui/styles";
 import { useYam } from '../hooks';
+import { useWeb3 } from '../hooks';
 import { GlobalContext } from '../contexts';
 import { stringHelper } from '../helpers';
 
@@ -14,6 +16,13 @@ const BCSSCAN = "/images/icons/BSCScan-icon.png";
 const COINMARKETCAP = "/images/icons/Coinmarketcap-icon.png";
 const POOCOIN = "/images/icons/Poocoin-icon.png";
 const DEXTOOLS = "/images/icons/Dextools-icon.png";
+
+const BSCNET = "https://bsc-dataseed2.binance.org/";
+
+const GROWTHWALLET = "0x2C0F2e13a79fEE743A283b25892D32fc3Ea59317";
+const ROYALTYWALLET = "0xa2f7DB7Fd092A676F8a3f88Ce9A41A51f9d2bd84";
+const TREASURYWALLET = "0xbCBb5E17c7544571581ef33c2a7ED9808B966955";
+const web3 = new Web3(BSCNET);
 
 const useStyles = makeStyles(() => ({
   networkIconStyle: {
@@ -56,8 +65,8 @@ const useStyles = makeStyles(() => ({
   },
   balanceContentStyle: {
     fontFamily:'Montserrat',
-    fontSize:'20px',
-    fontWeight:'bold',
+    fontSize:'18px',
+    
     lineHeight:'35px',
   },
   boxBlurStyle: {
@@ -91,9 +100,13 @@ const Home: NextPage = () => {
   const classes = useStyles(); 
   const { numberWithCommas } = stringHelper;
   const { sugarPrice, tokenHolders, totalSupply, marketCap } = useContext(GlobalContext);
+  const [ growthWalletAmount, setGrowthWalletAmount] = useState<number>(0);
+  const [ royaltyWalletAmount, setRoyaltyWalletAmount] = useState<number>(0);
+  const [ treasuryWalletAmount ,setTreasuryWalletAmount] = useState<number>(0);
   const [burntAmount, setBurntAmount] = useState<number>(0);
-  const [repeater,setRepeater]=useState<number>(0);
+  const [yamRepeater,setYamRepeater]=useState<number>(0);  
   const yamClient = useYam();
+  const web3Client = useWeb3();
 
   useEffect(() => {
     const getBurntAmount = async () => {
@@ -104,8 +117,39 @@ const Home: NextPage = () => {
     };
     // const { sugarPrice, tokenHolders, totalSupply, marketCap } = useContext(GlobalContext);
     getBurntAmount();
-    setTimeout(() => setRepeater(prevState=>prevState+1), 10000);
-  }, [repeater]);
+    setTimeout(() => setYamRepeater(prevState=>prevState+1), 10000);
+  }, [yamRepeater]);
+
+  
+  useEffect(() => {
+    const getExtraWallet = async () => {
+      if(web3Client != undefined) {
+        const res = await web3.eth.getBalance(GROWTHWALLET);
+        setGrowthWalletAmount(parseInt(res));
+        const res1 = await web3.eth.getBalance(ROYALTYWALLET);
+        setRoyaltyWalletAmount(parseInt(res1));
+        const res2 = await web3.eth.getBalance(TREASURYWALLET);
+        setTreasuryWalletAmount(parseInt(res2));
+        console.log("Grow:" + res);
+        console.log("ROYAL:" + res1);
+        console.log("TRASURY:" + res2);
+      }
+    };
+    getExtraWallet();
+    setTimeout(() => setYamRepeater(prevState=>prevState+1), 10000);
+  }, [yamRepeater]);
+
+
+  // useEffect(() => {
+  //   const getExtraWallet = async () => {
+  //     if(web3Client != undefined) {
+  //       const res = await web3Client.contracts.contractsMap['BUSD'].methods.balanceOf(GROWTHWALLET).call();
+  //       alert(res+"asdfadsf");
+  //     }
+  //   };
+  //   getExtraWallet();
+  //   setTimeout(() => setWeb3Repeater(prevState=>prevState+1), 10000);
+  // }, [web3Repeater]);
 
   return (
     <Container className={classes.dashContainerStyle}>
@@ -168,19 +212,19 @@ const Home: NextPage = () => {
         <Grid item lg={4} md={6} xs={12}>
           <Box className={classes.boxBlurStyle}>
             <Typography className={classes.balanceTitleStyle}>Growth Wallet Balance</Typography>
-            <Typography className={classes.balanceContentStyle}>$110</Typography>
+            <Typography className={classes.balanceContentStyle}>${growthWalletAmount}</Typography>
           </Box>
         </Grid>
         <Grid item lg={4} md={6} xs={12}>
           <Box className={classes.boxBlurStyle}>
             <Typography className={classes.balanceTitleStyle}>Royalty Wallet Balance</Typography>
-            <Typography className={classes.balanceContentStyle}>$110</Typography>
+            <Typography className={classes.balanceContentStyle}>${royaltyWalletAmount}</Typography>
           </Box>
         </Grid>
         <Grid item lg={4} md={6} xs={12}>
           <Box className={classes.boxBlurStyle}>
             <Typography className={classes.balanceTitleStyle}>Moonshot Wallet Balance</Typography>
-            <Typography className={classes.balanceContentStyle}>$110</Typography>
+            <Typography className={classes.balanceContentStyle}>${treasuryWalletAmount}</Typography>
           </Box>
         </Grid>
       </Grid>

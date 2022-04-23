@@ -1,7 +1,10 @@
 import * as React from 'react';
 import type { NextPage } from 'next';
 import { Container, Grid, Typography, Button, Box, TextField } from '@mui/material';
+import { GlobalContext, Web3ModalContext } from '../contexts';
+import { useContext, useEffect, useState } from 'react';
 import { makeStyles } from "@mui/styles";
+
 
 const useStyles = makeStyles(() => ({
   customInput: {
@@ -47,8 +50,23 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
+
+
 const Reward: NextPage = () => {
 
+  const globalContext = useContext(GlobalContext);
+  const { account } = useContext(Web3ModalContext);
+  const [addressInputValue, setAddressInputValue] = useState<any>();
+  const [reflectionAmount, setReflectionAmount] = useState<number>(0);
+  const [reflectionValue, setReflectionValue] = useState<number>(0);
+
+  const handleReward = () => {
+    alert("Reward");
+  }
+  const handleEnterWallet = () => {
+    setAddressInputValue(account);
+    alert("reflection");
+  }
   const classes = useStyles();
   return (
     <Container className={classes.rewardContainerStyle}>
@@ -61,18 +79,20 @@ const Reward: NextPage = () => {
             <Grid item sx={{mb:3}}>
               <TextField
               className={classes.customInput}
+              placeholder={'Input Wallet Address'}
+              value={addressInputValue}
               />
             </Grid>
             <Grid item sx={{mb:4}}>
-              <Button className={classes.customButtonStyle}>Enter Wallet</Button>
+              <Button className={classes.customButtonStyle} onClick={() => handleEnterWallet()}>Enter Wallet</Button>
             </Grid>
             <Grid item sx={{mb:3}}>
               <Typography className={classes.subtitleStyle} variant="subtitle2" >Reflections Amount</Typography>
-              <Typography className={classes.subContentStyle}>0</Typography>
+              <Typography className={classes.subContentStyle}>$ {reflectionAmount}</Typography>
             </Grid>
             <Grid item>
               <Typography className={classes.subtitleStyle} variant="subtitle2" >Reflections value </Typography>
-              <Typography className={classes.subContentStyle}>$ 0</Typography>
+              <Typography className={classes.subContentStyle}>$ {reflectionValue}</Typography>
             </Grid>
           </Box>
         </Grid>
@@ -91,7 +111,7 @@ const Reward: NextPage = () => {
               <Typography className={classes.subContentStyle}>$ 0</Typography>
             </Grid>
             <Grid item sx={{mb:3,}}>
-              <Button className={classes.customButtonStyle}>Claim Rewards</Button>
+              <Button className={classes.customButtonStyle} onClick={handleReward}>Claim Rewards</Button>
             </Grid>
             <Grid item sx={{mb:1,}}>
               <Typography className={classes.subDescriptionStyle}>

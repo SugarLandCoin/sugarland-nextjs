@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { ProviderProps } from '../../types';
 import GlobalContext from './GlobalContext';
 import { useCoingecko } from '../../hooks';
+// import { useReflection } from '../../hooks';
 import { useMoralis } from 'react-moralis';
 import { SUGAR_ADDRESS, SUGAR_GENESIS_BLOCK, MORALIS_SERVER_URL, MORALIS_APP_ID } from '../../config';
 
