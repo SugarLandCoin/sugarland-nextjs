@@ -6,6 +6,8 @@ import SUGAR from '../contracts/Sugar.json';
 import SugarNFT from '../contracts/SugarNFT.json';
 import ERC20JSON from '../contracts/IERC20.json';
 import FUSD from '../contracts/FUSD.json';
+import BUSD from '../contracts/BUSD.json';
+
 
 interface contractsMapOptions {
   [key: string]: Contract
@@ -22,6 +24,7 @@ export class Contracts {
     this.contractsMap = {
       'SUGAR': new web3.eth.Contract(SUGAR as AbiItem[]),
       'SugarNFT': new web3.eth.Contract(SugarNFT as AbiItem[]),
+      'BUSD' : new web3.eth.Contract(BUSD as AbiItem[])
     }
     // this.contractsMap = {
     //   'BUSD': new web3.eth.Contract(ERC20JSON.abi as AbiItem[]),
@@ -37,6 +40,7 @@ export class Contracts {
   _updateContractAddresses() {
     this.contractsMap['SUGAR'].options.address = addressMap['SUGAR'];
     this.contractsMap['SugarNFT'].options.address = addressMap['SugarNFT'];
+    this.contractsMap['BUSD'].options.address = addressMap['BUSD'];
     // this.contractsMap['FUSD'].options.address = addressMap['FUSD'];
     // stableCoins.forEach((coin) => {
     //   this.contractsMap[coin.name].options.address = addressMap[coin.name];

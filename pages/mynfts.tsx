@@ -2,7 +2,7 @@ import * as React from 'react';
 import Image from 'next/image';
 import type { NextPage } from 'next';
 import { useContext, useEffect, useState } from 'react';
-import { Container, Grid, Typography, Box} from '@mui/material';
+import { Container, Grid, Typography, Box, Stack, Badge} from '@mui/material';
 import { makeStyles } from "@mui/styles";
 import {useYam} from "../hooks";
 import { GlobalContext, Web3ModalContext } from '../contexts';
@@ -41,6 +41,23 @@ const useStyles = makeStyles(() => ({
     marginTop:'100px',
     marginLeft:'5%',
   },
+  myNftContentStyle: {
+    borderRadius:'5px',
+  },
+  customBadge: {
+    position:"absolute",
+    marginBottom:'260px',
+    textDecoration:'underline',
+    marginLeft:"160px",
+    color:'gray',
+    fontWeight:'bold',
+    fontSize:'18px',
+    width:'30px',
+    height:'30px',
+    borderRadius:'15px',
+    textAlign:'center',
+    paddingTop:'5px',
+  }
 }));
 
 const Mynfts: NextPage = () => {
@@ -57,14 +74,13 @@ const Mynfts: NextPage = () => {
       try {
         if(yamClient != undefined) {
 
-          const nftCount: number[] = new Array(6);
-          for(let i=1; i<=6; i++){
-            const temp = await yamClient.contracts.contractsMap['SugarNFT'].methods.balanceOf(account, i);
+          const nftCount: number[] = new Array(6).fill(0);
+          for(let i=0; i<6; i++){
+            const temp = await yamClient.contracts.contractsMap['SugarNFT'].methods.balanceOf(account, i+1).call();
             nftCount[i] = temp;
-            console.log(nftCount[i] + ":Diamondsssss");
+            // console.log(i+1,"-",temp);
           }
           setDiamondCounts(nftCount);
-          // console.log(diamondCounts + ":Diamondsssss");
         }
       } catch (error) {
         console.log(error);
@@ -79,36 +95,54 @@ const Mynfts: NextPage = () => {
         <Grid item xs={12}>
         <Box className={classes.customBoxStyle}>
           <Grid container xs={12}>
-              <Grid item xs={6}>
-                      <Grid item sx={{mb:6}}>
-                          <Typography className={classes.titleStyle} variant="subtitle2" >Diamond NFTs</Typography>
-                      </Grid>
+              <Grid item xs={12}>
+                  <Grid item sx={{mb:6}}>
+                      <Typography className={classes.titleStyle} variant="subtitle2" >Diamond NFTs</Typography>
+                  </Grid>
               </Grid>
-              <Grid item xs={6}>
-              </Grid>
-            </Grid>
+
+          
             <Grid container xs={12}>
-              
+              {
+                  (new Array(6).fill(0)).map((_, index) => {
+                  return (
+                    <>
+                      { diamondCounts[index]==0 ? (
+                        <></>
+                      ) : (
+                        <>
+                          <Grid key={index} item xs={12} sm={6} md={4} lg={3} >
+                          <Stack direction="column" justifyContent='center' alignItems='center'>
+                          <Typography className={classes.customBadge}>{diamondCounts[index]}</Typography>
+                          <Box 
+                            component="img"
+                            src={`/images/util/ez${index + 1}.gif`}
+                            
+                            sx={{
+                              height: 250,
+                              width: 200,
+                              borderRadius: 3,
+                              marginBottom:5,
+                              boxShadow: '0px 0px 4px 4px lightgray',
+                            
+                            }} 
+                          ></Box>
+                          </Stack>
+                          </Grid>                                
+
+
+                        </>
+                      )}
+                    </>
+                  )
+                })
+              }
             </Grid>
-          </Box>
+        </Grid>
+        </Box>
         </Grid>
 
-       <Grid item xs={12}>
-        <Box className={classes.customBoxStyle}>
-          <Grid container xs={12}>
-              <Grid item xs={6}>
-                      <Grid item sx={{mb:6}}>
-                          <Typography className={classes.titleStyle} variant="subtitle2" >3D Citizen NFTs</Typography>
-                      </Grid>
-              </Grid>
-              <Grid item xs={6}>
-              </Grid>
-            </Grid>
-            <Grid container xs={12}>
-              
-            </Grid>
-          </Box>
-        </Grid>
+       
       </Grid>
     </Container>
   );

@@ -1,7 +1,6 @@
 import React, { useCallback } from "react";
 import { useContext, useEffect, useState } from 'react';
 import type { NextPage } from 'next';
-import Image from 'next/image';
 import Badge from '@mui/material/Badge';
 import { makeStyles } from "@mui/styles";
 import { styled } from '@mui/material/styles';
@@ -16,55 +15,23 @@ const useStyles = makeStyles(() => ({
     paddingBottom:'5%',
     // backgroundImage:'url(/nft/tier1.png)',
     // backgroundImage: `url(${'/nft/tier' + 1 + '.png'})`,
+    // borderStyle:'2px solid white',
+    // boxShadow: '0px 0px 2px 2px #AB6FE9',
     backgroundSize:"contain",
     backgroundRepeat:'no-repeat',
     backgroundPositionX:'center',
     backgroundPositionY:'-10px',
     borderRadius:'10px',
-    // borderStyle:'2px solid white',
-    // boxShadow: '0px 0px 2px 2px #AB6FE9',
+
     color:'White',
 
     
   },
   customBadge: {
     display:'flex',
-    flexDirection:'column',
-    width:'40px',
-    height:'40px',
-    borderRadius:'20px',
-    color: 'gray',
-    backgroundImage:'url(/images/back/7.jpg)',
-    backgroundSize:'100px 100px',
-    backgroundPosition:'center',
-    // boxShadow: '0px 0px 2px 2px #AB6FE9',
-    boxShadow: '0px 0px 6px 6px lightgray',
-    // borderStyle:'2px solid white',
     fontSize:'15px',
-    alignItems:'center',
-    paddingTop:"8px",
-    // textAlign:'center',
+    color:'#EB6FE9',
   },
-
-  customBadge2: {
-    marginBottom:'250px',
-    marginRight:'120px',
-    position:'absolute',
-    display:'flex',
-    flexDirection:'column',
-    width:'25px',
-    height:'25px',
-    borderRadius:'20px',
-    color: 'white',
-    backgroundImage:'url(/images/back/2.jpg)',
-    backgroundSize:'100px 100px',
-    backgroundPosition:'center',
-    boxShadow: '0px 0px 3px 3px lightgray',
-    fontSize:'10px',
-    alignItems:'center',
-    paddingTop:"1px",
-  },
-  
 }));
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -126,12 +93,12 @@ const Mint: NextPage = () => {
   };
 
   const rows = [
-    createData('Tier 1', 'White Diamond', '5,000,000', '30', '5', '1,800', '54,000', '$' + 113),
-    createData('Tier 2', 'Black Diamond', '3,000,000', '30', '4', '1,060', '31,800', '$' + 67),
-    createData('Tier 3', 'Purple Diamond', '2,000,000', '50', '3', '695', '20,850', '$' + 44),
-    createData('Tier 4', 'Rose GOLD Diamond', '1,000,000', '80', '2', '345', '10,350', '$' + 22),
+    createData('Tier 1', 'White Diamond', '5,000,000', '45', '5', '1,800', '54,000', '$' + 113),
+    createData('Tier 2', 'Black Diamond', '3,000,000', '45', '4', '1,060', '31,800', '$' + 67),
+    createData('Tier 3', 'Purple Diamond', '2,000,000', '75', '3', '695', '20,850', '$' + 44),
+    createData('Tier 4', 'Rose GOLD Diamond', '1,000,000', '100', '2', '345', '10,350', '$' + 22),
     createData('Tier 5', 'Pink Diamond', '500,000', '100', '1', '170', '5,100', '$' + 11),
-    createData('Tier 6', 'Gray Diamond', '300,000', '110', '0.5', '100', '3,000', '$' + 6),
+    createData('Tier 6', 'Gray Diamond', '300,000', '135', '0.5', '100', '3,000', '$' + 6),
   ];
 
   
@@ -163,7 +130,7 @@ const Mint: NextPage = () => {
     if(yamClient != undefined) {
       const res = await yamClient.contracts.contractsMap['SugarNFT'].methods.getPricePerNFT(id).call();
       setNftPrice(res);
-      await yamClient.contracts.contractsMap['SugarNFT'].methods.mint(id).send({from:account, value:nftPrice});
+      await yamClient.contracts.contractsMap['SugarNFT'].methods.mint(id).send({from:account, value:nftPrice ,gasLimit:21000});
     }
   };
 
@@ -231,42 +198,37 @@ const Mint: NextPage = () => {
       <Grid container>
         <Grid item xs={12} sm={12} md={12} p={2} mb={3}>
           <Typography variant='h4'>COLLECT DIAMOND NFTS & BOOST YOUR $SUGAR REWARDS</Typography>
-          <Typography variant='h6'>Monthly Rewards Pool = 5,280,000 SUGAR [Worth ${(sugarPrice * 5280000).toFixed(2)}*]</Typography>
+          <Typography variant='h6'>Monthly Rewards Pool = 7,374,750 SUGAR [Worth ${(sugarPrice * 7374750).toFixed(2)}*]</Typography>
         </Grid>
         {
           (new Array(6).fill(0)).map((_, index) => {
             return (
-
               <Grid key={index} item xs={12} sm={6} md={4} lg={2} >
-                <Stack direction="column" justifyContent='center' alignItems='center'
-                // style={{backgroundImage:`url(${'/nft/tier'+(index+1)+'.png'})`}}
-                >
-                <Typography variant="subtitle1" className={classes.customBadge2}>{remainingAmount[index+1]}</Typography>
-
-
-                  <Box 
-                    component="img"
-                    src={`/nft/tier${index + 1}.png`}
-                    sx={{
-                      height: 300,
-                      width: 180,
-                      borderRadius: 3,
-                    }} 
-                  ></Box>
+                <Stack direction="column" justifyContent='center' alignItems='center'>
+                    <Box 
+                      component="img"
+                      src={`/nft/tier${index + 1}.png`}
+                      sx={{
+                        height: 300,
+                        width: 180,
+                        borderRadius: 3,
+                      }} 
+                    ></Box>
 
                      
                   {sellingStatus ? (
-                    <Button sx={{width: 150}}
+                    <Button sx={{width: 180, p:3, mb:2,}}
                     onClick = {() => handleMint(index + 1)}
                     >Mint Now
                     </Button>
                   ) : (
-                    <Button sx={{width: 150}}
+                    <Button sx={{width: 180, p:3, mb:2,}}
                       onClick = {() => handleClaim()}
                       disabled = {!getEnableStatus(index + 1)}
                     >Claim NFT
                     </Button>
                   )}
+                  <Typography className={classes.customBadge}>Only {remainingAmount[index+1]} left!</Typography>
                 </Stack>
               </Grid>
             )
@@ -282,8 +244,6 @@ const Mint: NextPage = () => {
               </Grid>
               <Grid item xs={12} sm={12} md={3}>
                 <Stack direction="column">
-                  <Typography variant="subtitle1">MINT CONDITION</Typography>
-                  <Typography variant="label1">Whitelisted Winners can mint for free but should have minimum SUGAR BALANCE for their Tier.</Typography>
                   <Typography variant="subtitle1">REWARDS CONDITION</Typography>
                   <Typography variant="label1">Daily rewards will reflect only if you have minimum SUGAR balance for your NFT tier.</Typography>
                   <Typography variant="subtitle1">MULTIPLE NFTS</Typography>
