@@ -135,14 +135,15 @@ const Mint: NextPage = () => {
       // const res = await yamClient.contracts.contractsMap['SugarNFT'].methods.getPricePerNFT(id).call();
       // setNftPrice(res);
       // alert(nftPrice[id]);
-      await yamClient.contracts.contractsMap['SugarNFT'].methods.mint(id).send({from:account, value:nftPrice[id] , gasLimit:21000});
+      if(nftPrice[id]) {
+        await yamClient.contracts.contractsMap['SugarNFT'].methods.mint(id).send({from:account, value:nftPrice[id] , gasLimit:21000});
+      }
     }
   };
 
   const handleClaim = async () => {
     if(yamClient != undefined) {
       await yamClient.contracts.contractsMap['SugarNFT'].methods.airdrop().send({from: account});
-
     }
   };
 
