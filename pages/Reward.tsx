@@ -61,11 +61,11 @@ const Reward: NextPage = () => {
   const [reflectionValue, setReflectionValue] = useState<number>(0);
 
   const handleReward = () => {
-    alert("Reward");
+    
   }
   const handleEnterWallet = () => {
     setAddressInputValue(account);
-    alert("reflection");
+    
   }
   const classes = useStyles();
   return (
