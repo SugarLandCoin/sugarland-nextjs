@@ -6,6 +6,7 @@ import { makeStyles } from "@mui/styles";
 import { styled } from '@mui/material/styles';
 import { useYam } from '../hooks';
 import { Container, Grid, Stack, Typography, Button, Box, Paper, Table, TableBody, TableContainer, TableHead, TableRow } from '@mui/material';
+import CircularProgress from '@mui/material/CircularProgress'
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import { GlobalContext, Web3ModalContext } from '../contexts';
 
@@ -224,10 +225,19 @@ const Mint: NextPage = () => {
 
                      
                   {sellingStatus ? (
-                    <Button sx={{width: 180, p:3, mb:2,}}
-                    onClick = {() => handleMint(index + 1)}
-                    >Mint Now
-                    </Button>
+                    nftPrice[index+1] ? (
+                      <Button sx={{width: 180, p:3, mb:2,}}
+                      onClick = {() => handleMint(index + 1)}
+                      >Mint Now
+                      </Button>
+                    ) : (
+                      <Button sx={{width: 180, p:3, mb:2,}}
+                      onClick = {() => handleMint(index + 1)}
+                      disabled
+                      >
+                       <CircularProgress disableShrink />
+                      </Button>
+                    )
                   ) : (
                     <Button sx={{width: 180, p:3, mb:2,}}
                       onClick = {() => handleClaim()}
