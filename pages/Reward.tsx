@@ -57,7 +57,7 @@ const Reward: NextPage = () => {
   const { account } = useContext(Web3ModalContext);
   const  {fetchReflection} = useReflection(account);  
   const [addressInputValue, setAddressInputValue] = useState<any>();
-  const [reflectionAmount, setReflectionAmount] = useState<number | null>(null);
+  const [reflectionAmount, setReflectionAmount] = useState<number>(0);
   const [reflectionValue, setReflectionValue] = useState<number>(0);
 
   const handleReward = () => {
@@ -70,8 +70,8 @@ const Reward: NextPage = () => {
       const sugarReflection = await fetchReflection();
       console.log("______________________________",sugarReflection);
       if(sugarReflection !=undefined){
-        setReflectionAmount (sugarReflection.totalBalValue);
-        setReflectionValue (sugarReflection.curPrice);
+        setReflectionAmount (sugarReflection.balToken);
+        setReflectionValue (sugarReflection.curPrice * sugarReflection.balToken);
       }
       return sugarReflection;
     }
@@ -98,11 +98,11 @@ const Reward: NextPage = () => {
             </Grid>
             <Grid item sx={{mb:3}}>
               <Typography className={classes.subtitleStyle} variant="subtitle2" >Reflections Amount</Typography>
-              <Typography className={classes.subContentStyle}>$ {reflectionAmount}</Typography>
+              <Typography className={classes.subContentStyle}>SUGAR {Number(reflectionAmount).toFixed(2)}</Typography>
             </Grid>
             <Grid item>
               <Typography className={classes.subtitleStyle} variant="subtitle2" >Reflections value </Typography>
-              <Typography className={classes.subContentStyle}>$ {reflectionValue}</Typography>
+              <Typography className={classes.subContentStyle}>$ {Number(reflectionValue).toFixed(2)}</Typography>
             </Grid>
           </Box>
         </Grid>
