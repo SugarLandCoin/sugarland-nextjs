@@ -8,12 +8,15 @@ import { SUGAR_ADDRESS, SUGAR_GENESIS_BLOCK, MORALIS_SERVER_URL, MORALIS_APP_ID 
 
 const GlobalContextProvider = ( props: ProviderProps) => {
   const { fetchCoinData } = useCoingecko();
+  // const  {fetchReflection} = useReflection();
   const { Moralis } = useMoralis();
   const [sugarPrice, setSugarPrice] = useState<number | null>(null);
   const [tokenHolders, setTokenHolders] = useState<number>(0);
   const [marketCap, setMarketCap] = useState<number>(0);
   const [totalSupply, setTotalSupply] = useState<number>(0);
   const [repeater,setRepeater]=useState<number>(0);
+  
+
 
   useEffect(() => {
     async function getCoinData() {
@@ -25,6 +28,14 @@ const GlobalContextProvider = ( props: ProviderProps) => {
       return sugarland;
     }
     getCoinData();
+
+
+    // async function getReflection() {
+    //   const sugarReflection = await fetchReflection();
+    //   console.log("RRRRRRRRRRRRRRRRRR",sugarReflection);
+    //   return sugarReflection;
+    // }
+    // getReflection();
 
     const getHolders = async () => {
       const GetBlockTokenHoldersDto  = {

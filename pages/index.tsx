@@ -125,14 +125,11 @@ const Home: NextPage = () => {
     const getExtraWallet = async () => {
       if(web3Client != undefined) {
         const res = await web3.eth.getBalance(GROWTHWALLET);
-        setGrowthWalletAmount(parseInt(res));
+        setGrowthWalletAmount(Number(res) / 1000000000000000000);
         const res1 = await web3.eth.getBalance(ROYALTYWALLET);
-        setRoyaltyWalletAmount(parseInt(res1));
+        setRoyaltyWalletAmount(Number(res1) / 1000000000000000000);
         const res2 = await web3.eth.getBalance(TREASURYWALLET);
-        setTreasuryWalletAmount(parseInt(res2));
-        console.log("Grow:" + res);
-        console.log("ROYAL:" + res1);
-        console.log("TRASURY:" + res2);
+        setTreasuryWalletAmount(parseInt(res2) / 1000000000000000000);
       }
     };
     getExtraWallet();
@@ -212,19 +209,19 @@ const Home: NextPage = () => {
         <Grid item lg={4} md={6} xs={12}>
           <Box className={classes.boxBlurStyle}>
             <Typography className={classes.balanceTitleStyle}>Growth Wallet Balance</Typography>
-            <Typography className={classes.balanceContentStyle}>${growthWalletAmount}</Typography>
+            <Typography className={classes.balanceContentStyle}>$ {growthWalletAmount}</Typography>
           </Box>
         </Grid>
         <Grid item lg={4} md={6} xs={12}>
           <Box className={classes.boxBlurStyle}>
             <Typography className={classes.balanceTitleStyle}>Royalty Wallet Balance</Typography>
-            <Typography className={classes.balanceContentStyle}>${royaltyWalletAmount}</Typography>
+            <Typography className={classes.balanceContentStyle}>$ {royaltyWalletAmount}</Typography>
           </Box>
         </Grid>
         <Grid item lg={4} md={6} xs={12}>
           <Box className={classes.boxBlurStyle}>
             <Typography className={classes.balanceTitleStyle}>Moonshot Wallet Balance</Typography>
-            <Typography className={classes.balanceContentStyle}>${treasuryWalletAmount}</Typography>
+            <Typography className={classes.balanceContentStyle}>$ {treasuryWalletAmount}</Typography>
           </Box>
         </Grid>
       </Grid>

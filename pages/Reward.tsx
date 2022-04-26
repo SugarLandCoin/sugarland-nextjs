@@ -2,8 +2,9 @@ import * as React from 'react';
 import type { NextPage } from 'next';
 import { Container, Grid, Typography, Button, Box, TextField } from '@mui/material';
 import { GlobalContext, Web3ModalContext } from '../contexts';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { makeStyles } from "@mui/styles";
+import { useReflection } from '../hooks';
 
 
 const useStyles = makeStyles(() => ({
@@ -53,18 +54,28 @@ const useStyles = makeStyles(() => ({
 
 
 const Reward: NextPage = () => {
-
-  const globalContext = useContext(GlobalContext);
   const { account } = useContext(Web3ModalContext);
+  const  {fetchReflection} = useReflection(account);  
   const [addressInputValue, setAddressInputValue] = useState<any>();
-  const [reflectionAmount, setReflectionAmount] = useState<number>(0);
+  const [reflectionAmount, setReflectionAmount] = useState<number | null>(null);
   const [reflectionValue, setReflectionValue] = useState<number>(0);
 
   const handleReward = () => {
     alert("Not Confirmed");
   }
-  const handleEnterWallet = () => {
+  const handleEnterWallet =() => { 
     setAddressInputValue(account);
+
+    async function getReflection() {
+      const sugarReflection = await fetchReflection();
+      console.log("______________________________",sugarReflection);
+      if(sugarReflection !=undefined){
+        setReflectionAmount (sugarReflection.totalBalValue);
+        setReflectionValue (sugarReflection.curPrice);
+      }
+      return sugarReflection;
+    }
+     getReflection();
   }
   const classes = useStyles();
   return (

@@ -66,7 +66,7 @@ const Staking: NextPage = () => {
             </Grid>
             <Grid item sx={{mb:1}}>
               <Typography className={classes.subtitleStyle} variant="subtitle2" >Duration</Typography>
-              <Typography className={classes.subContentStyle}>10Days</Typography>
+              <Typography className={classes.subContentStyle}>15Days</Typography>
             </Grid>
             <Grid item sx={{mb:5}}>
               <Typography className={classes.subtitleStyle} variant="subtitle2" >Stake SUGAR - Earn BUSD </Typography>
