@@ -7,7 +7,6 @@ import { makeStyles } from "@mui/styles";
 import { useReflection } from '../hooks';
 import { stringHelper } from '../helpers';
 
-
 const useStyles = makeStyles(() => ({
   customInput: {
     background: 'white',
@@ -52,22 +51,20 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-
-
 const Reward: NextPage = () => {
   const { numberWithCommas } = stringHelper;
   const { account } = useContext(Web3ModalContext);
   const  {fetchReflection} = useReflection(account);  
   const [addressInputValue, setAddressInputValue] = useState<any>();
-  const [reflectionAmount, setReflectionAmount] = useState<number>(0);
-  const [reflectionValue, setReflectionValue] = useState<number>(0);
+  const [reflectionAmount, setReflectionAmount] = useState<any>(0);
+  const [reflectionValue, setReflectionValue] = useState<any>(0);
 
   const handleReward = () => {
     alert("Not Confirmed");
   }
+
   const handleEnterWallet =() => { 
     setAddressInputValue(account);
-
     async function getReflection() {
       const sugarReflection = await fetchReflection();
       console.log("______________________________",sugarReflection);
@@ -79,6 +76,7 @@ const Reward: NextPage = () => {
     }
      getReflection();
   }
+  
   const classes = useStyles();
   return (
     <Container className={classes.rewardContainerStyle}>
@@ -100,11 +98,11 @@ const Reward: NextPage = () => {
             </Grid>
             <Grid item sx={{mb:3}}>
               <Typography className={classes.subtitleStyle} variant="subtitle2" >Reflections Amount</Typography>
-              <Typography className={classes.subContentStyle}>{numberWithCommas(reflectionAmount)} SUGAR</Typography>
+              <Typography className={classes.subContentStyle}>{numberWithCommas( reflectionAmount.toFixed(0) )} SUGAR</Typography>
             </Grid>
             <Grid item>
               <Typography className={classes.subtitleStyle} variant="subtitle2" >Reflections value </Typography>
-              <Typography className={classes.subContentStyle}>{numberWithCommas(reflectionValue)} $</Typography>
+              <Typography className={classes.subContentStyle}>{numberWithCommas( reflectionValue.toFixed(2) )} $</Typography>
             </Grid>
           </Box>
         </Grid>

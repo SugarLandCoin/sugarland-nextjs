@@ -4,9 +4,7 @@ const useReflection = (props:any) => {
     let walletAddress = props;
     let coinAddress = '0x59eB96F0B6f5838021f0E8f412Afe65D1Bf44A02' //sugarland
     const apiToken = 'JZ4J2AWVAU7UIIHXB5H39QZFDEUPGVDIJY'
-
-    // let coinAddress='0xc17c30e98541188614df99239cabd40280810ca3' everrise
-
+    
     function removeSpace(str: string) {
         return (str.toLowerCase().replace(" ", ""))
     }
@@ -34,7 +32,6 @@ const useReflection = (props:any) => {
         }
         return soldValue
     }
-
 
     const fetchReflection = async () => {
         console.log("hi");

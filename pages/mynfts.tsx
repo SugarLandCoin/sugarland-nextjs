@@ -11,6 +11,7 @@ const useStyles = makeStyles(() => ({
     padding:'2%',
     borderRadius: '10px',
   },
+
   customButtonStyle: {
     color:'white',
     borderRadius: '10px',
@@ -21,26 +22,33 @@ const useStyles = makeStyles(() => ({
     width:'50%',
     fontSize:'12px',
   },
+
   titleStyle: {
     fontSize:'30px',
     lineHeight:'40px',    
   },
+
   subtitleStyle: {
     fontSize:'20px',
   },
+
   subContentStyle: {
     fontSize:'20px',
   },
+
   subDescriptionStyle: {
     fontSize:'12px',
   },
+
   mynftContainerStyle: {
     marginTop:'100px',
     marginLeft:'5%',
   },
+
   myNftContentStyle: {
     borderRadius:'5px',
   },
+
   customBadge: {
     position:"absolute",
     marginBottom:'260px',
@@ -97,10 +105,9 @@ const Mynfts: NextPage = () => {
                   </Grid>
               </Grid>
 
-          
             <Grid container xs={12}>
               {
-                  (new Array(6).fill(0)).map((_, index) => {
+                (new Array(6).fill(0)).map((_, index) => {
                   return (
                     <>
                       { diamondCounts[index]==0 ? (
@@ -108,25 +115,21 @@ const Mynfts: NextPage = () => {
                       ) : (
                         <>
                           <Grid key={index} item xs={12} sm={6} md={4} lg={3} >
-                          <Stack direction="column" justifyContent='center' alignItems='center'>
-                          <Typography className={classes.customBadge}>{diamondCounts[index]}</Typography>
-                          <Box 
-                            component="img"
-                            src={`/images/util/ez${index + 1}.gif`}
-                            
-                            sx={{
-                              height: 250,
-                              width: 200,
-                              borderRadius: 3,
-                              marginBottom:5,
-                              boxShadow: '0px 0px 4px 4px lightgray',
-                            
-                            }} 
-                          ></Box>
-                          </Stack>
+                            <Stack direction="column" justifyContent='center' alignItems='center'>
+                              <Typography className={classes.customBadge}>{diamondCounts[index]}</Typography>
+                              <Box 
+                                component="img"
+                                src={`/images/util/ez${index + 1}.gif`}                        
+                                sx={{
+                                  height: 250,
+                                  width: 200,
+                                  borderRadius: 3,
+                                  marginBottom:5,
+                                  boxShadow: '0px 0px 4px 4px lightgray',
+                                }} 
+                              ></Box>
+                            </Stack>
                           </Grid>                                
-
-
                         </>
                       )}
                     </>
