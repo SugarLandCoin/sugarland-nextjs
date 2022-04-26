@@ -5,6 +5,7 @@ import { GlobalContext, Web3ModalContext } from '../contexts';
 import { useContext, useState } from 'react';
 import { makeStyles } from "@mui/styles";
 import { useReflection } from '../hooks';
+import { stringHelper } from '../helpers';
 
 
 const useStyles = makeStyles(() => ({
@@ -54,6 +55,7 @@ const useStyles = makeStyles(() => ({
 
 
 const Reward: NextPage = () => {
+  const { numberWithCommas } = stringHelper;
   const { account } = useContext(Web3ModalContext);
   const  {fetchReflection} = useReflection(account);  
   const [addressInputValue, setAddressInputValue] = useState<any>();
@@ -98,11 +100,11 @@ const Reward: NextPage = () => {
             </Grid>
             <Grid item sx={{mb:3}}>
               <Typography className={classes.subtitleStyle} variant="subtitle2" >Reflections Amount</Typography>
-              <Typography className={classes.subContentStyle}>SUGAR {Number(reflectionAmount).toFixed(2)}</Typography>
+              <Typography className={classes.subContentStyle}>{numberWithCommas(reflectionAmount)} SUGAR</Typography>
             </Grid>
             <Grid item>
               <Typography className={classes.subtitleStyle} variant="subtitle2" >Reflections value </Typography>
-              <Typography className={classes.subContentStyle}>$ {Number(reflectionValue).toFixed(2)}</Typography>
+              <Typography className={classes.subContentStyle}>{numberWithCommas(reflectionValue)} $</Typography>
             </Grid>
           </Box>
         </Grid>
