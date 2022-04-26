@@ -1,13 +1,10 @@
 import * as React from 'react';
-import Image from 'next/image';
 import type { NextPage } from 'next';
 import { useContext, useEffect, useState } from 'react';
-import { Container, Grid, Typography, Box, Stack, Badge} from '@mui/material';
+import { Container, Grid, Typography, Box, Stack} from '@mui/material';
 import { makeStyles } from "@mui/styles";
 import {useYam} from "../hooks";
 import { GlobalContext, Web3ModalContext } from '../contexts';
-
-import imageCitizen from '../public/images/citizen.png';
 const useStyles = makeStyles(() => ({
   customBoxStyle: {
     backgroundColor: 'rgba(47, 19, 74, 0.25)',
@@ -65,8 +62,7 @@ const Mynfts: NextPage = () => {
   const globalContext = useContext(GlobalContext);
   const { account } = useContext(Web3ModalContext);
   const [diamondCounts,setDiamondCounts] = useState<number[]>([]);
-  const [citizenCounts,setCitizenCounts] = useState<number[]>([]);
-  const sugarPrice = globalContext.sugarPrice == null ? 0 : globalContext.sugarPrice;
+  // const sugarPrice = globalContext.sugarPrice == null ? 0 : globalContext.sugarPrice;
   const yamClient = useYam();
 
   useEffect(() => {

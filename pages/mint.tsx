@@ -1,7 +1,6 @@
 import React, { useCallback } from "react";
 import { useContext, useEffect, useState } from 'react';
 import type { NextPage } from 'next';
-import Badge from '@mui/material/Badge';
 import { makeStyles } from "@mui/styles";
 import { styled } from '@mui/material/styles';
 import { useYam } from '../hooks';
@@ -119,8 +118,6 @@ const Mint: NextPage = () => {
           }
           setRemainingAmount(remains);
           setNftPrice(prices);
-          // console.log(remainingAmount);
-          console.log(nftPrice);
           setSellingStatus(sellingStatusRes);
           setWinnerInfo(winnerInfoRes);
         }
