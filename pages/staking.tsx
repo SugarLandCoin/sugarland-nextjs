@@ -62,7 +62,7 @@ const Staking: NextPage = () => {
               <Image alt="doken" src={imageDoken} width={'200px'} height={'40px'}/>
             </Grid>
             <Grid item sx={{mb:4}}>
-              <Button className={classes.customButtonStyle}>Open DokenDojo</Button>
+              <Button className={classes.customButtonStyle} href="https://app.doken.exchange/dojo">Open DokenDojo</Button>
             </Grid>
             <Grid item sx={{mb:1}}>
               <Typography className={classes.subtitleStyle} variant="subtitle2" >Duration</Typography>

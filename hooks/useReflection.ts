@@ -1,9 +1,6 @@
 import axios from "axios";
 
 const useReflection = (props:any) => {
-
-    // const request = require('request') 
-    // let walletAddress = '0xD44027448A3961a2fCc642B63Ad3D745611D68F1'
     let walletAddress = props;
     let coinAddress = '0x59eB96F0B6f5838021f0E8f412Afe65D1Bf44A02' //sugarland
     const apiToken = 'JZ4J2AWVAU7UIIHXB5H39QZFDEUPGVDIJY'
@@ -97,7 +94,7 @@ const useReflection = (props:any) => {
                     }
                     const totalBalValue = balToken * curPrice
                     console.log("USD:" + totalBalValue.toFixed(2))
-                    return { curPrice, totalBalValue };
+                    return { curPrice, balToken };
 
                 } catch (error) {
                     console.error(error);
