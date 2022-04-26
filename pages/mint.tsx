@@ -13,20 +13,14 @@ const useStyles = makeStyles(() => ({
   diamondBox: {
     margin:'5%',
     paddingBottom:'5%',
-    // backgroundImage:'url(/nft/tier1.png)',
-    // backgroundImage: `url(${'/nft/tier' + 1 + '.png'})`,
-    // borderStyle:'2px solid white',
-    // boxShadow: '0px 0px 2px 2px #AB6FE9',
     backgroundSize:"contain",
     backgroundRepeat:'no-repeat',
     backgroundPositionX:'center',
     backgroundPositionY:'-10px',
     borderRadius:'10px',
-
     color:'White',
-
-    
   },
+
   customBadge: {
     display:'flex',
     fontSize:'15px',
@@ -130,9 +124,6 @@ const Mint: NextPage = () => {
 
   const handleMint = async (id: number) => {
     if(yamClient != undefined) {
-      // const res = await yamClient.contracts.contractsMap['SugarNFT'].methods.getPricePerNFT(id).call();
-      // setNftPrice(res);
-      // alert(nftPrice[id]);
       if(nftPrice[id]) {
         await yamClient.contracts.contractsMap['SugarNFT'].methods.mint(id).send({from:account, value:nftPrice[id] , gasLimit:21000});
       }
@@ -219,8 +210,6 @@ const Mint: NextPage = () => {
                         borderRadius: 3,
                       }} 
                     ></Box>
-
-                     
                   {sellingStatus ? (
                     nftPrice[index+1] ? (
                       <Button sx={{width: 180, p:3, mb:2,}}

@@ -12,6 +12,7 @@ const useStyles = makeStyles(() => ({
     borderRadius: '10px',
     height: '100%',
   },
+
   customButtonStyle: {
     color:'white',
     borderRadius: '10px',
@@ -22,23 +23,28 @@ const useStyles = makeStyles(() => ({
     width:'50%',
     fontSize:'12px',
   },
+
   titleStyle: {
     fontSize:'30px',
     lineHeight:'40px',
     wordWrap:'break-word',
   },
+
   subtitleStyle: {
     fontSize:'20px',
     wordWrap:'break-word',
   },
+
   subContentStyle: {
     fontSize:'20px',
     wordWrap:'break-word',
   },
+
   subDescriptionStyle: {
     fontSize:'12px',
     wordWrap:'break-word',
   },
+  
   rewardContainerStyle: {
     marginTop:'100px',
     marginLeft:'5%',

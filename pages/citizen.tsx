@@ -6,11 +6,13 @@ import { makeStyles } from "@mui/styles";
 
 import imageCitizen from '../public/images/citizen.png';
 const useStyles = makeStyles(() => ({
+
   customBoxStyle: {
     backgroundColor: 'rgba(47, 19, 74, 0.25)',
     padding: '7%',
     borderRadius: '10px',
   },
+
   customButtonStyle: {
     color:'white',
     borderRadius: '10px',
@@ -21,27 +23,35 @@ const useStyles = makeStyles(() => ({
     width:'50%',
     fontSize:'12px',
   },
+
   titleStyle: {
     fontSize:'30px',
     lineHeight:'40px',    
   },
+
   subtitleStyle: {
     fontSize:'20px',
   },
+
   subContentStyle: {
     fontSize:'20px',
   },
+
   subDescriptionStyle: {
     fontSize:'12px',
   },
+
   rewardContainerStyle: {
     marginTop:'100px',
     marginLeft:'5%',
   },
+
 }));
 
 const Citizen: NextPage = () => {
+
   const classes = useStyles();
+
   return (
     <Container className={classes.rewardContainerStyle}>
       <Grid container spacing={6}>
@@ -74,6 +84,7 @@ const Citizen: NextPage = () => {
         <Grid item xs={12} md={6}>
           <Image alt="citizen" src={imageCitizen}/>
         </Grid>        
+        
       </Grid>
     </Container>
   );

@@ -16,7 +16,6 @@ const BCSSCAN = "/images/icons/BSCScan-icon.png";
 const COINMARKETCAP = "/images/icons/Coinmarketcap-icon.png";
 const POOCOIN = "/images/icons/Poocoin-icon.png";
 const DEXTOOLS = "/images/icons/Dextools-icon.png";
-
 const BSCNET = "https://bsc-dataseed2.binance.org/";
 
 const GROWTHWALLET = "0x2C0F2e13a79fEE743A283b25892D32fc3Ea59317";
@@ -36,13 +35,16 @@ const useStyles = makeStyles(() => ({
   inRowStyle: {
     display:'flex',
   },
+
   iconStyle: {
     justifyContent:'center',
   },
+
   dashContainerStyle: {
     marginTop:'100px',
     marginLeft:'5%',
   },
+
   subTitleStyle: {
     fontFamily:'Montserrat',
     fontSize:'16px',
@@ -51,24 +53,28 @@ const useStyles = makeStyles(() => ({
     marginRight:'10px',
     wordWrap:'break-word',
   },
+
   subContentStyle: {
     fontFamily:'Montserrat',
     fontSize:'20px',
     lineHeight:'35px',
     wordWrap:'break-word',
   },
+
   balanceTitleStyle: {
     fontFamily:'Montserrat',
     fontSize:'12px',
     fontWeight:'bold',
     lineHeight:'35px',
   },
+
   balanceContentStyle: {
     fontFamily:'Montserrat',
     fontSize:'18px',
     
     lineHeight:'35px',
   },
+
   boxBlurStyle: {
     marginLeft:'5%',
     padding: '5%',
@@ -78,6 +84,7 @@ const useStyles = makeStyles(() => ({
     borderColor: '#AB6FE9',
     boxShadow: '0px 0px 2px 2px #AB6FE9',
   },
+
   boxlinkStyle: {
     marginTop:'5%',
     marginLeft: '2%',
@@ -85,6 +92,7 @@ const useStyles = makeStyles(() => ({
     borderRadius: '10px',
     background: 'linear-gradient(to bottom, rgba(78, 14, 238, 0.25), rgba(50,122, 231, 0.25))',
   },
+
   calcBoxStyle: {
     padding:'5%',
     height:'100%',
@@ -97,6 +105,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const Home: NextPage = () => {
+
   const classes = useStyles(); 
   const { numberWithCommas } = stringHelper;
   const { sugarPrice, tokenHolders, totalSupply, marketCap } = useContext(GlobalContext);
@@ -136,25 +145,13 @@ const Home: NextPage = () => {
     setTimeout(() => setYamRepeater(prevState=>prevState+1), 10000);
   }, [yamRepeater]);
 
-
-  // useEffect(() => {
-  //   const getExtraWallet = async () => {
-  //     if(web3Client != undefined) {
-  //       const res = await web3Client.contracts.contractsMap['BUSD'].methods.balanceOf(GROWTHWALLET).call();
-  //       alert(res+"asdfadsf");
-  //     }
-  //   };
-  //   getExtraWallet();
-  //   setTimeout(() => setWeb3Repeater(prevState=>prevState+1), 10000);
-  // }, [web3Repeater]);
-
   return (
     <Container className={classes.dashContainerStyle}>
       <Grid container spacing={6}>
 
       <Grid item xs={12} sx={{mb:5,}}>
-          <Typography textAlign={'center'} variant='subtitle2'>SUGARLAND DASHBOARD</Typography>
-        </Grid>
+        <Typography textAlign={'center'} variant='subtitle2'>SUGARLAND DASHBOARD</Typography>
+      </Grid>
 
       <Grid container spacing={6}>
         <Grid lg={4} md={6} xs={12} item>
@@ -186,7 +183,6 @@ const Home: NextPage = () => {
               <Typography  className={classes.subContentStyle}> $ {numberWithCommas (Number(burntAmount) * Number(sugarPrice))}</Typography>
             </Grid>
           </Box>
-          
         </Grid>
 
         <Grid lg={4} md={6} xs={12} item>  
@@ -226,8 +222,6 @@ const Home: NextPage = () => {
         </Grid>
       </Grid>
 
-
-      
       <Grid container lg={12} spacing={6} className={classes.boxlinkStyle}>
         <Grid lg={2} md={6} xs={12} className={classes.networkIconStyle}>
           <Image alt="coingecko" src={COINGECKO} width={'40px'} height={'40px'}/>
