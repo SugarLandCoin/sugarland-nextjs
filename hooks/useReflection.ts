@@ -34,7 +34,6 @@ const useReflection = (props:any) => {
     }
 
     const fetchReflection = async () => {
-        console.log("hi");
         // const url = https://api.bscscan.com/api?module=account&action=tokentx&address=0xD44027448A3961a2fCc642B63Ad3D745611D68F1&startblock=0&endblock=99999999&sort=asc&apikey=JZ4J2AWVAU7UIIHXB5H39QZFDEUPGVDIJY
         const url = 'https://api.bscscan.com/api?module=account&action=tokentx&address=' + walletAddress + '&startblock=0&endblock=99999999&sort=asc&apikey=' + apiToken
         try {
@@ -47,7 +46,6 @@ const useReflection = (props:any) => {
             let curval = 0;
             let curPrice = 0;
             let balToken = 0;
-            console.log("DATE:",data);
             if (data.result.length > 0) {
                 let datalist = data.result
                 buyval = boughtfun(datalist) / 1000000000
@@ -62,7 +60,6 @@ const useReflection = (props:any) => {
             }
             //const nurl='https://api.bscscan.com/api?module=account&action=tokenbalance&contractaddress=0x8076c74c5e3f5852037f31ff0093eeb8c8add8d3&address=0x910466a829ca5717EEe66015280c8713a2f8acef&tag=latest&apikey=BSGW5KIFXF6N7GVIZQHIWRFR8IQ8EBMTAH&tokenPriceUSD=tokenPriceUSD'
             const nurl = 'https://api.bscscan.com/api?module=account&action=tokenbalance&contractaddress=' + coinAddress + '&address=' + walletAddress + '&tag=latest&apikey=' + apiToken + '&tokenPriceUSD=tokenPriceUSD'
-            console.log('hi1',response);
             try {
                 const response: any = await axios.get(nurl);
                 const datacurrent = response.data;
@@ -72,10 +69,8 @@ const useReflection = (props:any) => {
                 const purl = 'https://bsc.api.0x.org/swap/v1/price?sellToken=' + coinAddress + '&buyToken=BUSD&sellAmount=1000000000000000000'
                 try {
                     const response: any = await axios.get(purl);
-                    console.log('hi2',response);
                     const dataCurrentPrice = response.data
                     curPrice = Number(dataCurrentPrice['price'])
-                    console.log("curprice:" + curPrice.toFixed(18))
                     balToken = curval - balval;
                     console.log("baltoken:" + balToken)
                     if (balToken < 0) {

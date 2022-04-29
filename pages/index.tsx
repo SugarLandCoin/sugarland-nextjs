@@ -142,7 +142,7 @@ const Home: NextPage = () => {
       }
     };
     getExtraWallet();
-    setTimeout(() => setYamRepeater(prevState=>prevState+1), 10000);
+    setTimeout(() => setYamRepeater(prevState => prevState + 1), 10000);
   }, [yamRepeater]);
 
   return (
@@ -166,7 +166,7 @@ const Home: NextPage = () => {
             </Grid>
             <Grid item sx={{mb:3,}}>
               <Typography className={classes.subTitleStyle}>Circulating Supply </Typography>
-              <Typography className={classes.subContentStyle}>  {numberWithCommas(totalSupply)}</Typography>
+              <Typography className={classes.subContentStyle}> {numberWithCommas(totalSupply)}</Typography>
             </Grid>
           </Box>
         </Grid>
@@ -180,7 +180,7 @@ const Home: NextPage = () => {
 
             <Grid item sx={{mb:3,}}>
               <Typography  className={classes.subTitleStyle}>Burned Value </Typography>
-              <Typography  className={classes.subContentStyle}> $ {numberWithCommas (Number(burntAmount) * Number(sugarPrice))}</Typography>
+              <Typography  className={classes.subContentStyle}> $ {numberWithCommas(Number(burntAmount) * Number(sugarPrice))}</Typography>
             </Grid>
           </Box>
         </Grid>

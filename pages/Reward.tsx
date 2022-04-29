@@ -1,11 +1,13 @@
 import * as React from 'react';
 import type { NextPage } from 'next';
+import { useContext, useEffect, useState } from 'react';
 import { Container, Grid, Typography, Button, Box, TextField } from '@mui/material';
 import { GlobalContext, Web3ModalContext } from '../contexts';
-import { useContext, useState } from 'react';
 import { makeStyles } from "@mui/styles";
 import { useReflection } from '../hooks';
+import { useYam } from '../hooks';
 import { stringHelper } from '../helpers';
+
 
 const useStyles = makeStyles(() => ({
   customInput: {
@@ -59,18 +61,70 @@ const Reward: NextPage = () => {
   const [reflectionAmount, setReflectionAmount] = useState<any>(0);
   const [reflectionValue, setReflectionValue] = useState<any>(0);
 
+  const [rewardAmount, setRewardAmount] = useState<number>(0);
+  const [rewardValue, setRewardValue] = useState<number>(0);
+
+  const [diamondCounts,setDiamondCounts] = useState<number[]>([]);
+  const [curPrice, setCurPrice] = useState<any>(0);
+  const [rewardsPerDay , setRewardsPerDay] = useState<number[]>([]);
+  const yamClient = useYam();
+
+  useEffect(() => {
+    const getSellingStatus = async () => {
+      try {
+        if(yamClient != undefined) {
+          const nftCount: number[] = new Array(6).fill(0);
+          for(let i = 0; i < 6; i++){
+            const temp = await yamClient.contracts.contractsMap['SugarNFT'].methods.balanceOf("0x3ade241eded91fe0f10cdb93a7295c6469220b2b", i+1).call();
+            nftCount[i] = temp;
+          } 
+          setDiamondCounts(nftCount);
+
+          const rewards: number[] = new Array(6).fill(0);
+          for(let i = 0; i < 6; i++){
+            const temp = await yamClient.contracts.contractsMap['REWARD'].methods.getRewardsPerDay(i+1).call();
+            rewards[i] = temp / 1000000000;
+          } 
+          setRewardsPerDay(rewards);
+
+          const sugarReflection = await fetchReflection();
+          if(sugarReflection != undefined) {
+          const res = sugarReflection.curPrice;
+          setCurPrice(res);
+
+          let sum = 0 ;
+          for(let i = 0; i < 6; i ++) { 
+            sum += nftCount[i] * rewards[i];
+          }
+          setRewardAmount(sum);
+          setRewardValue(sum * res);          
+          }
+        } 
+      } catch (error) {
+          console.log(error);
+        }
+      };
+      getSellingStatus();
+    }, [yamClient]);
+
   const handleReward = () => {
-    alert("Not Confirmed");
+    async function getRewards() {
+      if(yamClient != undefined) {
+        const res = await yamClient.contracts.contractsMap['REWARD'].methods.claimRewards().send({from: account, gasLimit:21000});
+        setRewardAmount(0);
+        setRewardValue(0);
+      }
+    }
+    getRewards(); 
   }
 
   const handleEnterWallet =() => { 
     setAddressInputValue(account);
     async function getReflection() {
       const sugarReflection = await fetchReflection();
-      console.log("______________________________",sugarReflection);
-      if(sugarReflection !=undefined){
-        setReflectionAmount (sugarReflection.balToken);
-        setReflectionValue (sugarReflection.curPrice * sugarReflection.balToken);
+      if(sugarReflection != undefined){
+        setReflectionAmount(sugarReflection.balToken);
+        setReflectionValue(sugarReflection.curPrice * sugarReflection.balToken);
       }
       return sugarReflection;
     }
@@ -114,11 +168,11 @@ const Reward: NextPage = () => {
             </Grid>
             <Grid item sx={{mb:3,}}>
               <Typography className={classes.subtitleStyle} variant="subtitle2" >Rewards Collected </Typography>
-              <Typography className={classes.subContentStyle}>0</Typography>
+              <Typography className={classes.subContentStyle}>{rewardAmount}</Typography>
             </Grid>
             <Grid item sx={{mb:3,}}>
               <Typography className={classes.subtitleStyle} variant="subtitle2" >Rewards Value</Typography>
-              <Typography className={classes.subContentStyle}>$ 0</Typography>
+              <Typography className={classes.subContentStyle}>{rewardValue} $</Typography>
             </Grid>
             <Grid item sx={{mb:3,}}>
               <Button className={classes.customButtonStyle} onClick={handleReward}>Claim Rewards</Button>

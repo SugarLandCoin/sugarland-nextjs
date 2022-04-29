@@ -42,7 +42,7 @@ type AddressMapOptions = {
 export const addressMap: AddressMapOptions = {
   'SUGAR': '0xcB2aDBCa6f15E9B3F1D98FcE57aC48a093F34fA9',
   'SugarNFT' : '0xB822271328e4D1236e209fC5C6Fe4E282313f9F6',
-  
+  'REWARD' : '0x6D3F9a7418FAD7A5483745e26c6616e9712d408A',
 };
 
 interface TokenInfo {
