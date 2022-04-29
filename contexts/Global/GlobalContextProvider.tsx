@@ -16,10 +16,8 @@ const GlobalContextProvider = ( props: ProviderProps) => {
   const [totalSupply, setTotalSupply] = useState<number>(0);
   const [repeater,setRepeater]=useState<number>(0);
   
-
-
   useEffect(() => {
-    async function getCoinData() {
+    async function getCoinData() {  
       const sugarland = await fetchCoinData('sugarland-token');
       console.log(sugarland);
       setSugarPrice(sugarland.usdPrice.toFixed(10));
@@ -28,15 +26,7 @@ const GlobalContextProvider = ( props: ProviderProps) => {
       return sugarland;
     }
     getCoinData();
-
-
-    // async function getReflection() {
-    //   const sugarReflection = await fetchReflection();
-    //   console.log("RRRRRRRRRRRRRRRRRR",sugarReflection);
-    //   return sugarReflection;
-    // }
-    // getReflection();
-
+    
     const getHolders = async () => {
       const GetBlockTokenHoldersDto  = {
         chainId: 56,

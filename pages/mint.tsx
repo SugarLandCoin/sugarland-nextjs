@@ -104,7 +104,7 @@ const Mint: NextPage = () => {
           const winnerInfoRes = await yamClient.contracts.contractsMap['SugarNFT'].methods.getWinnerInfo(account).call(); 
           const remains: number[] = new Array(6);
           const prices: number[] = new Array(6);
-          for(let i=1; i<=6; i++){
+          for(let i = 1; i <= 6; i++){
             const temp = await yamClient.contracts.contractsMap['SugarNFT'].methods.getRemainingAmount(i).call();
             const price = await yamClient.contracts.contractsMap['SugarNFT'].methods.getPricePerNFT(i).call();
             remains[i] = temp;
