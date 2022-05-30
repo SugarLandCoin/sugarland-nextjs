@@ -19,6 +19,7 @@ const DISCORD = "/images/icons/Discord.png";
 const FACEBOOK = "/images/icons/Facebook.png";
 import {CgLaptop} from 'react-icons/cg';
 import {BiPulse} from 'react-icons/bi';
+import {FaShoppingCart} from 'react-icons/Fa';
 import {IoIosSwitch} from 'react-icons/io';
 import {BsFillCheckCircleFill} from 'react-icons/bs';
 import {IoMdLock} from 'react-icons/io';
@@ -94,6 +95,16 @@ export default function PermanentDrawerLeft(props: Props) {
               <ListItem button key="officialwebsite" selected={router.asPath == '/officialwebsite'}>
                 <CgLaptop/>
                 <ListItemText sx={listItemStyle} primary="Official Website" />
+              </ListItem>
+            </Link>
+        </List>
+      </Box>
+      <Box sx={boxItemStyle}>
+        <List >
+            <Link href='/market' passHref>
+              <ListItem button key="Sugarland Marketplace" selected={router.asPath == '/market'}>
+                <FaShoppingCart/>
+                <ListItemText sx={listItemStyle} primary="Market" />
               </ListItem>
             </Link>
         </List>

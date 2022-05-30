@@ -61,61 +61,80 @@ const Reward: NextPage = () => {
   const [reflectionAmount, setReflectionAmount] = useState<any>(0);
   const [reflectionValue, setReflectionValue] = useState<any>(0);
 
-  const [rewardAmount, setRewardAmount] = useState<number>(0);
+  const [rewardAmount, setRewardAmount] = useState<any>(0);
   const [rewardValue, setRewardValue] = useState<number>(0);
-
-  const [diamondCounts,setDiamondCounts] = useState<number[]>([]);
+  const [tempValue,setTempValue] = useState<any>(0);
   const [curPrice, setCurPrice] = useState<any>(0);
   const [rewardsPerDay , setRewardsPerDay] = useState<number[]>([]);
+  const [claimButtonStatus, setClaimButtonStatus] = useState<boolean>(false);
   const yamClient = useYam();
 
-  useEffect(() => {
-    const getSellingStatus = async () => {
-      try {
-        if(yamClient != undefined) {
-          const nftCount: number[] = new Array(6).fill(0);
-          for(let i = 0; i < 6; i++){
-            const temp = await yamClient.contracts.contractsMap['SugarNFT'].methods.balanceOf("0x3ade241eded91fe0f10cdb93a7295c6469220b2b", i+1).call();
-            nftCount[i] = temp;
+  // useEffect(() => {
+  //   const getSellingStatus = async () => {
+  //     try {
+  //       if(yamClient != undefined) {
+  //         const nftCount: number[] = new Array(6).fill(0);
+  //         for(let i = 0; i < 6; i++){
+  //           const temp = await yamClient.contracts.contractsMap['SugarNFT'].methods.balanceOf(account, i+1).call();
+  //           nftCount[i] = temp;
+  //         } 
+  //         setDiamondCounts(nftCount);
+
+  //         const rewards: number[] = new Array(6).fill(0);
+  //         for(let i = 0; i < 6; i++){
+  //           const temp = await yamClient.contracts.contractsMap['REWARD'].methods.getRewardsPerDay(i+1).call();
+  //           rewards[i] = temp / 1000000000;
+  //         } 
+  //         setRewardsPerDay(rewards);
+
+  //         const sugarReflection = await fetchReflection();
+  //         if(sugarReflection != undefined) {
+  //         const res = sugarReflection.curPrice;
+  //         setCurPrice(res);
+
+  //         let sum = 0 ;
+  //         for(let i = 0; i < 6; i ++) { 
+  //           sum += nftCount[i] * rewards[i];
+  //         }
+  //         setRewardAmount(sum);
+  //         setRewardValue(sum * res);          
+  //         }
+  //       } 
+  //     } catch (error) {
+  //         console.log(error);
+  //       }
+  //     };
+  //     getSellingStatus();
+  //   }, [yamClient]);
+
+    useEffect(() => {
+      const ClaimInit = async () => {
+        try {
+          if(yamClient != undefined) {
+              const temp = await yamClient.contracts.contractsMap['REWARD'].methods.g_userInfo(account).call();
+              const temp1 = await yamClient.contracts.contractsMap['REWARD'].methods.getCurrentTime(account).call();
+              setRewardAmount(temp[0]);
+              setClaimButtonStatus(temp1);
+              } 
+              const sugarReflection = await fetchReflection();
+              if(sugarReflection != undefined) {
+              const res = sugarReflection.curPrice;
+              setRewardValue(res);
           } 
-          setDiamondCounts(nftCount);
-
-          const rewards: number[] = new Array(6).fill(0);
-          for(let i = 0; i < 6; i++){
-            const temp = await yamClient.contracts.contractsMap['REWARD'].methods.getRewardsPerDay(i+1).call();
-            rewards[i] = temp / 1000000000;
+        } catch (error) {
+            console.log(error);
           } 
-          setRewardsPerDay(rewards);
-
-          const sugarReflection = await fetchReflection();
-          if(sugarReflection != undefined) {
-          const res = sugarReflection.curPrice;
-          setCurPrice(res);
-
-          let sum = 0 ;
-          for(let i = 0; i < 6; i ++) { 
-            sum += nftCount[i] * rewards[i];
-          }
-          setRewardAmount(sum);
-          setRewardValue(sum * res);          
-          }
-        } 
-      } catch (error) {
-          console.log(error);
-        }
-      };
-      getSellingStatus();
-    }, [yamClient]);
+        };
+        ClaimInit();
+      }, [yamClient]);
 
   const handleReward = () => {
     async function getRewards() {
-      if(yamClient != undefined) {
-        const res = await yamClient.contracts.contractsMap['REWARD'].methods.claimRewards().send({from: account, gasLimit:21000});
-        setRewardAmount(0);
-        setRewardValue(0);
+        if(yamClient != undefined) {
+          const res = await yamClient.contracts.contractsMap['REWARD'].methods.claimRewards().send({from:account})
+        }
       }
-    }
-    getRewards(); 
+      getRewards();
   }
 
   const handleEnterWallet =() => { 
@@ -168,14 +187,18 @@ const Reward: NextPage = () => {
             </Grid>
             <Grid item sx={{mb:3,}}>
               <Typography className={classes.subtitleStyle} variant="subtitle2" >Rewards Collected </Typography>
-              <Typography className={classes.subContentStyle}>{rewardAmount}</Typography>
+              <Typography className={classes.subContentStyle}>{numberWithCommas(rewardAmount)} SUGAR</Typography>
             </Grid>
             <Grid item sx={{mb:3,}}>
               <Typography className={classes.subtitleStyle} variant="subtitle2" >Rewards Value</Typography>
-              <Typography className={classes.subContentStyle}>{rewardValue} $</Typography>
+              <Typography className={classes.subContentStyle}>{(rewardValue * rewardAmount).toFixed(2)} $</Typography>
             </Grid>
             <Grid item sx={{mb:3,}}>
-              <Button className={classes.customButtonStyle} onClick={handleReward}>Claim Rewards</Button>
+            {claimButtonStatus == false ? (
+              <Button className={classes.customButtonStyle} onClick={() => handleReward()} disabled>Claim Rewards {claimButtonStatus}</Button>
+            ) : (
+              <Button className={classes.customButtonStyle} onClick={() => handleReward()}>Claim Rewards {claimButtonStatus}</Button>
+            )}
             </Grid>
             <Grid item sx={{mb:1,}}>
               <Typography className={classes.subDescriptionStyle}>

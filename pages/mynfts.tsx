@@ -70,6 +70,8 @@ const Mynfts: NextPage = () => {
   const globalContext = useContext(GlobalContext);
   const { account } = useContext(Web3ModalContext);
   const [diamondCounts,setDiamondCounts] = useState<number[]>([]);
+
+  const [holders, setHolders] = useState<number>();
   // const sugarPrice = globalContext.sugarPrice == null ? 0 : globalContext.sugarPrice;
   const yamClient = useYam();
 
@@ -77,10 +79,9 @@ const Mynfts: NextPage = () => {
     const getMyNFTs = async () => {
       try {
         if(yamClient != undefined) {
-
           const nftCount: number[] = new Array(6).fill(0);
           for(let i = 0; i < 6; i++){
-            const temp = await yamClient.contracts.contractsMap['SugarNFT'].methods.balanceOf(account, i+1).call();
+            const temp = await yamClient.contracts.contractsMap['SugarNFT'].methods.getMyTokens(account,i+1).call();
             nftCount[i] = temp;
           }
           setDiamondCounts(nftCount);
