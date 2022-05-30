@@ -101,8 +101,8 @@ export default function PermanentDrawerLeft(props: Props) {
       </Box>
       <Box sx={boxItemStyle}>
         <List >
-            <Link href='/market' passHref>
-              <ListItem button key="Sugarland Marketplace" selected={router.asPath == '/market'}>
+            <Link href='/soon' passHref>
+              <ListItem button key="Sugarland Marketplace" selected={router.asPath == '/soon'}>
                 <FaShoppingCart/>
                 <ListItemText sx={listItemStyle} primary="Market" />
               </ListItem>
