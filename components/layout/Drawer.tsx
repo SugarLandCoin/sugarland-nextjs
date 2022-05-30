@@ -195,7 +195,6 @@ export default function PermanentDrawerLeft(props: Props) {
             </Link>
           </List>
       </Box>
-
       <Box sx={iconContainerStyle} >
           <List>
             <ListItem>

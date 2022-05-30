@@ -116,7 +116,6 @@ const Mint: NextPage = () => {
             prices[i] = price;
           }
           setTotalBalance(totalBalanceRes);
-          console.log("--------------------------------------------------" ,exchangeRes,totalBalance);
           if(exchangeRes > 0 && sellingStatus == true) {
             if(totalBalanceRes < exchangeRes) {
               setExchangeStatus(false);
@@ -142,11 +141,11 @@ const Mint: NextPage = () => {
     }
   };
 
-  const handleClaim = async () => {
-    if(yamClient != undefined) {
-      await yamClient.contracts.contractsMap['SugarNFT'].methods.airdrop().send({from: account});
-    }
-  };
+  // const handleClaim = async () => {
+  //   if(yamClient != undefined) {
+  //     await yamClient.contracts.contractsMap['SugarNFT'].methods.airdrop().send({from: account});
+  //   }
+  // };
 
   const handleExchange = async (id: number) => {
     if(yamClient != undefined) {
@@ -240,8 +239,6 @@ const Mint: NextPage = () => {
                         </Button>
                       ) : (
                         <Button sx={{width: 180, p:3, mb:2,}}
-                        onClick = {() => handleMint(index + 1)}
-                        disabled
                         >
                         <CircularProgress disableShrink />
                         </Button>
@@ -250,7 +247,7 @@ const Mint: NextPage = () => {
                       <Button sx={{width: 180, p:3, mb:2,}}
                         // onClick = {() => handleClaim()}
                         onClick = {() => handleExchange(index + 1)}
-                        // disabled = {getExchangeEnableStatus()}
+                        disabled = {!getEnableStatus(index + 1)}
                       >Exchange NFT
                       </Button>
                     )}

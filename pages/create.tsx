@@ -1,10 +1,8 @@
 import * as React from 'react';
-import Image from 'next/image';
 import type { NextPage } from 'next';
-import { Container, Grid, Typography, Box, Select, MenuItem, FormControl, TextField, Input, RadioGroup, FormControlLabel, Radio, Button} from '@mui/material';
+import { Container, Grid, Typography, Box, Select, MenuItem, FormControl, TextField, RadioGroup, FormControlLabel, Radio, Button} from '@mui/material';
 import { makeStyles } from "@mui/styles";
 
-import unlockNFT from '../public/images/unlockNFT1.png';
 const useStyles = makeStyles(() => ({
   customBoxStyle: {
     backgroundColor: 'rgba(47, 19, 74, 0.25)',

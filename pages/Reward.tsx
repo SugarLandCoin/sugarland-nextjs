@@ -60,12 +60,8 @@ const Reward: NextPage = () => {
   const [addressInputValue, setAddressInputValue] = useState<any>();
   const [reflectionAmount, setReflectionAmount] = useState<any>(0);
   const [reflectionValue, setReflectionValue] = useState<any>(0);
-
   const [rewardAmount, setRewardAmount] = useState<any>(0);
   const [rewardValue, setRewardValue] = useState<number>(0);
-  const [tempValue,setTempValue] = useState<any>(0);
-  const [curPrice, setCurPrice] = useState<any>(0);
-  const [rewardsPerDay , setRewardsPerDay] = useState<number[]>([]);
   const [claimButtonStatus, setClaimButtonStatus] = useState<boolean>(false);
   const yamClient = useYam();
 

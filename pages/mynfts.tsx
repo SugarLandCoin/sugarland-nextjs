@@ -70,8 +70,6 @@ const Mynfts: NextPage = () => {
   const globalContext = useContext(GlobalContext);
   const { account } = useContext(Web3ModalContext);
   const [diamondCounts,setDiamondCounts] = useState<number[]>([]);
-
-  const [holders, setHolders] = useState<number>();
   // const sugarPrice = globalContext.sugarPrice == null ? 0 : globalContext.sugarPrice;
   const yamClient = useYam();
 
