@@ -23,7 +23,6 @@ import {IoIosSwitch} from 'react-icons/io';
 import {BsFillCheckCircleFill} from 'react-icons/bs';
 import {IoMdLock} from 'react-icons/io';
 import {RiImageFill} from 'react-icons/ri';
-import {RiBookmarkFill} from 'react-icons/ri';
 import {AiOutlineUser} from 'react-icons/ai';
 import {BsFillBookmarkPlusFill} from 'react-icons/bs';
 import {BsList} from 'react-icons/bs';
@@ -136,12 +135,6 @@ export default function PermanentDrawerLeft(props: Props) {
               <ListItem button key="mint" selected={router.asPath == '/mint'}>
                 <RiImageFill/>
                 <ListItemText sx={listItemStyle} primary="Diamond NFTs" />
-              </ListItem>
-            </Link>
-            <Link href='/whitelist' passHref>
-              <ListItem button key="whitelist" selected={router.asPath == '/whitelist'}>
-                <RiBookmarkFill/>
-                <ListItemText sx={listItemStyle} primary="Whitelist Pass" />
               </ListItem>
             </Link>
             <Link href='/citizen' passHref>
