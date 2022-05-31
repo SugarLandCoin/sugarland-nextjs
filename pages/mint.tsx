@@ -68,6 +68,8 @@ const Mint: NextPage = () => {
   const { account } = useContext(Web3ModalContext);
   const sugarPrice = globalContext.sugarPrice == null ? 0 : globalContext.sugarPrice;
   const [sellingStatus, setSellingStatus] = useState(true); 
+  const [exchangeStatus, setExchangeStatus] = useState(true);
+  const [totalBalance, setTotalBalance] = useState(0);
   const [winnerInfo, setWinnerInfo] = useState<any>();
   const [nftPrice, setNftPrice] = useState<number[]>([]);
   const [remainingAmount, setRemainingAmount] = useState<number[]>([]);
@@ -100,8 +102,11 @@ const Mint: NextPage = () => {
     const getSellingStatus = async () => {
       try {
         if(yamClient != undefined) {
+          const exchangeRes = await yamClient.contracts.contractsMap['SugarNewNFT'].methods.getTotalBalance(account).call();
+          const totalBalanceRes = await yamClient.contracts.contractsMap['SugarNFT'].methods.balanceOf(account).call();
           const sellingStatusRes = await yamClient.contracts.contractsMap['SugarNFT'].methods.getSellingStatus().call(); //Selling
           const winnerInfoRes = await yamClient.contracts.contractsMap['SugarNFT'].methods.getWinnerInfo(account).call(); 
+
           const remains: number[] = new Array(6);
           const prices: number[] = new Array(6);
           for(let i = 1; i <= 6; i++){
@@ -109,6 +114,12 @@ const Mint: NextPage = () => {
             const price = await yamClient.contracts.contractsMap['SugarNFT'].methods.getPricePerNFT(i).call();
             remains[i] = temp;
             prices[i] = price;
+          }
+          setTotalBalance(totalBalanceRes);
+          if(exchangeRes > 0 && sellingStatus == true) {
+            if(totalBalanceRes < exchangeRes) {
+              setExchangeStatus(false);
+            }
           }
           setRemainingAmount(remains);
           setNftPrice(prices);
@@ -125,14 +136,20 @@ const Mint: NextPage = () => {
   const handleMint = async (id: number) => {
     if(yamClient != undefined) {
       if(nftPrice[id]) {
-        await yamClient.contracts.contractsMap['SugarNFT'].methods.mint(id).send({from:account, value:nftPrice[id] , gasLimit:21000});
+        await yamClient.contracts.contractsMap['SugarNFT'].methods.mint(account, id).send({from:account, value:nftPrice[id]});
       }
     }
   };
 
-  const handleClaim = async () => {
+  // const handleClaim = async () => {
+  //   if(yamClient != undefined) {
+  //     await yamClient.contracts.contractsMap['SugarNFT'].methods.airdrop().send({from: account});
+  //   }
+  // };
+
+  const handleExchange = async (id: number) => {
     if(yamClient != undefined) {
-      await yamClient.contracts.contractsMap['SugarNFT'].methods.airdrop().send({from: account});
+      await yamClient.contracts.contractsMap['SugarNFT'].methods.exchange(account , id).send({from:account});
     }
   };
 
@@ -147,6 +164,10 @@ const Mint: NextPage = () => {
     }
     return (id == winnerInfo[0]);
   }, [sellingStatus, winnerInfo]);
+  
+  const getExchangeEnableStatus =  useCallback(() : boolean => {
+    return (sellingStatus == true);
+  },[exchangeStatus]);
   
   const _renderTable = (_rows: any) => {
     return (
@@ -210,27 +231,27 @@ const Mint: NextPage = () => {
                         borderRadius: 3,
                       }} 
                     ></Box>
-                  {sellingStatus ? (
-                    nftPrice[index+1] ? (
-                      <Button sx={{width: 180, p:3, mb:2,}}
-                      onClick = {() => handleMint(index + 1)}
-                      >Mint Now
-                      </Button>
+                    { exchangeStatus ? (
+                      nftPrice[index+1] ? (
+                        <Button sx={{width: 180, p:3, mb:2,}}
+                        onClick = {() => handleMint(index + 1)}
+                        >Mint Now
+                        </Button>
+                      ) : (
+                        <Button sx={{width: 180, p:3, mb:2,}}
+                        >
+                        <CircularProgress disableShrink />
+                        </Button>
+                      )
                     ) : (
                       <Button sx={{width: 180, p:3, mb:2,}}
-                      onClick = {() => handleMint(index + 1)}
-                      disabled
-                      >
-                       <CircularProgress disableShrink />
+                        // onClick = {() => handleClaim()}
+                        onClick = {() => handleExchange(index + 1)}
+                        disabled = {!getEnableStatus(index + 1)}
+                      >Exchange NFT
                       </Button>
-                    )
-                  ) : (
-                    <Button sx={{width: 180, p:3, mb:2,}}
-                      onClick = {() => handleClaim()}
-                      disabled = {!getEnableStatus(index + 1)}
-                    >Claim NFT
-                    </Button>
-                  )}
+                    )}
+
                   <Typography className={classes.customBadge}>Only {remainingAmount[index+1]} left!</Typography>
                 </Stack>
               </Grid>
