@@ -97,41 +97,44 @@ const Mint: NextPage = () => {
     createData('Tier 6', 'Gray Diamond', '300,000', '135', '0.5', '100', '3,000', '$' + 6),
   ];
 
-  
-  useEffect(() => {
-    const getSellingStatus = async () => {
+  const getSellingStatus = useCallback (async () => {
+    if(yamClient != undefined) {
       try {
-        if(yamClient != undefined) {
-          const exchangeRes = await yamClient.contracts.contractsMap['SugarNewNFT'].methods.getTotalBalance(account).call();
-          const totalBalanceRes = await yamClient.contracts.contractsMap['SugarNFT'].methods.balanceOf(account).call();
-          const sellingStatusRes = await yamClient.contracts.contractsMap['SugarNFT'].methods.getSellingStatus().call(); //Selling
-          const winnerInfoRes = await yamClient.contracts.contractsMap['SugarNFT'].methods.getWinnerInfo(account).call(); 
+        const exchangeRes = await yamClient.contracts.contractsMap['SugarNewNFT'].methods.getTotalBalance(account).call();
+        const totalBalanceRes = await yamClient.contracts.contractsMap['SugarNFT'].methods.balanceOf(account).call();
+        const sellingStatusRes = await yamClient.contracts.contractsMap['SugarNFT'].methods.getSellingStatus().call(); //Selling
+        const winnerInfoRes = await yamClient.contracts.contractsMap['SugarNFT'].methods.getWinnerInfo(account).call(); 
 
-          const remains: number[] = new Array(6);
-          const prices: number[] = new Array(6);
-          for(let i = 1; i <= 6; i++){
-            const temp = await yamClient.contracts.contractsMap['SugarNFT'].methods.getRemainingAmount(i).call();
-            const price = await yamClient.contracts.contractsMap['SugarNFT'].methods.getPricePerNFT(i).call();
-            remains[i] = temp;
-            prices[i] = price;
-          }
-          setTotalBalance(totalBalanceRes);
-          if(exchangeRes > 0 && sellingStatus == true) {
-            if(totalBalanceRes < exchangeRes) {
-              setExchangeStatus(false);
-            }
-          }
-          setRemainingAmount(remains);
-          setNftPrice(prices);
-          setSellingStatus(sellingStatusRes);
-          setWinnerInfo(winnerInfoRes);
+        const remains: number[] = new Array(6);
+        const prices: number[] = new Array(6);
+        for(let i = 1; i <= 6; i++){
+          const temp = await yamClient.contracts.contractsMap['SugarNFT'].methods.getRemainingAmount(i).call();
+          const price = await yamClient.contracts.contractsMap['SugarNFT'].methods.getPricePerNFT(i).call();
+          remains[i] = temp;
+          prices[i] = price;
         }
+        setTotalBalance(totalBalanceRes);
+        if(exchangeRes > 0 && sellingStatus == true) {
+          if(totalBalanceRes < exchangeRes) {
+            setExchangeStatus(false);
+          }
+        }
+        setRemainingAmount(remains);
+        setNftPrice(prices);
+        setSellingStatus(sellingStatusRes);
+        setWinnerInfo(winnerInfoRes);
       } catch (error) {
-        console.log(error);
+      console.log(error);
       }
-    };
-    getSellingStatus();
+    }
   }, [yamClient]);
+  
+
+  useEffect(() => {
+    getSellingStatus();
+    const refreshInterval = setInterval(getSellingStatus, 5000);
+    return () => clearInterval(refreshInterval);
+  }, [getSellingStatus]);
 
   const handleMint = async (id: number) => {
     if(yamClient != undefined) {
@@ -166,7 +169,11 @@ const Mint: NextPage = () => {
   }, [sellingStatus, winnerInfo]);
   
   const getExchangeEnableStatus =  useCallback(() : boolean => {
-    return (sellingStatus == true);
+    if (sellingStatus) {
+      return true;
+    } else {
+      return false;
+    }
   },[exchangeStatus]);
   
   const _renderTable = (_rows: any) => {
@@ -232,24 +239,29 @@ const Mint: NextPage = () => {
                       }} 
                     ></Box>
                     { exchangeStatus ? (
-                      nftPrice[index+1] ? (
+                     ( nftPrice[index+1] || remainingAmount[index+1] )? (
                         <Button sx={{width: 180, p:3, mb:2,}}
                         onClick = {() => handleMint(index + 1)}
+                        disabled = {!getEnableStatus(index + 1)}
                         >Mint Now
                         </Button>
                       ) : (
-                        <Button sx={{width: 180, p:3, mb:2,}}
-                        >
+                        <Button sx={{width: 180, p:3, mb:2,}}>
                         <CircularProgress disableShrink />
                         </Button>
                       )
                     ) : (
-                      <Button sx={{width: 180, p:3, mb:2,}}
-                        // onClick = {() => handleClaim()}
-                        onClick = {() => handleExchange(index + 1)}
-                        disabled = {!getEnableStatus(index + 1)}
-                      >Exchange NFT
-                      </Button>
+                        (remainingAmount[index+1]) ? (
+                        <Button sx={{width: 180, p:3, mb:2,}}
+                          // onClick = {() => handleClaim()}
+                          onClick = {() => handleExchange(index + 1)}
+                          disabled = {!getExchangeEnableStatus()}
+                        >Exchange NFT
+                        </Button> ) : (
+                          <Button sx={{width: 180, p:3, mb:2,}}>
+                          <CircularProgress disableShrink />
+                          </Button>
+                        )
                     )}
 
                   <Typography className={classes.customBadge}>Only {remainingAmount[index+1]} left!</Typography>
