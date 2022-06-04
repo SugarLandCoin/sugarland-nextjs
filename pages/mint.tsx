@@ -113,12 +113,16 @@ const Mint: NextPage = () => {
           remains[i] = temp;
           prices[i] = price;
         }
+        
         setTotalBalance(totalBalanceRes);
         if(exchangeRes > 0 && sellingStatus == true) {
           if(totalBalanceRes < exchangeRes) {
             setExchangeStatus(false);
+          } else {
+            setExchangeStatus(true);
           }
         }
+
         setRemainingAmount(remains);
         setNftPrice(prices);
         setSellingStatus(sellingStatusRes);
@@ -140,6 +144,7 @@ const Mint: NextPage = () => {
     if(yamClient != undefined) {
       if(nftPrice[id]) {
         await yamClient.contracts.contractsMap['SugarNFT'].methods.mint(account, id).send({from:account, value:nftPrice[id]});
+        getSellingStatus();
       }
     }
   };
@@ -153,6 +158,7 @@ const Mint: NextPage = () => {
   const handleExchange = async (id: number) => {
     if(yamClient != undefined) {
       await yamClient.contracts.contractsMap['SugarNFT'].methods.exchange(account , id).send({from:account});
+      getSellingStatus();
     }
   };
 
