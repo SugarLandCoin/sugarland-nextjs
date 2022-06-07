@@ -183,11 +183,11 @@ const Reward: NextPage = () => {
             </Grid>
             <Grid item sx={{mb:3,}}>
               <Typography className={classes.subtitleStyle} variant="subtitle2" >Rewards Collected </Typography>
-              <Typography className={classes.subContentStyle}>{numberWithCommas(rewardAmount)} SUGAR</Typography>
+              <Typography className={classes.subContentStyle}>{numberWithCommas(rewardAmount/1000000000)} SUGAR</Typography>
             </Grid>
             <Grid item sx={{mb:3,}}>
               <Typography className={classes.subtitleStyle} variant="subtitle2" >Rewards Value</Typography>
-              <Typography className={classes.subContentStyle}>{(rewardValue * rewardAmount).toFixed(2)} $</Typography>
+              <Typography className={classes.subContentStyle}>{((rewardValue * rewardAmount) / 1000000000) .toFixed(10)} $</Typography>
             </Grid>
             <Grid item sx={{mb:3,}}>
             {claimButtonStatus == false ? (
