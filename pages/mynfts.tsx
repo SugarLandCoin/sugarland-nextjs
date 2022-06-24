@@ -79,7 +79,7 @@ const Mynfts: NextPage = () => {
         if(yamClient != undefined) {
           const nftCount: number[] = new Array(6).fill(0);
           for(let i = 0; i < 6; i++){
-            const temp = await yamClient.contracts.contractsMap['SugarNFT'].methods.getMyTokens(account,i+1).call();
+            const temp = await yamClient.contracts.contractsMap['SugarOldNFT'].methods.balanceOf(account, i+1).call();
             nftCount[i] = temp;
           }
           setDiamondCounts(nftCount);

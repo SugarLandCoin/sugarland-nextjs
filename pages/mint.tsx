@@ -70,7 +70,7 @@ const Mint: NextPage = () => {
   const [sellingStatus, setSellingStatus] = useState(true); 
   const [exchangeStatus, setExchangeStatus] = useState(0);
   const [totalBalance, setTotalBalance] = useState(0);
-  const [winnerInfo, setWinnerInfo] = useState<any>();
+  // const [winnerInfo, setWinnerInfo] = useState<any>();
   const [nftPrice, setNftPrice] = useState<number[]>([]);
   const [remainingAmount, setRemainingAmount] = useState<number[]>([]);
   const [exchangeable, setExchangeable] = useState<number[]>([]);
@@ -102,17 +102,17 @@ const Mint: NextPage = () => {
     const getSellingStatus = async () => {
       try {
         if(yamClient != undefined) {
-          const exchangeRes = await yamClient.contracts.contractsMap['SugarNewNFT'].methods.getTotalBalance(account).call();
-          const totalBalanceRes = await yamClient.contracts.contractsMap['SugarNFT'].methods.balanceOf(account).call();
-          const sellingStatusRes = await yamClient.contracts.contractsMap['SugarNFT'].methods.getSellingStatus().call(); //Selling
-          const winnerInfoRes = await yamClient.contracts.contractsMap['SugarNFT'].methods.getWinnerInfo(account).call(); 
-          const remains: number[] = new Array(6);
-          const prices: number[] = new Array(6);
-          const exchanges: number[] = new Array(6);
-          for(let i = 1; i <= 6; i++){
-            const tempRemain = await yamClient.contracts.contractsMap['SugarNFT'].methods.getRemainingAmount(i).call();
-            const tempPrice = await yamClient.contracts.contractsMap['SugarNFT'].methods.getPricePerNFT(i).call();
-            const tempExchange = await yamClient.contracts.contractsMap['SugarNewNFT'].methods.balanceOf(account,i).call();
+          const exchangeRes = await yamClient.contracts.contractsMap['SugarOldNFT'].methods.getTotalBalance(account).call();
+          const totalBalanceRes = await yamClient.contracts.contractsMap['CitizenNFT'].methods.balanceOf(account).call();
+          const sellingStatusRes = await yamClient.contracts.contractsMap['CitizenNFT'].methods.getSellingStatus().call(); //Selling
+          // const winnerInfoRes = await yamClient.contracts.contractsMap['CitizenNFT'].methods.getWinnerInfo(account).call(); 
+          const remains: number[] = new Array(10);
+          const prices: number[] = new Array(10);
+          const exchanges: number[] = new Array(10);
+          for(let i = 1; i <= 10; i++){
+            const tempRemain = await yamClient.contracts.contractsMap['CitizenNFT'].methods.getRemainingAmount(i).call();
+            const tempPrice = await yamClient.contracts.contractsMap['CitizenNFT'].methods.getPricePerNFT(i).call();
+            const tempExchange = await yamClient.contracts.contractsMap['SugarOldNFT'].methods.balanceOf(account,i).call();
             remains[i] = tempRemain;
             prices[i] = tempPrice;
             exchanges[i] = tempExchange;
@@ -122,7 +122,7 @@ const Mint: NextPage = () => {
           setNftPrice(prices);
           setExchangeable(exchanges);
           setSellingStatus(sellingStatusRes);
-          setWinnerInfo(winnerInfoRes);
+          // setWinnerInfo(winnerInfoRes);
         
           if(exchangeRes > 0) {
             if(totalBalanceRes >= exchangeRes) {
@@ -145,20 +145,20 @@ const Mint: NextPage = () => {
   const handleMint = async (id: number) => {
     if(yamClient != undefined) {
       if(nftPrice[id]) {
-        await yamClient.contracts.contractsMap['SugarNFT'].methods.mint(account, id).send({from:account, value:nftPrice[id]});
+        await yamClient.contracts.contractsMap['CitizenNFT'].methods.mint(account, id).send({from:account, value:nftPrice[id]});
       }
     }
   };
 
   // const handleClaim = async () => {
   //   if(yamClient != undefined) {
-  //     await yamClient.contracts.contractsMap['SugarNFT'].methods.airdrop().send({from: account});
+  //     await yamClient.contracts.contractsMap['CitizenNFT'].methods.airdrop().send({from: account});
   //   }
   // };
 
   const handleExchange = async (id: number) => {
     if(yamClient != undefined) {
-      await yamClient.contracts.contractsMap['SugarNFT'].methods.exchange(account , id).send({from:account});
+      await yamClient.contracts.contractsMap['CitizenNFT'].methods.exchange(account , id).send({from:account});
     }
   };
 
@@ -166,14 +166,17 @@ const Mint: NextPage = () => {
     // Mint phase
     if (sellingStatus) {
       return true;
+    } else {
+      return false;
     }
     // Airdrop phase
 
-    if (winnerInfo[1]) {
-      return false;
-    }
-    return (id == winnerInfo[0]);
-  }, [sellingStatus, winnerInfo]);
+    // if (winnerInfo[1]) {
+    //   return false;
+    // }
+    // return (id == winnerInfo[0]);
+  // }, [sellingStatus, winnerInfo]);
+  }, [sellingStatus]);
 
   
   const getExchangeEnableStatus = useCallback((id: number): boolean => {
@@ -237,13 +240,13 @@ const Mint: NextPage = () => {
           <Typography variant='h6'>Monthly Rewards Pool = 7,374,750 SUGAR [Worth ${(sugarPrice * 7374750).toFixed(2)}*]</Typography>
         </Grid>
         {
-          (new Array(6).fill(0)).map((_, index) => {
+          (new Array(10).fill(0)).map((_, index) => {
             return (
               <Grid key={index} item xs={12} sm={6} md={4} lg={2} >
                 <Stack direction="column" justifyContent='center' alignItems='center'>
                     <Box 
                       component="img"
-                      src={`/nft/tier${index + 1}.png`}
+                      src={`/nft/cn${index + 1}.jpg`}
                       sx={{
                         height: 300,
                         width: 180,
@@ -267,7 +270,7 @@ const Mint: NextPage = () => {
                       exchangeStatus == 1 ? (
                         <Button sx={{width: 180, p:3, mb:2,}}
                           onClick = {() => handleExchange(index + 1)}
-                          disabled = {!getExchangeEnableStatus(index + 1)}
+                          // disabled = {!getExchangeEnableStatus(index + 1)}
                         >Exchange NFT
                         </Button> ) : (
                           <Button sx={{width: 180, p:3, mb:2,}}>

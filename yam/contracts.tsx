@@ -1,10 +1,10 @@
 import Web3 from 'web3';
 import { Contract } from 'web3-eth-contract';
 import { AbiItem } from 'web3-utils';
-import { addressMap, SUGAR_NFT_ADDRESS } from '../config';
+import { addressMap, CITIZEN_NFT } from '../config';
 import SUGAR from '../contracts/Sugar.json';
-import SugarNFT from '../contracts/SugarNFT.json';
-import SugarNewNFT from '../contracts/SugarNewNFT.json';
+import CitizenNFT from '../contracts/CitizenNFT.json';
+import SugarOldNFT from '../contracts/SugarOldNFT.json';
 import ERC20JSON from '../contracts/IERC20.json';
 import FUSD from '../contracts/FUSD.json';
 import BUSD from '../contracts/BUSD.json';
@@ -24,8 +24,8 @@ export class Contracts {
 
     this.contractsMap = {
       'SUGAR': new web3.eth.Contract(SUGAR as AbiItem[]),
-      'SugarNFT': new web3.eth.Contract(SugarNFT as AbiItem[]),
-      'SugarNewNFT': new web3.eth.Contract(SugarNewNFT as AbiItem[]),
+      'CitizenNFT': new web3.eth.Contract(CitizenNFT as AbiItem[]),
+      'SugarOldNFT': new web3.eth.Contract(SugarOldNFT as AbiItem[]),
       'BUSD' : new web3.eth.Contract(BUSD as AbiItem[]),
       'REWARD' : new web3.eth.Contract(REWARD as AbiItem[])
     }
@@ -42,8 +42,8 @@ export class Contracts {
 
   _updateContractAddresses() {
     this.contractsMap['SUGAR'].options.address = addressMap['SUGAR'];
-    this.contractsMap['SugarNFT'].options.address = addressMap['SugarNFT'];
-    this.contractsMap['SugarNewNFT'].options.address = addressMap['SugarNewNFT'];
+    this.contractsMap['CitizenNFT'].options.address = addressMap['CitizenNFT'];
+    this.contractsMap['SugarOldNFT'].options.address = addressMap['SugarOldNFT'];
     this.contractsMap['BUSD'].options.address = addressMap['BUSD'];
     this.contractsMap['REWARD'].options.address = addressMap['REWARD'];
     // this.contractsMap['FUSD'].options.address = addressMap['FUSD'];

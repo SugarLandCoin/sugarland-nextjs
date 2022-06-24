@@ -15,7 +15,7 @@ export const SUGAR_V2_GENESIS_BLOCK = 14254159;
 export const SUGAR_ADDRESS = SUGAR_V2_ADDRESS;
 export const SUGAR_GENESIS_BLOCK = SUGAR_V2_GENESIS_BLOCK;
 
-export const SUGAR_NFT_ADDRESS = "0xd7bF5cFe1e63341c95cC4f9A27998191cF360F95";
+export const CITIZEN_NFT  = "0x4E3fd88B4Cb3d524148DE906235dF7b45267Ec8F";
 
 interface IRpcUrls {
   [key: number]: string
@@ -42,8 +42,8 @@ type AddressMapOptions = {
 export const addressMap: AddressMapOptions = {
 
   'SUGAR': '0x59eB96F0B6f5838021f0E8f412Afe65D1Bf44A02',
-  'SugarNewNFT' : '0xB822271328e4D1236e209fC5C6Fe4E282313f9F6',
-  'SugarNFT' : '0xC116B6df7f97f3A93D173DC1826dc98c6dc1cE5F',
+  'SugarOldNFT' : '0xB822271328e4D1236e209fC5C6Fe4E282313f9F6',
+  'CitizenNFT' : '0x4E3fd88B4Cb3d524148DE906235dF7b45267Ec8F',
   'REWARD' : '0xE3486e37c9E3B4AD96fa06003376E21Af1F17490',
 };
 
@@ -64,11 +64,6 @@ export const drawerWidthCollapsed = 60;
 
 
 
-
-
-
-
-
 // export const MORALIS_SERVER_URL = "https://ty7ttshwev7r.usemoralis.com:2053/server";
 // export const MORALIS_APP_ID = "wK36eTnEubsFHqXbwWZ0m31RYKGC6ibofNwwTOvn";
 // export const MORALIS_MASTER_KEY = "oivOABWSwJHNd4NJ9TJO8h3hYzDzQTb9ATF6XyUZ";
@@ -77,16 +72,16 @@ export const drawerWidthCollapsed = 60;
 
 // export const DATA_UNAVAILABLE = '--';
 
-// export const defaultChainId = 56;
+// export const defaultChainId = 3;
 
-// export const SUGAR_V2_ADDRESS = "0x59eB96F0B6f5838021f0E8f412Afe65D1Bf44A02";
+// export const SUGAR_V2_ADDRESS = "0x46aa2585f1eBE4Be93fcBA0301466465537F5D85";
                                  
 // export const SUGAR_V2_GENESIS_BLOCK = 14254159;
 
 // export const SUGAR_ADDRESS = SUGAR_V2_ADDRESS;
 // export const SUGAR_GENESIS_BLOCK = SUGAR_V2_GENESIS_BLOCK;
 
-// export const SUGAR_NFT_ADDRESS = "0x39930cf2Af45a2cD284664663b11CE0BB4AD1125";
+// export const CITIZEN_NFT = "0x7A50811d49d3FCd34AE581c6c1DE4f582Ea2ba22";
 
 // interface IRpcUrls {
 //   [key: number]: string
@@ -98,12 +93,14 @@ export const drawerWidthCollapsed = 60;
 
 // export const rpcUrls: IRpcUrls = {
 //   56: 'https://bsc-dataseed.binance.org/',
-//   97: 'https://data-seed-prebsc-1-s1.binance.org:8545/'
+//   97: 'https://data-seed-prebsc-1-s1.binance.org:8545/',
+//   3 : 'https://ropsten.infura.io/v3/be0a123d3e494bc28708d61034424f92',
 // }
 
 // export const networkNames: INetworkNames = {
 //   56: 'BSC Mainnet',
-//   97: 'BSC Testnet'
+//   97: 'BSC Testnet',
+//   3: 'ROPSTEN',
 // }
 
 // type AddressMapOptions = {
@@ -112,16 +109,11 @@ export const drawerWidthCollapsed = 60;
 
 // export const addressMap: AddressMapOptions = {
 
-//   // 'SUGAR': '0x1379A0Ea8F000A04EB71baC3E3C1Af24C1eAaF23',
-//   // 'SugarNewNFT' : '0xa62CBD6929E39AB5E3E7d0264e38CF039a6b4247',
-//   // 'SugarNFT' : '0x39930cf2Af45a2cD284664663b11CE0BB4AD1125',
-//   // 'REWARD' : '0x4783c0a4dA8b8136272146e288Ea290124FE6ad6',
+//   'SUGAR': '0x46aa2585f1eBE4Be93fcBA0301466465537F5D85',
+//   'SugarOldNFT' : '0x7aCf36C1b16e2367Aad643299c21fCDF3beBB54C',
+//   'CitizenNFT' : '0x7A50811d49d3FCd34AE581c6c1DE4f582Ea2ba22',
+//   'REWARD' : '0x5d9a86f1E40620990462330e206d2f5aFAE58DDb',
 
-//   'SUGAR': '0x1379A0Ea8F000A04EB71baC3E3C1Af24C1eAaF23',
-//   'SugarNewNFT' : '0xa62CBD6929E39AB5E3E7d0264e38CF039a6b4247',
-//   'SugarNFT' : '0x655A07aB7c2Dd1671607e11851884b7C8F1093c8',
-//   'REWARD' : '0xb2036640B30b4eBE211C1f69776464Ec3e06ea40',
-  
 // };
 
 // interface TokenInfo {
