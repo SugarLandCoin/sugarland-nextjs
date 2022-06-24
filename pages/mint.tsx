@@ -246,7 +246,8 @@ const Mint: NextPage = () => {
                 <Stack direction="column" justifyContent='center' alignItems='center'>
                     <Box 
                       component="img"
-                      src={`/nft/cn${index + 1}.jpg`}
+                      // src={`/nft/cn${index + 1}.jpg`}
+                      src={`/nft/tier${(index % 6) + 1}.png`}
                       sx={{
                         height: 300,
                         width: 180,
